@@ -11,4 +11,4 @@
 
 ## Przykład
 
-    
+    ![Example](/example/drezyna.png)
