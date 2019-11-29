@@ -6,4 +6,9 @@
     
 ## Punkty kontrolne
     
-assa
+...
+
+
+## Przykład
+
+    
