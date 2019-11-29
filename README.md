@@ -11,4 +11,4 @@
 
 ## Przykład
 
-   [logo]: http://galeranew.ii.pw.edu.pl:8100/GKOM.19Z/ZT1-Drezyna/blob/be9fc34e0f795bfcc68729d7cb2779de0132a0e8/Example/drezyna.JPG
+   [alt text]: http://galeranew.ii.pw.edu.pl:8100/GKOM.19Z/ZT1-Drezyna/blob/be9fc34e0f795bfcc68729d7cb2779de0132a0e8/Example/drezyna.JPG "Drezyna"
