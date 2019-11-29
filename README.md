@@ -6,8 +6,13 @@
     
 ## Punkty kontrolne
     
-...
-
+- [ ] Storzenie wstępnego szkicu projektu
+- [ ] Zamodelowanie obiektów
+- [ ] Zaprogramowanie kontroli kamery
+- [ ] Zaprogramowanie ruchu obiektów
+- [ ] Teksturowanie
+- [ ] Stworzenie źródeł światła
+- [ ] Prezentacja gotowego projetku na spotkaniu nr 7
 
 ## Przykład
 
