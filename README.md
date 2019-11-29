@@ -11,4 +11,4 @@
 
 ## Przykład
 
-   [alt text]: (http://galeranew.ii.pw.edu.pl:8100/GKOM.19Z/ZT1-Drezyna/Example/drezyna.JPG "Drezyna")
+   ![alt text](http://galeranew.ii.pw.edu.pl:8100/GKOM.19Z/ZT1-Drezyna/Example/drezyna.JPG "Drezyna")
