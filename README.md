@@ -6,7 +6,7 @@
     
 ## Punkty kontrolne
     
-- [ ] Storzenie wstępnego szkicu projektu
+- [ ] Stworzenie wstępnego szkicu projektu
 - [ ] Zamodelowanie obiektów
 - [ ] Zaprogramowanie kontroli kamery
 - [ ] Zaprogramowanie ruchu obiektów
