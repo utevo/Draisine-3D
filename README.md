@@ -28,12 +28,12 @@
     - [ ] Tory
     - [ ] Tło
     - [ ] Ozdoby
-    - ...
-- [ ] Zaprogramowanie kontroli kamery
+- [ ] Zaprogramowanie ruchu kamery
 - [ ] Zaprogramowanie ruchu obiektów:
     - [ ] Kół drezyny
     - [ ] Drezyny
     - [ ] "Wajchy" drezyny
+- [ ] Dodanie interakcji (obsługa klawiatury/myszki)
 - [ ] Teksturowanie
 - [ ] Stworzenie oświetlenia
 - [ ] Prezentacja gotowego projetku na spotkaniu nr 7
