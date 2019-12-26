@@ -6,12 +6,35 @@
     
 ## Punkty kontrolne
     
+- [x] Stworzenie wstępnych punków kontrolnych
+- [ ] Utworzenie prostego przykładowego projektu OpenGL
+- [ ] Zaprojetowanie klas tworzących szablon struktóry projektu:
+    - [ ] Utilities
+    - [ ] Debug
+    - [ ] ArrayBuffer
+    - [ ] VertexBufferLayout
+    - [ ] IndexBuffer
+    - [ ] VertexArray
+    - [ ] Shader
+    - [ ] Renderer
+    - [ ] Texture
+    - [ ] Blender
+    - [ ] Objects...
 - [ ] Stworzenie wstępnego szkicu projektu
-- [ ] Zamodelowanie obiektów
+- [ ] Zamodelowanie obiektów:
+    - [ ] Drezyna
+    - [ ] Podłoże
+    - [ ] Tory
+    - [ ] Tło
+    - [ ] Ozdoby
+    - ...
 - [ ] Zaprogramowanie kontroli kamery
-- [ ] Zaprogramowanie ruchu obiektów
+- [ ] Zaprogramowanie ruchu obiektów:
+    - [ ] Kół drezyny
+    - [ ] Drezyny
+    - [ ] "Wajchy" drezyny
 - [ ] Teksturowanie
-- [ ] Stworzenie źródeł światła
+- [ ] Stworzenie oświetlenia
 - [ ] Prezentacja gotowego projetku na spotkaniu nr 7
 
 ## Przykład
