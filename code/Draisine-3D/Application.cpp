@@ -1,7 +1,11 @@
 #define GLEW_STATIC
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
+
 #include <iostream>
+#include <fstream>
+#include <sstream>
+#include <string>
 
 const GLuint WIDTH = 800, HEIGHT = 600;
 
@@ -12,22 +16,23 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 		glfwSetWindowShouldClose(window, GL_TRUE);
 }
 
-// Shaders
-const GLchar* vertexShaderSource = "#version 330 core\n"
-"layout (location = 0) in vec3 position;\n"
-"void main()\n"
-"{\n"
-"gl_Position = vec4(position.x, position.y, position.z, 1.0);\n"
-"}\0";
-const GLchar* fragmentShaderSource = "#version 330 core\n"
-"out vec4 color;\n"
-"void main()\n"
-"{\n"
-"color = vec4(1.0f, 0.5f, 0.2f, 1.0f);\n"
-"}\n\0";
 
 int main()
 {
+	std::ifstream fragmentShaderFile("shader.frag");
+	std::stringstream fragmentShaderStream;
+	fragmentShaderStream << fragmentShaderFile.rdbuf();
+	std::string fragmentShaderString = fragmentShaderStream.str();
+	const GLchar* fragmentShaderSource = fragmentShaderString.c_str();
+
+
+	std::ifstream vertexShaderFile("shader.vert");
+	std::stringstream vertexShaderStream;
+	vertexShaderStream << vertexShaderFile.rdbuf();
+	std::string vertexShaderString = vertexShaderStream.str();
+	const GLchar* vertexShaderSource = vertexShaderString.c_str();
+
+
 	if (glfwInit() != GL_TRUE)
 	{
 		std::cout << "GLFW initialization failed" << std::endl;
