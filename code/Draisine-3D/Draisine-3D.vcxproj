@@ -20,8 +20,8 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
-    <ProjectGuid>{9F06EABD-23FF-4648-B2E4-68DD3196DB9D}</ProjectGuid>
-    <RootNamespace>Drezyna</RootNamespace>
+    <ProjectGuid>{BB8F2930-4D5D-42FF-B85D-3841EF6E8BFB}</ProjectGuid>
+    <RootNamespace>Draisine3D</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
