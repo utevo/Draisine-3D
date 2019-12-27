@@ -19,4 +19,12 @@
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="shader.vert">
+      <Filter>Pliki źródłowe</Filter>
+    </None>
+    <None Include="shader.frag">
+      <Filter>Pliki źródłowe</Filter>
+    </None>
+  </ItemGroup>
 </Project>
