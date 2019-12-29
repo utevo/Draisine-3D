@@ -24,9 +24,6 @@
     <ClCompile Include="IndexBuffer.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
-    <ClCompile Include="VertexArray.cpp">
-      <Filter>Pliki źródłowe</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="shader.vert">
@@ -50,9 +47,6 @@
       <Filter>Pliki źródłowe</Filter>
     </ClInclude>
     <ClInclude Include="VertexBufferLayout.h">
-      <Filter>Pliki źródłowe</Filter>
-    </ClInclude>
-    <ClInclude Include="VertexArray.h">
       <Filter>Pliki źródłowe</Filter>
     </ClInclude>
   </ItemGroup>
