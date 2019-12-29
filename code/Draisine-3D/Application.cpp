@@ -9,6 +9,7 @@
 #include <sstream>
 
 #include "Utilities.h"
+#include "VertexBuffer.h"
 
 using namespace std;
 
@@ -131,14 +132,12 @@ int main()
 
 		GLuint VBO, EBO, VAO;
 		GLCall(glGenVertexArrays(1, &VAO));
-		GLCall(glGenBuffers(1, &VBO));
+		VertexBuffer vertexBuffer(vertices, sizeof(vertices));
 		GLCall(glGenBuffers(1, &EBO));
 
 		// Bind the Vertex Array Object first, then bind and set vertex buffer(s) and attribute pointer(s).
 		GLCall(glBindVertexArray(VAO));
 
-		GLCall(glBindBuffer(GL_ARRAY_BUFFER, VBO));
-		GLCall(glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW));
 
 		GLCall(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO));
 		GLCall(glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW));
@@ -156,7 +155,7 @@ int main()
 		GLCall(glEnableVertexAttribArray(2));
 
 		GLCall(glBindBuffer(GL_ARRAY_BUFFER, 0)); // Note that this is allowed, the call to glVertexAttribPointer registered VBO as the currently bound vertex buffer object so afterwards we can safely unbind
-
+		
 		GLCall(glBindVertexArray(0)); // Unbind VAO (it's always a good thing to unbind any buffer/array to prevent strange bugs)
 
 		// Set the texture wrapping parameters
