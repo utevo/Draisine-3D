@@ -9,8 +9,11 @@
 #include <sstream>
 
 #include "Utilities.h"
+#include "VertexArray.h"
 #include "VertexBuffer.h"
+#include "VertexBufferLayout.h"
 #include "IndexBuffer.h"
+
 
 using namespace std;
 
@@ -131,29 +134,21 @@ int main()
 			0, 2, 3,
 		};
 
-		GLuint VAO;
-		GLCall(glGenVertexArrays(1, &VAO));
-		GLCall(glBindVertexArray(VAO));
-
-		
 		VertexBuffer vertexBuffer(vertices, sizeof(vertices));
 
+		VertexBufferLayout vertexBufferLayout;
 		// vertex geometry data
-		GLCall(glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (GLvoid*)0));
-		GLCall(glEnableVertexAttribArray(0));
-
+		vertexBufferLayout.addFloat(3);
 		// vertex color data
-		GLCall(glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (GLvoid*)(3 * sizeof(GLfloat))));
-		GLCall(glEnableVertexAttribArray(1));
-
+		vertexBufferLayout.addFloat(3);
 		// vertex texture coordinates
-		GLCall(glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (GLvoid*)(6 * sizeof(GLfloat))));
-		GLCall(glEnableVertexAttribArray(2));
+		vertexBufferLayout.addFloat(2);
 
+		VertexArray vertexArray = VertexArray();
+		vertexArray.link(vertexBuffer, vertexBufferLayout);
 
 		IndexBuffer indexBuffer(indices, sizeof(indices));
 		
-
 		// Set the texture wrapping parameters
 		GLCall(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT));	// Set texture wrapping to GL_REPEAT (usually basic wrapping method)
 		GLCall(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT));
@@ -196,15 +191,16 @@ int main()
 			// Draw our first triangle
 			GLCall(glUseProgram(shaderProgram));
 
-			GLCall(glBindVertexArray(VAO));
+			vertexArray.bind();
+			indexBuffer.bind();
 			GLCall(glDrawElements(GL_TRIANGLES, _countof(indices), GL_UNSIGNED_INT, 0));
-			GLCall(glBindVertexArray(0));
+			vertexArray.unbind();
+			indexBuffer.unbind();
 
 			// Swap the screen buffers
 			glfwSwapBuffers(window);
 		}
-		GLCall(glDeleteVertexArrays(1, &VAO));
-		// GLCall(glDeleteBuffers(1, &EBO));
+
 	}
 	catch (exception ex)
 	{
