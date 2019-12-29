@@ -9,9 +9,9 @@ public:
     void bind() const;
     void unbind() const;
 
-    unsigned int getCount() const { return count; }
+    unsigned int getCount() const { return _count; }
 
 private:
-    unsigned int id;
-    unsigned int count;
+    unsigned int _id;
+    unsigned int _count;
 };
