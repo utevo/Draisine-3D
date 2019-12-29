@@ -46,5 +46,8 @@
     <ClInclude Include="IndexBuffer.h">
       <Filter>Pliki źródłowe</Filter>
     </ClInclude>
+    <ClInclude Include="VertexBufferLayout.h">
+      <Filter>Pliki nagłówkowe</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
