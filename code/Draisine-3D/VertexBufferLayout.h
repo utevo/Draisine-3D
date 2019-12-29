@@ -21,7 +21,7 @@ public:
     void addUnsignedInt(unsigned int count) { _push(GL_UNSIGNED_INT, count, GL_FALSE); }
     void addUnsignedByte(unsigned int count) { _push(GL_UNSIGNED_BYTE, count, GL_TRUE); }
 
-    const std::vector<VertexBufferElement> GetElements() const { return _elements; };
+    const std::vector<VertexBufferElement> getElements() const { return _elements; };
     unsigned int getPointerToNextElement() const { return _pointerToNextElement; };
 
 private:
