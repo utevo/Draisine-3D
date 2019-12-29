@@ -158,7 +158,6 @@
   <ItemGroup>
     <ClInclude Include="Debug.h" />
     <ClInclude Include="IndexBuffer.h" />
-    <ClInclude Include="VertexBufferLayout.h" />
     <ClInclude Include="Utilities.h" />
     <ClInclude Include="VertexBuffer.h" />
   </ItemGroup>
