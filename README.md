@@ -9,9 +9,9 @@
 - [x] Stworzenie wstępnych punków kontrolnych
 - [x] Utworzenie prostego przykładowego projektu OpenGL
 - [ ] Zaprojetowanie klas tworzących szablon struktóry projektu:
-    - [ ] Application
-    - [ ] Utilities
-    - [ ] Debug
+    - [x] Application
+    - [x] Utilities
+    - [x] Debug
     - [ ] ArrayBuffer
     - [ ] VertexBufferLayout
     - [ ] IndexBuffer
