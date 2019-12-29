@@ -7,6 +7,7 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+
 using namespace std;
 
 const GLuint WIDTH = 800, HEIGHT = 600;
