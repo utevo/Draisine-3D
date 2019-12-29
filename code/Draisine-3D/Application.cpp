@@ -8,6 +8,8 @@
 #include <fstream>
 #include <sstream>
 
+#include "Utilities.h"
+
 using namespace std;
 
 const GLuint WIDTH = 800, HEIGHT = 600;
@@ -42,13 +44,13 @@ int main()
 		if (glewInit() != GLEW_OK)
 			throw exception("GLEW Initialization failed");
 
-		glViewport(0, 0, WIDTH, HEIGHT);
+		GLCall(glViewport(0, 0, WIDTH, HEIGHT));
 
 		// Let's check what are maximum parameters counts
 		GLint nrAttributes;
-		glGetIntegerv(GL_MAX_VERTEX_ATTRIBS, &nrAttributes);
+		GLCall(glGetIntegerv(GL_MAX_VERTEX_ATTRIBS, &nrAttributes));
 		cout << "Max vertex attributes allowed: " << nrAttributes << std::endl;
-		glGetIntegerv(GL_MAX_TEXTURE_COORDS, &nrAttributes);
+		GLCall(glGetIntegerv(GL_MAX_TEXTURE_COORDS, &nrAttributes));
 		cout << "Max texture coords allowed: " << nrAttributes << std::endl;
 
 
@@ -69,28 +71,28 @@ int main()
 		// Build and compile our shader program
 		// Vertex shader
 		GLuint vertexShader = glCreateShader(GL_VERTEX_SHADER);
-		glShaderSource(vertexShader, 1, &vertexShaderSource, NULL);
-		glCompileShader(vertexShader);
+		GLCall(glShaderSource(vertexShader, 1, &vertexShaderSource, NULL));
+		GLCall(glCompileShader(vertexShader));
 		// Check for compile time errors
 		GLint success;
 		GLchar infoLog[512];
-		glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &success);
+		GLCall(glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &success));
 		if (!success)
 		{
-			glGetShaderInfoLog(vertexShader, 512, NULL, infoLog);
+			GLCall(glGetShaderInfoLog(vertexShader, 512, NULL, infoLog));
 			string msg = string("Vertex shader compilation: ") + infoLog;
 			throw exception(msg.c_str());
 		}
 
 		// Fragment shader
 		GLuint fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
-		glShaderSource(fragmentShader, 1, &fragmentShaderSource, NULL);
-		glCompileShader(fragmentShader);
+		GLCall(glShaderSource(fragmentShader, 1, &fragmentShaderSource, NULL));
+		GLCall(glCompileShader(fragmentShader));
 		// Check for compile time errors
-		glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &success);
+		GLCall(glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &success));
 		if (!success)
 		{
-			glGetShaderInfoLog(fragmentShader, 512, NULL, infoLog);
+			GLCall(glGetShaderInfoLog(fragmentShader, 512, NULL, infoLog));
 			string msg = string("Fragment shader compilation: ") + infoLog;
 			throw exception(msg.c_str());
 		}
@@ -98,19 +100,19 @@ int main()
 
 		// Link shaders
 		GLuint shaderProgram = glCreateProgram();
-		glAttachShader(shaderProgram, vertexShader);
-		glAttachShader(shaderProgram, fragmentShader);
-		glLinkProgram(shaderProgram);
+		GLCall(glAttachShader(shaderProgram, vertexShader));
+		GLCall(glAttachShader(shaderProgram, fragmentShader));
+		GLCall(glLinkProgram(shaderProgram));
 		// Check for linking errors
-		glGetProgramiv(shaderProgram, GL_LINK_STATUS, &success);
+		GLCall(glGetProgramiv(shaderProgram, GL_LINK_STATUS, &success));
 		if (!success) {
-			glGetProgramInfoLog(shaderProgram, 512, NULL, infoLog);
+			GLCall(glGetProgramInfoLog(shaderProgram, 512, NULL, infoLog));
 			string msg = string("Shader linking: ") + infoLog;
 			throw exception(msg.c_str());
 		}
 
-		glDeleteShader(vertexShader);
-		glDeleteShader(fragmentShader);
+		GLCall(glDeleteShader(vertexShader));
+		GLCall(glDeleteShader(fragmentShader));
 
 
 		// Set up vertex data 
@@ -128,41 +130,41 @@ int main()
 		};
 
 		GLuint VBO, EBO, VAO;
-		glGenVertexArrays(1, &VAO);
-		glGenBuffers(1, &VBO);
-		glGenBuffers(1, &EBO);
+		GLCall(glGenVertexArrays(1, &VAO));
+		GLCall(glGenBuffers(1, &VBO));
+		GLCall(glGenBuffers(1, &EBO));
 
 		// Bind the Vertex Array Object first, then bind and set vertex buffer(s) and attribute pointer(s).
-		glBindVertexArray(VAO);
+		GLCall(glBindVertexArray(VAO));
 
-		glBindBuffer(GL_ARRAY_BUFFER, VBO);
-		glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+		GLCall(glBindBuffer(GL_ARRAY_BUFFER, VBO));
+		GLCall(glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW));
 
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+		GLCall(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO));
+		GLCall(glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW));
 
 		// vertex geometry data
-		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (GLvoid*)0);
-		glEnableVertexAttribArray(0);
+		GLCall(glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (GLvoid*)0));
+		GLCall(glEnableVertexAttribArray(0));
 
 		// vertex color data
-		glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (GLvoid*)(3 * sizeof(GLfloat)));
-		glEnableVertexAttribArray(1);
+		GLCall(glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (GLvoid*)(3 * sizeof(GLfloat))));
+		GLCall(glEnableVertexAttribArray(1));
 
 		// vertex texture coordinates
-		glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (GLvoid*)(6 * sizeof(GLfloat)));
-		glEnableVertexAttribArray(2);
+		GLCall(glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (GLvoid*)(6 * sizeof(GLfloat))));
+		GLCall(glEnableVertexAttribArray(2));
 
-		glBindBuffer(GL_ARRAY_BUFFER, 0); // Note that this is allowed, the call to glVertexAttribPointer registered VBO as the currently bound vertex buffer object so afterwards we can safely unbind
+		GLCall(glBindBuffer(GL_ARRAY_BUFFER, 0)); // Note that this is allowed, the call to glVertexAttribPointer registered VBO as the currently bound vertex buffer object so afterwards we can safely unbind
 
-		glBindVertexArray(0); // Unbind VAO (it's always a good thing to unbind any buffer/array to prevent strange bugs)
+		GLCall(glBindVertexArray(0)); // Unbind VAO (it's always a good thing to unbind any buffer/array to prevent strange bugs)
 
 		// Set the texture wrapping parameters
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);	// Set texture wrapping to GL_REPEAT (usually basic wrapping method)
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+		GLCall(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT));	// Set texture wrapping to GL_REPEAT (usually basic wrapping method)
+		GLCall(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT));
 		// Set texture filtering parameters
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+		GLCall(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR));
+		GLCall(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR));
 
 		// prepare textures
 		int width, height;
@@ -171,15 +173,15 @@ int main()
 			throw exception("Failed to load texture file");
 
 		GLuint texture0;
-		glGenTextures(1, &texture0);
+		GLCall(glGenTextures(1, &texture0));
 
-		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, texture0);
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
-		glGenerateMipmap(GL_TEXTURE_2D);
+		GLCall(glActiveTexture(GL_TEXTURE0));
+		GLCall(glBindTexture(GL_TEXTURE_2D, texture0));
+		GLCall(glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, image));
+		GLCall(glGenerateMipmap(GL_TEXTURE_2D));
 		// freeing unnecessary texture stuff
 		SOIL_free_image_data(image);
-		glBindTexture(GL_TEXTURE_2D, 0);
+		GLCall(glBindTexture(GL_TEXTURE_2D, 0));
 
 		// main event loop
 		while (!glfwWindowShouldClose(window))
@@ -188,27 +190,27 @@ int main()
 			glfwPollEvents();
 
 			// Clear the colorbuffer
-			glClearColor(0.1f, 0.2f, 0.3f, 1.0f);
-			glClear(GL_COLOR_BUFFER_BIT);
+			GLCall(glClearColor(0.1f, 0.2f, 0.3f, 1.0f));
+			GLCall(glClear(GL_COLOR_BUFFER_BIT));
 
 			// Bind Textures using texture units
-			glActiveTexture(GL_TEXTURE0);
-			glBindTexture(GL_TEXTURE_2D, texture0);
-			glUniform1i(glGetUniformLocation(shaderProgram, "Texture0"), 0);
+			GLCall(glActiveTexture(GL_TEXTURE0));
+			GLCall(glBindTexture(GL_TEXTURE_2D, texture0));
+			GLCall(glUniform1i(glGetUniformLocation(shaderProgram, "Texture0"), 0));
 
 			// Draw our first triangle
-			glUseProgram(shaderProgram);
+			GLCall(glUseProgram(shaderProgram));
 
-			glBindVertexArray(VAO);
-			glDrawElements(GL_TRIANGLES, _countof(indices), GL_UNSIGNED_INT, 0);
-			glBindVertexArray(0);
+			GLCall(glBindVertexArray(VAO));
+			GLCall(glDrawElements(GL_TRIANGLES, _countof(indices), GL_UNSIGNED_INT, 0));
+			GLCall(glBindVertexArray(0));
 
 			// Swap the screen buffers
 			glfwSwapBuffers(window);
 		}
-		glDeleteVertexArrays(1, &VAO);
-		glDeleteBuffers(1, &VBO);
-		glDeleteBuffers(1, &EBO);
+		GLCall(glDeleteVertexArrays(1, &VAO));
+		GLCall(glDeleteBuffers(1, &VBO));
+		GLCall(glDeleteBuffers(1, &EBO));
 	}
 	catch (exception ex)
 	{
