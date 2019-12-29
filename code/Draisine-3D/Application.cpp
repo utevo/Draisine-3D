@@ -10,6 +10,7 @@
 
 #include "Utilities.h"
 #include "VertexBuffer.h"
+#include "IndexBuffer.h"
 
 using namespace std;
 
@@ -130,17 +131,12 @@ int main()
 			0, 2, 3,
 		};
 
-		GLuint VBO, EBO, VAO;
+		GLuint VAO;
 		GLCall(glGenVertexArrays(1, &VAO));
-		VertexBuffer vertexBuffer(vertices, sizeof(vertices));
-		GLCall(glGenBuffers(1, &EBO));
-
-		// Bind the Vertex Array Object first, then bind and set vertex buffer(s) and attribute pointer(s).
 		GLCall(glBindVertexArray(VAO));
 
-
-		GLCall(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO));
-		GLCall(glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW));
+		
+		VertexBuffer vertexBuffer(vertices, sizeof(vertices));
 
 		// vertex geometry data
 		GLCall(glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (GLvoid*)0));
@@ -154,9 +150,9 @@ int main()
 		GLCall(glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (GLvoid*)(6 * sizeof(GLfloat))));
 		GLCall(glEnableVertexAttribArray(2));
 
-		GLCall(glBindBuffer(GL_ARRAY_BUFFER, 0)); // Note that this is allowed, the call to glVertexAttribPointer registered VBO as the currently bound vertex buffer object so afterwards we can safely unbind
+
+		IndexBuffer indexBuffer(indices, sizeof(indices));
 		
-		GLCall(glBindVertexArray(0)); // Unbind VAO (it's always a good thing to unbind any buffer/array to prevent strange bugs)
 
 		// Set the texture wrapping parameters
 		GLCall(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT));	// Set texture wrapping to GL_REPEAT (usually basic wrapping method)
@@ -208,8 +204,7 @@ int main()
 			glfwSwapBuffers(window);
 		}
 		GLCall(glDeleteVertexArrays(1, &VAO));
-		GLCall(glDeleteBuffers(1, &VBO));
-		GLCall(glDeleteBuffers(1, &EBO));
+		// GLCall(glDeleteBuffers(1, &EBO));
 	}
 	catch (exception ex)
 	{
