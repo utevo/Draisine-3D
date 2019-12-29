@@ -12,9 +12,9 @@
     - [x] Application
     - [x] Utilities
     - [x] Debug
-    - [ ] ArrayBuffer
+    - [x] ArrayBuffer
     - [ ] VertexBufferLayout
-    - [ ] IndexBuffer
+    - [x] IndexBuffer
     - [ ] VertexArray
     - [ ] Shader
     - [ ] Renderer
