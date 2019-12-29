@@ -7,7 +7,7 @@
 ## Punkty kontrolne
     
 - [x] Stworzenie wstępnych punków kontrolnych
-- [ ] Utworzenie prostego przykładowego projektu OpenGL
+- [x] Utworzenie prostego przykładowego projektu OpenGL
 - [ ] Zaprojetowanie klas tworzących szablon struktóry projektu:
     - [ ] Application
     - [ ] Utilities
