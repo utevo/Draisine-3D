@@ -4,13 +4,16 @@
 
 #include <GL/glew.h>
 
+
 #define ASSERT(x) if (!(x)) assert(false)
 
-void inline ClearError() {
+
+void inline GLClearError() {
 	while (glGetError() != GL_NO_ERROR);
 }
 
-bool inline CheckError()
+
+bool inline GLCheckError()
 {
 	while (GLenum error = glGetError()) {
 		std::cout << "[OpenGL Error]";
