@@ -49,11 +49,11 @@
     <ClInclude Include="IndexBuffer.h">
       <Filter>Pliki źródłowe</Filter>
     </ClInclude>
-    <ClInclude Include="VertexBufferLayout.h">
-      <Filter>Pliki nagłówkowe</Filter>
-    </ClInclude>
     <ClInclude Include="VertexArray.h">
-      <Filter>Pliki nagłówkowe</Filter>
+      <Filter>Pliki źródłowe</Filter>
+    </ClInclude>
+    <ClInclude Include="VertexBufferLayout.h">
+      <Filter>Pliki źródłowe</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -13,9 +13,9 @@
     - [x] Utilities
     - [x] Debug
     - [x] ArrayBuffer
-    - [ ] VertexBufferLayout
+    - [x] VertexBufferLayout
     - [x] IndexBuffer
-    - [ ] VertexArray
+    - [x] VertexArray
     - [ ] Shader
     - [ ] Renderer
     - [ ] Texture
