@@ -17,7 +17,7 @@
     - [x] IndexBuffer
     - [x] VertexArray
     - [x] Shader
-    - [ ] Renderer
+    - [x] Renderer
     - [ ] Texture
     - [ ] Blender
     - [ ] Objects...
