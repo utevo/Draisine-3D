@@ -22,6 +22,7 @@ public:
 
     void setUniformVec4(const std::string& name, glm::vec4 vec4);
     void setUniformFloat(const std::string& name, float value);
+    void setUniformInt(const std::string& name, int value);
 
     int getUniformLocation(const std::string& name);
 
