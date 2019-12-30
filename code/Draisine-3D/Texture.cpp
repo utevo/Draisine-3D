@@ -1,13 +1,13 @@
 #include "Texture.h"
 
-#include <stb/stb_image.h>
+#include <SOIL.h>
 #include <GLFW/glfw3.h>
 
 #include "Utilities.h"
 
 
 Texture::Texture(const std::string& filePath) {
-    _buffer = stbi_load(filePath.c_str(), &_width, &_height, &_bpp, 4);
+    _buffer = SOIL_load_image(filePath.c_str(), &_width, &_height, &_channels, 4);
     GLCall(glGenTextures(1, &_id));
     GLCall(glBindTexture(GL_TEXTURE_2D, _id)); // Bind without slot selection
 
@@ -20,7 +20,7 @@ Texture::Texture(const std::string& filePath) {
     unbind();
 
     if (_buffer)
-        stbi_image_free(_buffer);
+        SOIL_free_image_data(_buffer);
 };
 
 Texture::~Texture() {

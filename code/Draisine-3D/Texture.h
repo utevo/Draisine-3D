@@ -19,6 +19,6 @@ private:
     unsigned char* _buffer;
     int _width;
     int _height;
-    int _bpp;
+    int _channels;
 };
 
