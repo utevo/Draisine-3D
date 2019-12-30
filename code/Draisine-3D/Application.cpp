@@ -13,6 +13,7 @@
 #include "VertexBuffer.h"
 #include "VertexBufferLayout.h"
 #include "IndexBuffer.h"
+#include "Shader.h"
 
 
 using namespace std;
@@ -58,67 +59,9 @@ int main()
 		GLCall(glGetIntegerv(GL_MAX_TEXTURE_COORDS, &nrAttributes));
 		cout << "Max texture coords allowed: " << nrAttributes << std::endl;
 
-
-
-		// Build, compile and link shader program
-		std::ifstream vertexShaderFile("shader.vert");
-		std::stringstream vertexShaderStream;
-		vertexShaderStream << vertexShaderFile.rdbuf();
-		std::string vertexShaderString = vertexShaderStream.str();
-		const GLchar* vertexShaderSource = vertexShaderString.c_str();
-
-		std::ifstream fragmentShaderFile("shader.frag");
-		std::stringstream fragmentShaderStream;
-		fragmentShaderStream << fragmentShaderFile.rdbuf();
-		std::string fragmentShaderString = fragmentShaderStream.str();
-		const GLchar* fragmentShaderSource = fragmentShaderString.c_str();
-
-		// Build and compile our shader program
-		// Vertex shader
-		GLuint vertexShader = glCreateShader(GL_VERTEX_SHADER);
-		GLCall(glShaderSource(vertexShader, 1, &vertexShaderSource, NULL));
-		GLCall(glCompileShader(vertexShader));
-		// Check for compile time errors
-		GLint success;
-		GLchar infoLog[512];
-		GLCall(glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &success));
-		if (!success)
-		{
-			GLCall(glGetShaderInfoLog(vertexShader, 512, NULL, infoLog));
-			string msg = string("Vertex shader compilation: ") + infoLog;
-			throw exception(msg.c_str());
-		}
-
-		// Fragment shader
-		GLuint fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
-		GLCall(glShaderSource(fragmentShader, 1, &fragmentShaderSource, NULL));
-		GLCall(glCompileShader(fragmentShader));
-		// Check for compile time errors
-		GLCall(glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &success));
-		if (!success)
-		{
-			GLCall(glGetShaderInfoLog(fragmentShader, 512, NULL, infoLog));
-			string msg = string("Fragment shader compilation: ") + infoLog;
-			throw exception(msg.c_str());
-		}
-
-
-		// Link shaders
-		GLuint shaderProgram = glCreateProgram();
-		GLCall(glAttachShader(shaderProgram, vertexShader));
-		GLCall(glAttachShader(shaderProgram, fragmentShader));
-		GLCall(glLinkProgram(shaderProgram));
-		// Check for linking errors
-		GLCall(glGetProgramiv(shaderProgram, GL_LINK_STATUS, &success));
-		if (!success) {
-			GLCall(glGetProgramInfoLog(shaderProgram, 512, NULL, infoLog));
-			string msg = string("Shader linking: ") + infoLog;
-			throw exception(msg.c_str());
-		}
-
-		GLCall(glDeleteShader(vertexShader));
-		GLCall(glDeleteShader(fragmentShader));
-
+		const std::string vertexShaderSource = "shader.vert";
+		const std::string fragmentShaderSource = "shader.frag";
+		Shader shader(vertexShaderSource, fragmentShaderSource);
 
 		// Set up vertex data 
 		GLfloat vertices[] = {
@@ -186,10 +129,10 @@ int main()
 			// Bind Textures using texture units
 			GLCall(glActiveTexture(GL_TEXTURE0));
 			GLCall(glBindTexture(GL_TEXTURE_2D, texture0));
-			GLCall(glUniform1i(glGetUniformLocation(shaderProgram, "Texture0"), 0));
+			shader.setUniformInt("Texture0", 0);
 
 			// Draw our first triangle
-			GLCall(glUseProgram(shaderProgram));
+			shader.bind();
 
 			vertexArray.bind();
 			indexBuffer.bind();
