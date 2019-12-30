@@ -5,33 +5,45 @@
     3 - Michał Kowieski
     
 ## Punkty kontrolne
+
+
     
-- [x] Stworzenie wstępnych punków kontrolnych
-- [x] Utworzenie prostego przykładowego projektu OpenGL
-- [ ] Zaprojetowanie klas tworzących szablon struktóry projektu:
-    - [x] Application
-    - [x] Utilities
-    - [x] Debug
-    - [x] ArrayBuffer
-    - [x] VertexBufferLayout
-    - [x] IndexBuffer
-    - [x] VertexArray
-    - [x] Shader
-    - [x] Renderer
-    - [x] Texture
-    - [ ] Objects...
+- [x] Stworzenie wstępnych punków kontrolnych | *estimate:* 0.5h | *spend:* 1.0h
+- [x] Utworzenie prostego przykładowego projektu OpenGL | *estimate:* 1.0h | *spend:* 1.5h
+- [ ] Zaprojetowanie klas tworzących szablon struktóry projektu: | *estimate:* 20.0h |
+    - [x] Application | *estimate:* 0.5h | *spend:* 0.5h
+    - [x] Utilities | *estimate:* 0.5h | *spend:* 0.5h
+    - [x] Debug | *estimate:* 0.5h | *spend:* 0.5h
+    - [x] ArrayBuffer | *estimate:* 1.0h | *spend:* 1.0h
+    - [x] VertexBufferLayout | *estimate:* 1.0h | *spend:* 2.0h
+    - [x] IndexBuffer | *estimate:* 0.5h | *spend:* 0.5h
+    - [x] VertexArray | *estimate:* 0.5h | *spend:* 0.5h
+    - [x] Shader | *estimate:* 0.5h | *spend:* 0.5h
+    - [x] Renderer | *estimate:* 0.5h | *spend:* 0.2h
+    - [x] Texture | *estimate:* 0.5h | *spend:* 1.0h
+    - [ ] Projection
+    - [ ] View
+    - [ ] Textures
+    - [ ] Object
+    - [ ] Other...
 - [ ] Stworzenie wstępnego szkicu projektu
 - [ ] Zamodelowanie obiektów:
-    - [ ] Drezyna
+    - [ ] Drezyna:
+        - [ ] Koła
+        - [ ] Podstawa dzwigni
+        - [ ] Podwozie
+        - [ ] Dzwignia
     - [ ] Podłoże
     - [ ] Tory
     - [ ] Tło
     - [ ] Ozdoby
 - [ ] Zaprogramowanie ruchu kamery
 - [ ] Zaprogramowanie ruchu obiektów:
-    - [ ] Kół drezyny
-    - [ ] Drezyny
-    - [ ] "Wajchy" drezyny
+    -[ ] Drezyna: 
+        - [ ] Kóła
+        - [ ] Podstawa dzwigni
+        - [ ] Podwozie
+        - [ ] Dzwignia
 - [ ] Dodanie interakcji (obsługa klawiatury/myszki)
 - [ ] Teksturowanie
 - [ ] Stworzenie oświetlenia
