@@ -18,8 +18,7 @@
     - [x] VertexArray
     - [x] Shader
     - [x] Renderer
-    - [ ] Texture
-    - [ ] Blender
+    - [x] Texture
     - [ ] Objects...
 - [ ] Stworzenie wstępnego szkicu projektu
 - [ ] Zamodelowanie obiektów:
