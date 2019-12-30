@@ -14,6 +14,7 @@
 #include "VertexBufferLayout.h"
 #include "IndexBuffer.h"
 #include "Shader.h"
+#include "Renderer.h"
 
 
 using namespace std;
@@ -116,29 +117,21 @@ int main()
 		SOIL_free_image_data(image);
 		GLCall(glBindTexture(GL_TEXTURE_2D, 0));
 
+
+		Renderer renderer;
 		// main event loop
-		while (!glfwWindowShouldClose(window))
-		{
+		while (!glfwWindowShouldClose(window)) {
 			// Check if any events have been activiated (key pressed, mouse moved etc.) and call corresponding response functions
 			glfwPollEvents();
 
-			// Clear the colorbuffer
-			GLCall(glClearColor(0.1f, 0.2f, 0.3f, 1.0f));
-			GLCall(glClear(GL_COLOR_BUFFER_BIT));
+			renderer.clear();
 
 			// Bind Textures using texture units
 			GLCall(glActiveTexture(GL_TEXTURE0));
 			GLCall(glBindTexture(GL_TEXTURE_2D, texture0));
 			shader.setUniformInt("Texture0", 0);
 
-			// Draw our first triangle
-			shader.bind();
-
-			vertexArray.bind();
-			indexBuffer.bind();
-			GLCall(glDrawElements(GL_TRIANGLES, _countof(indices), GL_UNSIGNED_INT, 0));
-			vertexArray.unbind();
-			indexBuffer.unbind();
+			renderer.draw(vertexArray, indexBuffer, shader);
 
 			// Swap the screen buffers
 			glfwSwapBuffers(window);
