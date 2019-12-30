@@ -15,6 +15,7 @@
 #include "IndexBuffer.h"
 #include "Shader.h"
 #include "Renderer.h"
+#include "Texture.h"
 
 
 using namespace std;
@@ -92,33 +93,10 @@ int main()
 		vertexArray.link(vertexBuffer, vertexBufferLayout);
 
 		IndexBuffer indexBuffer(indices, sizeof(indices));
-		
-		// Set the texture wrapping parameters
-		GLCall(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT));	// Set texture wrapping to GL_REPEAT (usually basic wrapping method)
-		GLCall(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT));
-		// Set texture filtering parameters
-		GLCall(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR));
-		GLCall(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR));
-
-		// prepare textures
-		int width, height;
-		unsigned char* image = SOIL_load_image("textures/iipw.png", &width, &height, 0, SOIL_LOAD_RGB);
-		if (image == nullptr)
-			throw exception("Failed to load texture file");
-
-		GLuint texture0;
-		GLCall(glGenTextures(1, &texture0));
-
-		GLCall(glActiveTexture(GL_TEXTURE0));
-		GLCall(glBindTexture(GL_TEXTURE_2D, texture0));
-		GLCall(glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, image));
-		GLCall(glGenerateMipmap(GL_TEXTURE_2D));
-		// freeing unnecessary texture stuff
-		SOIL_free_image_data(image);
-		GLCall(glBindTexture(GL_TEXTURE_2D, 0));
-
-
+	
+		Texture texture("textures/iipw.png");
 		Renderer renderer;
+
 		// main event loop
 		while (!glfwWindowShouldClose(window)) {
 			// Check if any events have been activiated (key pressed, mouse moved etc.) and call corresponding response functions
@@ -126,9 +104,7 @@ int main()
 
 			renderer.clear();
 
-			// Bind Textures using texture units
-			GLCall(glActiveTexture(GL_TEXTURE0));
-			GLCall(glBindTexture(GL_TEXTURE_2D, texture0));
+			texture.bind(0);
 			shader.setUniformInt("Texture0", 0);
 
 			renderer.draw(vertexArray, indexBuffer, shader);
