@@ -39,7 +39,7 @@
     - [ ] Ozdoby
 - [ ] Zaprogramowanie ruchu kamery
 - [ ] Zaprogramowanie ruchu obiektów:
-    -[ ] Drezyna: 
+    - [ ] Drezyna: 
         - [ ] Kóła
         - [ ] Podstawa dzwigni
         - [ ] Podwozie
