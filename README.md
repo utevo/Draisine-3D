@@ -16,7 +16,7 @@
     - [x] VertexBufferLayout
     - [x] IndexBuffer
     - [x] VertexArray
-    - [ ] Shader
+    - [x] Shader
     - [ ] Renderer
     - [ ] Texture
     - [ ] Blender
