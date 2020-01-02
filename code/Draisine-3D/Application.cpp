@@ -94,7 +94,8 @@ int main()
 
 		IndexBuffer indexBuffer(indices, sizeof(indices));
 	
-		Texture texture("textures/iipw.png");
+		Texture texture0("textures/weiti.png");
+		Texture texture1("textures/iipw.png");
 		Renderer renderer;
 
 		// main event loop
@@ -104,8 +105,10 @@ int main()
 
 			renderer.clear();
 
-			texture.bind(0);
+			texture0.bind(0);
+			texture1.bind(1);
 			shader.setUniformInt("Texture0", 0);
+			shader.setUniformInt("Texture1", 1);
 
 			renderer.draw(vertexArray, indexBuffer, shader);
 
