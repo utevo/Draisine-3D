@@ -1,4 +1,4 @@
-#include "Textures.h"
+#include "TexturesMapper.h"
 
 #include <SOIL.h>
 #include <GLFW/glfw3.h>
