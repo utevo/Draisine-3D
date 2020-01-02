@@ -16,6 +16,7 @@
 #include "Shader.h"
 #include "Renderer.h"
 #include "Texture.h"
+#include "TexturesMapper.h"
 
 
 using namespace std;
@@ -94,7 +95,11 @@ int main()
 
 		IndexBuffer indexBuffer(indices, sizeof(indices));
 	
-		Texture texture("textures/iipw.png");
+		Texture texture0("textures/weiti.png");
+		Texture texture1("textures/iipw.png");
+		std::vector < pair<std::string, Texture&> > textureMapperMapping = { pair<std::string, Texture&>{"Texture0", texture0 }, pair<std::string, Texture&>{ "Texture1", texture1 }};
+		TexturesMapper texturesMapper(textureMapperMapping, shader);
+
 		Renderer renderer;
 
 		// main event loop
@@ -104,9 +109,7 @@ int main()
 
 			renderer.clear();
 
-			texture.bind(0);
-			shader.setUniformInt("Texture0", 0);
-
+			texturesMapper.bind();
 			renderer.draw(vertexArray, indexBuffer, shader);
 
 			// Swap the screen buffers
