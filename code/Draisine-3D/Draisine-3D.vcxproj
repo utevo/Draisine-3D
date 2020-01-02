@@ -172,6 +172,10 @@
     <ClInclude Include="Utilities.h" />
     <ClInclude Include="VertexBuffer.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="textures\iipw.png" />
+    <Image Include="textures\weiti.png" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

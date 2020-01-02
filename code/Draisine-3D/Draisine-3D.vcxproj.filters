@@ -80,4 +80,12 @@
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="textures\weiti.png">
+      <Filter>Pliki zasobów</Filter>
+    </Image>
+    <Image Include="textures\iipw.png">
+      <Filter>Pliki zasobów</Filter>
+    </Image>
+  </ItemGroup>
 </Project>
