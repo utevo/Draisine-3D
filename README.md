@@ -5,9 +5,6 @@
     3 - Michał Kowieski
     
 ## Punkty kontrolne
-
-
-    
 - [x] Stworzenie wstępnych punków kontrolnych | *estimate:* 0.5h | *spend:* 1.0h
 - [x] Utworzenie prostego przykładowego projektu OpenGL | *estimate:* 1.0h | *spend:* 1.5h
 - [ ] Zaprojetowanie klas tworzących szablon struktóry projektu: | *estimate:* 20.0h |
@@ -23,7 +20,7 @@
     - [x] Texture | *estimate:* 0.5h | *spend:* 1.0h
     - [ ] Projection
     - [ ] View
-    - [ ] TexturesMapper | *estimate:* 1.0h | *spend:* ?
+    - [x] TexturesMapper | *estimate:* 1.0h | *spend:* 1.75h
     - [ ] Object
     - [ ] Other...
 - [ ] Stworzenie wstępnego szkicu projektu
@@ -50,5 +47,4 @@
 - [ ] Prezentacja gotowego projetku na spotkaniu nr 7
 
 ## Przykład
-
    ![alt text](pictures/drezyna.JPG "Drezyna")
