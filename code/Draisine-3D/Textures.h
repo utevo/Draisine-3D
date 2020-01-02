@@ -7,11 +7,11 @@
 #include "Texture.h"
 
 
-class Textures {
+class TexturesMapper {
 public:
-    Textures(std::vector <std::pair<unsigned int, Texture> > &mapping);
-    Textures(std::vector <Texture> &textures);
-    ~Textures();
+    TexturesMapper(std::vector <std::pair<unsigned int, Texture> > &mapping);
+    TexturesMapper(std::vector <Texture> &textures);
+    ~TexturesMapper();
 
     void bind() const;
     void unbind() const;
