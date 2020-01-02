@@ -20,7 +20,7 @@
     - [x] Texture | *estimate:* 0.5h | *spend:* 1.0h
     - [x] Projection | *estimate:* 1.5h | *spend:* 1.5h
     	- [ ] PerspectiveProjection
-	- [ ] OrtogonalProjection
+        - [ ] OrtogonalProjection
     - [x] View | *estimate:* 0.5h | *spend:* 0.1h
     	- [ ] PositionFrontUpView
     - [x] TexturesMapper | *estimate:* 1.0h | *spend:* 1.75h
