@@ -18,8 +18,8 @@
     - [x] Shader | *estimate:* 0.5h | *spend:* 0.5h
     - [x] Renderer | *estimate:* 0.5h | *spend:* 0.2h
     - [x] Texture | *estimate:* 0.5h | *spend:* 1.0h
-    - [ ] Projection
-    - [ ] View
+    - [ ] Projection | *estimate:* 1.5h | *spend:* ?
+    - [ ] View | *estimate:* 0.5h | *spend:* ?
     - [x] TexturesMapper | *estimate:* 1.0h | *spend:* 1.75h
     - [ ] Object
     - [ ] Other...
