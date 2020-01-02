@@ -79,7 +79,7 @@
     <ClInclude Include="TexturesMapper.h">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
-    <ClInclude Include="textures\Projection.h">
+    <ClInclude Include="Projection.h">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
   </ItemGroup>
