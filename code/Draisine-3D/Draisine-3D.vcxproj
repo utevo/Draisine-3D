@@ -167,6 +167,7 @@
     <ClInclude Include="Shader.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="TexturesMapper.h" />
+    <ClInclude Include="textures\Projection.h" />
     <ClInclude Include="VertexArray.h" />
     <ClInclude Include="VertexBufferLayout.h" />
     <ClInclude Include="Utilities.h" />
