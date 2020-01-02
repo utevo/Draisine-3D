@@ -23,7 +23,7 @@
     - [x] Texture | *estimate:* 0.5h | *spend:* 1.0h
     - [ ] Projection
     - [ ] View
-    - [ ] Textures
+    - [ ] Textures | *estimate:* 1.0h | *spend:* ?
     - [ ] Object
     - [ ] Other...
 - [ ] Stworzenie wstępnego szkicu projektu
