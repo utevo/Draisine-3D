@@ -19,7 +19,7 @@
     - [x] Renderer | *estimate:* 0.5h | *spend:* 0.2h
     - [x] Texture | *estimate:* 0.5h | *spend:* 1.0h
     - [x] Projection | *estimate:* 1.5h | *spend:* 1.5h
-    	- [ ] PerspectiveProjection 
+    	- [ ] PerspectiveProjection | *estimate:* 1.0h | *spend:* ?
         - [ ] OrtogonalProjection | *estimate:* 0.5h | *spend:* ?
     - [x] View | *estimate:* 0.5h | *spend:* 0.1h
     	- [x] PositionFrontUpView | *estimate:* 1.0h | *spend:* 1.0h
