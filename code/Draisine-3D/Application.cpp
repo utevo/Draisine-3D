@@ -63,8 +63,6 @@ int main()
 		if (glewInit() != GLEW_OK)
 			throw exception("GLEW Initialization failed");
 
-		GLCall(glViewport(0, 0, WIDTH, HEIGHT));
-
 		// Let's check what are maximum parameters counts
 		GLint nrAttributes;
 		GLCall(glGetIntegerv(GL_MAX_VERTEX_ATTRIBS, &nrAttributes));
