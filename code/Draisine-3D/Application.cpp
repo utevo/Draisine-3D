@@ -14,7 +14,6 @@
 #include "VertexBufferLayout.h"
 #include "IndexBuffer.h"
 #include "Shader.h"
-#include "Renderer.h"
 #include "Texture.h"
 #include "TexturesMapper.h"
 
@@ -28,6 +27,17 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 	cout << key << endl;
 	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
 		glfwSetWindowShouldClose(window, GL_TRUE);
+}
+
+void render(const VertexArray& vertexArray, const IndexBuffer& indexBuffer, const Shader& shader) {
+	shader.bind();
+	vertexArray.bind();
+	indexBuffer.bind();
+	GLCall(glDrawElements(GL_TRIANGLES, indexBuffer.getCount(), GL_UNSIGNED_INT, nullptr));
+}
+
+void clear() {
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
 int main()
@@ -52,8 +62,6 @@ int main()
 		glewExperimental = GL_TRUE;
 		if (glewInit() != GLEW_OK)
 			throw exception("GLEW Initialization failed");
-
-		GLCall(glViewport(0, 0, WIDTH, HEIGHT));
 
 		// Let's check what are maximum parameters counts
 		GLint nrAttributes;
@@ -80,6 +88,8 @@ int main()
 			0, 2, 3,
 		};
 
+		GLCall(glEnable(GL_DEPTH_TEST));
+
 		VertexBuffer vertexBuffer(vertices, sizeof(vertices));
 
 		VertexBufferLayout vertexBufferLayout;
@@ -100,17 +110,16 @@ int main()
 		std::vector < pair<std::string, Texture&> > textureMapperMapping = { pair<std::string, Texture&>{"Texture0", texture0 }, pair<std::string, Texture&>{ "Texture1", texture1 }};
 		TexturesMapper texturesMapper(textureMapperMapping, shader);
 
-		Renderer renderer;
 
 		// main event loop
 		while (!glfwWindowShouldClose(window)) {
 			// Check if any events have been activiated (key pressed, mouse moved etc.) and call corresponding response functions
 			glfwPollEvents();
 
-			renderer.clear();
+			clear();
 
 			texturesMapper.bind();
-			renderer.draw(vertexArray, indexBuffer, shader);
+			render(vertexArray, indexBuffer, shader);
 
 			// Swap the screen buffers
 			glfwSwapBuffers(window);
