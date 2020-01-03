@@ -152,7 +152,6 @@
     <ClCompile Include="IndexBuffer.cpp" />
     <ClCompile Include="OrtogonalProjection.cpp" />
     <ClCompile Include="PerspectiveProjection.cpp" />
-    <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TexturesMapper.cpp" />

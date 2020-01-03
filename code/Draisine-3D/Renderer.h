@@ -1,13 +1,31 @@
 #pragma once
 
-#include "VertexArray.h"
-#include "IndexBuffer.h"
-#include "Shader.h"
+#include <GL/glew.h>
+#include <GLFW/glfw3.h>
+
+#include "View.h"
+#include "Projection.h"
 
 
 class Renderer
 {
 public:
-    void clear() const;
-    void draw(const VertexArray& vertexArray, const IndexBuffer& indexBuffer, const Shader& shader) const;
+    Renderer(View& view, Projection& projection)
+    : _view(view), _projection(projection)  {
+        glEnable(GL_DEPTH_TEST);
+    }
+
+    void clear() const {
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    };
+
+    void setView(View& view) { _view = view; }
+    View& getView() { return _view; }
+
+    void setProjection(Projection& projection) { _projection = projection; }
+    Projection& getProjection() { return _projection; }
+
+private:
+    View& _view;
+    Projection& _projection;
 };
