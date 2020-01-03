@@ -149,6 +149,8 @@
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="IndexBuffer.cpp" />
+    <ClCompile Include="OrtogonalProjection.cpp" />
+    <ClCompile Include="PerspectiveProjection.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="Texture.cpp" />
@@ -164,6 +166,8 @@
   <ItemGroup>
     <ClInclude Include="Debug.h" />
     <ClInclude Include="IndexBuffer.h" />
+    <ClInclude Include="OrtogonalProjection.h" />
+    <ClInclude Include="PerspectiveProjection.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="Texture.h" />
