@@ -37,7 +37,7 @@ void render(const VertexArray& vertexArray, const IndexBuffer& indexBuffer, cons
 }
 
 void clear() {
-	GLCall(glClear(GL_COLOR_BUFFER_BIT));
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
 int main()
@@ -87,6 +87,8 @@ int main()
 			0, 1, 2,
 			0, 2, 3,
 		};
+
+		GLCall(glEnable(GL_DEPTH_TEST));
 
 		VertexBuffer vertexBuffer(vertices, sizeof(vertices));
 

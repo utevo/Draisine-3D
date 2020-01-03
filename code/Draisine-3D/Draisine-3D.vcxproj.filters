@@ -30,9 +30,6 @@
     <ClCompile Include="Shader.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
-    <ClCompile Include="Renderer.cpp">
-      <Filter>Pliki źródłowe</Filter>
-    </ClCompile>
     <ClCompile Include="Texture.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
