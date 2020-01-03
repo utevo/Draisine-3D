@@ -153,6 +153,7 @@
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TexturesMapper.cpp" />
+    <ClCompile Include="PositionFrontUpView.cpp" />
     <ClCompile Include="VertexArray.cpp" />
     <ClCompile Include="VertexBuffer.cpp" />
   </ItemGroup>
@@ -168,6 +169,7 @@
     <ClInclude Include="Texture.h" />
     <ClInclude Include="TexturesMapper.h" />
     <ClInclude Include="Projection.h" />
+    <ClInclude Include="PositionFrontUpView.h" />
     <ClInclude Include="View.h" />
     <ClInclude Include="VertexArray.h" />
     <ClInclude Include="VertexBufferLayout.h" />
