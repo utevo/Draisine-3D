@@ -15,6 +15,7 @@ struct ShaderSource {
 
 class Shader {
 public:
+    Shader();
     Shader(const std::string& vertexShaderFilepath, const std::string& fragmentShaderFilepath);
     ~Shader();
 

@@ -8,6 +8,9 @@
 
 #include "Utilities.h"
 
+Shader::Shader() {
+    _id = glCreateProgram();
+}
 
 Shader::Shader(const std::string& vertexShaderFilePath, const std::string& fragmentShaderFilePath) {
     _source = _parseShaderSource(vertexShaderFilePath, fragmentShaderFilePath);
@@ -32,7 +35,7 @@ ShaderSource Shader::_parseShaderSource(const std::string& vertexShaderFilePath,
 }
 
 unsigned int Shader::_createShader(const std::string& vertexShaderSource, const std::string& fragmentShaderSource) {
-    unsigned int program = glCreateProgram();
+    GLCall(unsigned int program = glCreateProgram());
     unsigned int vertexShader = _compileShader(GL_VERTEX_SHADER, vertexShaderSource);
     unsigned int fragmentShader = _compileShader(GL_FRAGMENT_SHADER, fragmentShaderSource);
 
@@ -56,8 +59,7 @@ unsigned int Shader::_createShader(const std::string& vertexShaderSource, const 
     return program;
 }
 
-unsigned int Shader::_compileShader(unsigned int type, const std::string& shaderSource)
-{
+unsigned int Shader::_compileShader(unsigned int type, const std::string& shaderSource) {
     GLCall(unsigned int shader = glCreateShader(type));
     const GLchar* shaderSourceAsGLcharPoiter = shaderSource.c_str();
     GLCall(glShaderSource(shader, 1, &shaderSourceAsGLcharPoiter, nullptr));
