@@ -43,12 +43,9 @@ protected:
 	virtual Shader initShader() = 0;
 	virtual TexturesMapper initTexturesMapper() = 0;
 
-private:
 	VertexArray _vertexArray;
 	IndexBuffer _indexBuffer;
 	Shader _shader;
 	TexturesMapper _texturesMapper;
-
-
 };
 
