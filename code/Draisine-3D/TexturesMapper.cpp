@@ -6,6 +6,9 @@
 #include "Utilities.h"
 
 
+TexturesMapper::TexturesMapper() : _mapping(std::vector <std::pair<std::string, Texture&> >()), _shader(Shader()) {
+};
+
 TexturesMapper::TexturesMapper(std::vector <std::pair<std::string, Texture&> > &mapping, Shader& shader)
 : _shader(shader), _mapping(mapping) {
 };
