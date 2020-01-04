@@ -2,6 +2,7 @@
 
 #include <fstream>
 #include <sstream>
+#include <iostream>
 
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
@@ -9,11 +10,24 @@
 #include "Utilities.h"
 
 Shader::Shader() {
+    std::cout << "START> Shader::Shader()" << std::endl;
     _id = glCreateProgram();
+    
+    std::cout << "END> Shader::Shader() _id = " << _id << std::endl;
+}
+
+Shader& Shader::operator=(const Shader& shader) {
+    _id = shader._id;
+    _source = shader._source;
+    _uniformLocationCache = shader._uniformLocationCache;
+
+    return *this;
 }
 
 Shader::Shader(const std::string& vertexShaderFilePath, const std::string& fragmentShaderFilePath) {
     _source = _parseShaderSource(vertexShaderFilePath, fragmentShaderFilePath);
+    std::cout << _source.vertexShaderSource << std::endl;
+    std::cout << _source.fragmentShaderSource << std::endl;
     _id = _createShader(_source.vertexShaderSource, _source.fragmentShaderSource);
     GLCall(glUseProgram(_id));
 }

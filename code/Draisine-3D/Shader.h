@@ -16,8 +16,11 @@ struct ShaderSource {
 class Shader {
 public:
     Shader();
+    //Shader(const Shader& shader);
     Shader(const std::string& vertexShaderFilepath, const std::string& fragmentShaderFilepath);
     ~Shader();
+
+    Shader& operator=(const Shader& shader);
 
     void bind() const;
     void unbind() const;

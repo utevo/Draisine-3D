@@ -11,25 +11,29 @@
 
 class ImplementedObject : public Object {
 public:
-	ImplementedObject() 
-		: _vertexArray(initVertexArray()), _indexBuffer(initIndexBuffer()), _shader(initShader()), _texturesMapper(initTexturesMapper()) {
+	ImplementedObject() {
+		//_vertexArray = initVertexArray();
+		//_indexBuffer = initIndexBuffer();
+		//_shader = initShader();
+		//_texturesMapper = initTexturesMapper();
 	};
-	~ImplementedObject() {};
+	virtual ~ImplementedObject() {};
 
 	void render(Renderer& renderer) override {
-		_vertexArray.bind();
-		_indexBuffer.bind();
-		_shader.bind();
-		_texturesMapper.bind();
+		_vertexArray->bind();
+		_indexBuffer->bind();
+		_shader->bind();
+		_texturesMapper->bind();
 
 		glm::mat4 modelMatrix = _model.getMatrix();
 		glm::mat4 viewMatrix = renderer.getView().getMatrix();
 		glm::mat4 projectionMatrix = renderer.getProjection().getMatrix();
 
-		glm::mat4 MVP = modelMatrix * viewMatrix * projectionMatrix;
-		_shader.setUniformMat4("MVP", MVP);
+		// glm::mat4 MVP = modelMatrix * viewMatrix * projectionMatrix;
+		glm::mat4 MVP = glm::mat4(1.0f);
+		_shader->setUniformMat4("MVP", MVP);
 		
-		GLCall(glDrawElements(GL_TRIANGLES, _indexBuffer.getCount(), GL_UNSIGNED_INT, nullptr));
+		GLCall(glDrawElements(GL_TRIANGLES, _indexBuffer->getCount(), GL_UNSIGNED_INT, nullptr));
 	};
 
 	Model& getModel() { return _model; }
@@ -38,14 +42,14 @@ public:
 protected:
 	Model _model;
 
-	virtual VertexArray initVertexArray() = 0;
-	virtual IndexBuffer initIndexBuffer() = 0;
-	virtual Shader initShader() = 0;
-	virtual TexturesMapper initTexturesMapper() = 0;
+	virtual std::shared_ptr<VertexArray> initVertexArray() = 0;
+	virtual std::shared_ptr <IndexBuffer> initIndexBuffer() = 0;
+	virtual std::shared_ptr <Shader> initShader() = 0;
+	virtual std::shared_ptr <TexturesMapper> initTexturesMapper() = 0;
 
-	VertexArray _vertexArray;
-	IndexBuffer _indexBuffer;
-	Shader _shader;
-	TexturesMapper _texturesMapper;
+	std::shared_ptr<VertexArray> _vertexArray;
+	std::shared_ptr <IndexBuffer> _indexBuffer;
+	std::shared_ptr <Shader> _shader;
+	std::shared_ptr <TexturesMapper> _texturesMapper;
 };
 
