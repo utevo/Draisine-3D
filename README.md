@@ -23,6 +23,7 @@
         - [x] OrtogonalProjection | *estimate:* 0.5h | *spend:* 0.5h
     - [x] View | *estimate:* 0.5h | *spend:* 0.1h
     	- [x] PositionFrontUpView | *estimate:* 1.0h | *spend:* 1.0h
+    - [x] Model | *estimate:* 0.5h | *spend:* 0.3h
     - [x] TexturesMapper | *estimate:* 1.0h | *spend:* 1.75h
     - [ ] Object | *estimate:* 5.0h | *spend:* ?
     - [ ] Other...

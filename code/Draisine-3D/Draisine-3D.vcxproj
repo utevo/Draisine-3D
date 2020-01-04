@@ -168,6 +168,7 @@
     <ClInclude Include="Debug.h" />
     <ClInclude Include="ImplementedObject.h" />
     <ClInclude Include="IndexBuffer.h" />
+    <ClInclude Include="Model.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="OrtogonalProjection.h" />
     <ClInclude Include="PerspectiveProjection.h" />
