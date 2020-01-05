@@ -2,6 +2,8 @@
 
 #include <assert.h>
 
+#include <glm/glm.hpp>
+
 #include "Debug.h"
 
 
@@ -23,4 +25,17 @@ static unsigned int GLGetSizeOfType(unsigned int type)
     }
     ASSERT(false);
     return 0;
+}
+
+static std::string mat4ToString(glm::mat4 matrix) {
+    std::string result;
+
+    for (int i = 0; i < 4; ++i) {
+        for (int j = 0; j < 4; ++j) {
+            result += matrix[i][j];
+            result += " ";
+        }
+        result += "\n";
+    }
+    return result;
 }
