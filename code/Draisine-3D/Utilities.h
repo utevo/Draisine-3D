@@ -1,6 +1,7 @@
 #pragma once
 
 #include <assert.h>
+#include <sstream>
 
 #include <glm/glm.hpp>
 
@@ -32,7 +33,11 @@ static std::string mat4ToString(glm::mat4 matrix) {
 
     for (int i = 0; i < 4; ++i) {
         for (int j = 0; j < 4; ++j) {
-            result += matrix[i][j];
+            std::ostringstream ss;
+            float myFloat = (float)matrix[i][j];
+            ss << myFloat;
+            std::string s(ss.str());
+            result += s;
             result += " ";
         }
         result += "\n";
