@@ -6,16 +6,7 @@
 class Square : public ImplementedObject {
 public:
 	Square() {
-		auto vertexBufferAndVertexBufferLayout = initVertexBufferAndVertexBufferLayout();
-		_vertexBuffer = vertexBufferAndVertexBufferLayout.first;
-		_vertexBufferLayout = vertexBufferAndVertexBufferLayout.second;
-
-		_vertexArray = std::make_shared<VertexArray>();
-		_vertexArray->link(*_vertexBuffer, *_vertexBufferLayout);
-
-		_indexBuffer = initIndexBuffer();
-		_shader = initShader();
-		_texturesMapper = initTexturesMapper();
+		init();
 	}
 
 	virtual ~Square() { }
@@ -75,8 +66,6 @@ protected:
 
 		return texturesMapper;
 	};
-
-
 
 };
 

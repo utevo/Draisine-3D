@@ -18,12 +18,19 @@ public:
 	std::shared_ptr<Shader> _shader;
 	std::shared_ptr<TexturesMapper> _texturesMapper;
 
-	ImplementedObject() {
-		//_vertexArray = initVertexArray();
-		//_indexBuffer = initIndexBuffer();
-		//_shader = initShader();
-		//_texturesMapper = initTexturesMapper();
-	};
+	void init() {
+		auto vertexBufferAndVertexBufferLayout = initVertexBufferAndVertexBufferLayout();
+		_vertexBuffer = vertexBufferAndVertexBufferLayout.first;
+		_vertexBufferLayout = vertexBufferAndVertexBufferLayout.second;
+
+		_vertexArray = std::make_shared<VertexArray>();
+		_vertexArray->link(*_vertexBuffer, *_vertexBufferLayout);
+
+		_indexBuffer = initIndexBuffer();
+		_shader = initShader();
+		_texturesMapper = initTexturesMapper();
+	}
+
 	virtual ~ImplementedObject() {};
 
 	void render(Renderer& renderer) override {
@@ -49,10 +56,13 @@ public:
 protected:
 	Model _model;
 
-	virtual std::pair<std::shared_ptr <VertexBuffer>, std::shared_ptr <VertexBufferLayout>> initVertexBufferAndVertexBufferLayout() = 0;
-	virtual std::shared_ptr <IndexBuffer> initIndexBuffer() = 0;
-	virtual std::shared_ptr <Shader> initShader() = 0;
-	virtual std::shared_ptr <TexturesMapper> initTexturesMapper() = 0;
+	virtual std::pair<std::shared_ptr <VertexBuffer>, std::shared_ptr <VertexBufferLayout>> initVertexBufferAndVertexBufferLayout() {
+		std::pair<std::shared_ptr <VertexBuffer>, std::shared_ptr <VertexBufferLayout>> result = { nullptr, nullptr };
+		return result;
+	}
+	virtual std::shared_ptr <IndexBuffer> initIndexBuffer() { return nullptr; }
+	virtual std::shared_ptr <Shader> initShader() { return nullptr; }
+	virtual std::shared_ptr <TexturesMapper> initTexturesMapper() { return nullptr; }
 
 
 };
