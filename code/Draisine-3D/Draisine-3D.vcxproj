@@ -148,7 +148,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
-    <ClCompile Include="ImplementedObject.cpp" />
     <ClCompile Include="IndexBuffer.cpp" />
     <ClCompile Include="OrtogonalProjection.cpp" />
     <ClCompile Include="PerspectiveProjection.cpp" />

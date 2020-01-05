@@ -11,6 +11,13 @@
 
 class ImplementedObject : public Object {
 public:
+	std::shared_ptr<VertexBuffer> _vertexBuffer;
+	std::shared_ptr<VertexBufferLayout> _vertexBufferLayout;
+	std::shared_ptr<VertexArray> _vertexArray;
+	std::shared_ptr<IndexBuffer> _indexBuffer;
+	std::shared_ptr<Shader> _shader;
+	std::shared_ptr<TexturesMapper> _texturesMapper;
+
 	ImplementedObject() {
 		//_vertexArray = initVertexArray();
 		//_indexBuffer = initIndexBuffer();
@@ -30,8 +37,8 @@ public:
 		glm::mat4 projectionMatrix = renderer.getProjection().getMatrix();
 
 		// glm::mat4 MVP = modelMatrix * viewMatrix * projectionMatrix;
-		glm::mat4 MVP = glm::mat4(1.0f);
-		_shader->setUniformMat4("MVP", MVP);
+		//glm::mat4 MVP = glm::mat4(1.0f);
+		//_shader->setUniformMat4("MVP", MVP);
 		
 		GLCall(glDrawElements(GL_TRIANGLES, _indexBuffer->getCount(), GL_UNSIGNED_INT, nullptr));
 	};
@@ -42,14 +49,11 @@ public:
 protected:
 	Model _model;
 
-	virtual std::shared_ptr<VertexArray> initVertexArray() = 0;
+	virtual std::pair<std::shared_ptr <VertexBuffer>, std::shared_ptr <VertexBufferLayout>> initVertexBufferAndVertexBufferLayout() = 0;
 	virtual std::shared_ptr <IndexBuffer> initIndexBuffer() = 0;
 	virtual std::shared_ptr <Shader> initShader() = 0;
 	virtual std::shared_ptr <TexturesMapper> initTexturesMapper() = 0;
 
-	std::shared_ptr<VertexArray> _vertexArray;
-	std::shared_ptr <IndexBuffer> _indexBuffer;
-	std::shared_ptr <Shader> _shader;
-	std::shared_ptr <TexturesMapper> _texturesMapper;
+
 };
 
