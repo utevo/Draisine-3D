@@ -75,9 +75,9 @@ int main()
 		GLCall(glGetIntegerv(GL_MAX_TEXTURE_COORDS, &nrAttributes));
 		cout << "Max texture coords allowed: " << nrAttributes << std::endl;
 
-		//const std::string vertexShaderSource = "shader.vert";
-		//const std::string fragmentShaderSource = "shader.frag";
-		//Shader shader(vertexShaderSource, fragmentShaderSource);
+		const std::string vertexShaderSource = "shader.vert";
+		const std::string fragmentShaderSource = "shader.frag";
+		std::shared_ptr<Shader> shader = std::make_shared<Shader>(vertexShaderSource, fragmentShaderSource);
 
 		// Set up vertex data 
 		GLfloat vertices[] = {
@@ -95,25 +95,25 @@ int main()
 
 		//GLCall(glEnable(GL_DEPTH_TEST));
 
-		//VertexBuffer vertexBuffer(vertices, sizeof(vertices));
+		VertexBuffer vertexBuffer = VertexBuffer(vertices, sizeof(vertices));
 
-		//VertexBufferLayout vertexBufferLayout;
+		VertexBufferLayout vertexBufferLayout;
 		//// vertex geometry data
-		//vertexBufferLayout.addFloat(3);
+		vertexBufferLayout.addFloat(3);
 		//// vertex color data
-		//vertexBufferLayout.addFloat(3);
+		vertexBufferLayout.addFloat(3);
 		//// vertex texture coordinates
-		//vertexBufferLayout.addFloat(2);
+		vertexBufferLayout.addFloat(2);
 
-		//VertexArray vertexArray = VertexArray();
-		//vertexArray.link(vertexBuffer, vertexBufferLayout);
+		std::shared_ptr<VertexArray> vertexArray = std::make_shared<VertexArray>();
+		vertexArray->link(vertexBuffer, vertexBufferLayout);
 
-		//IndexBuffer indexBuffer(indices, sizeof(indices));
+		std::shared_ptr<IndexBuffer> indexBuffer = std::make_shared<IndexBuffer>(indices, sizeof(indices));
 	
-		//Texture texture0("textures/weiti.png");
-		//Texture texture1("textures/iipw.png");
-		//std::vector < pair<std::string, Texture&> > textureMapperMapping = { pair<std::string, Texture&>{"Texture0", texture0 }, pair<std::string, Texture&>{ "Texture1", texture1 }};
-		//TexturesMapper texturesMapper(textureMapperMapping, shader);
+		Texture texture0("textures/weiti.png");
+		Texture texture1("textures/iipw.png");
+		std::vector < pair<std::string, Texture&> > textureMapperMapping = { pair<std::string, Texture&>{"Texture0", texture0 }, pair<std::string, Texture&>{ "Texture1", texture1 }};
+		std::shared_ptr <TexturesMapper> texturesMapper = std::make_shared<TexturesMapper>(textureMapperMapping, *shader);
 
 
 		glm::vec3 cameraPos = glm::vec3(0.0f, 0.0f, 3.0f);
@@ -129,12 +129,12 @@ int main()
 			// Check if any events have been activiated (key pressed, mouse moved etc.) and call corresponding response functions
 			glfwPollEvents();
 
-			renderer.clear();
-
+			//renderer.clear();
+			clear();
 			//texturesMapper.bind();
 			//render(vertexArray, indexBuffer, shader);
-			
-			square.render(renderer);
+			render(*vertexArray, *indexBuffer, *shader);
+			//square.render(renderer);
 			// Swap the screen buffers
 			glfwSwapBuffers(window);
 		}
