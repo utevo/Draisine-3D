@@ -6,7 +6,13 @@
 class Square : public ImplementedObject {
 public:
 	Square() {
-		_vertexArray = initVertexArray();
+		auto vertexBufferAndVertexBufferLayout = initVertexBufferAndVertexBufferLayout();
+		_vertexBuffer = vertexBufferAndVertexBufferLayout.first;
+		_vertexBufferLayout = vertexBufferAndVertexBufferLayout.second;
+
+		_vertexArray = std::make_shared<VertexArray>();
+		_vertexArray->link(*_vertexBuffer, *_vertexBufferLayout);
+
 		_indexBuffer = initIndexBuffer();
 		_shader = initShader();
 		_texturesMapper = initTexturesMapper();
@@ -15,7 +21,7 @@ public:
 	virtual ~Square() { }
 
 protected:
-	std::shared_ptr<VertexArray> initVertexArray() override {
+	std::pair<std::shared_ptr<VertexBuffer>, std::shared_ptr<VertexBufferLayout> > initVertexBufferAndVertexBufferLayout() override {
 		// Set up vertex data 
 		GLfloat vertices[] = {
 			// coordinates			// color			// texture
@@ -25,19 +31,18 @@ protected:
 			 0.75f, -0.5f,  0.0f,	1.0f, 0.0f, 1.0f,	1.0f,  1.0f,
 		};
 
-		std::shared_ptr <VertexBuffer> vertexBuffer= std::make_shared<VertexBuffer>(vertices, sizeof(vertices));
+		std::shared_ptr<VertexBuffer> vertexBuffer = std::make_shared<VertexBuffer>(vertices, sizeof(vertices));
 
-		std::shared_ptr <VertexBufferLayout> vertexBufferLayout = std::make_shared<VertexBufferLayout>();
-		// vertex geometry data
+		std::shared_ptr<VertexBufferLayout> vertexBufferLayout = std::make_shared<VertexBufferLayout>();
+		//// vertex geometry data
 		vertexBufferLayout->addFloat(3);
-		// vertex color data
+		//// vertex color data
 		vertexBufferLayout->addFloat(3);
-		// vertex texture coordinates
+		//// vertex texture coordinates
 		vertexBufferLayout->addFloat(2);
 
-		std::shared_ptr <VertexArray> vertexArray = std::make_shared <VertexArray>();
-		vertexArray->link(*vertexBuffer, *vertexBufferLayout);
-		return vertexArray;
+		std::pair<std::shared_ptr<VertexBuffer>, std::shared_ptr<VertexBufferLayout> > result = { vertexBuffer, vertexBufferLayout };
+		return result;
 	}
 
 	std::shared_ptr <IndexBuffer> initIndexBuffer() override {
@@ -59,14 +64,19 @@ protected:
 	};
 
 	std::shared_ptr <TexturesMapper> initTexturesMapper() override {
-		Texture texture0("textures/weiti.png");
-		Texture texture1("textures/iipw.png");
-		std::vector < std::pair<std::string, Texture&> > textureMapperMapping = { std::pair<std::string, Texture&>{"Texture0", texture0 }, std::pair<std::string, Texture&>{ "Texture1", texture1 } };
+		std::shared_ptr<Texture> texture0 = std::make_shared<Texture>("textures/weiti.png");
+		std::shared_ptr<Texture> texture1 = std::make_shared<Texture>("textures/iipw.png");
 
-		std::shared_ptr <TexturesMapper> texturesMapper = std::make_shared<TexturesMapper>(textureMapperMapping, *_shader);
+		std::vector <std::pair<std::string, std::shared_ptr<Texture> > > textureMapperMapping = {
+			std::pair<std::string, std::shared_ptr<Texture> > {"Texture0", texture0 },
+			std::pair<std::string, std::shared_ptr<Texture> > { "Texture1", texture1 }
+		};
+		std::shared_ptr<TexturesMapper> texturesMapper = std::make_shared<TexturesMapper>(textureMapperMapping, *_shader);
 
 		return texturesMapper;
 	};
+
+
 
 };
 
