@@ -10,10 +10,7 @@
 #include "Utilities.h"
 
 Shader::Shader() {
-    std::cout << "START> Shader::Shader()" << std::endl;
     _id = glCreateProgram();
-    
-    std::cout << "END> Shader::Shader() _id = " << _id << std::endl;
 }
 
 Shader& Shader::operator=(const Shader& shader) {
@@ -26,8 +23,6 @@ Shader& Shader::operator=(const Shader& shader) {
 
 Shader::Shader(const std::string& vertexShaderFilePath, const std::string& fragmentShaderFilePath) {
     _source = _parseShaderSource(vertexShaderFilePath, fragmentShaderFilePath);
-    std::cout << _source.vertexShaderSource << std::endl;
-    std::cout << _source.fragmentShaderSource << std::endl;
     _id = _createShader(_source.vertexShaderSource, _source.fragmentShaderSource);
     GLCall(glUseProgram(_id));
 }
