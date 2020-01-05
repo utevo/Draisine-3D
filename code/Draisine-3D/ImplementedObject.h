@@ -11,13 +11,6 @@
 
 class ImplementedObject : public Object {
 public:
-	std::shared_ptr<VertexBuffer> _vertexBuffer;
-	std::shared_ptr<VertexBufferLayout> _vertexBufferLayout;
-	std::shared_ptr<VertexArray> _vertexArray;
-	std::shared_ptr<IndexBuffer> _indexBuffer;
-	std::shared_ptr<Shader> _shader;
-	std::shared_ptr<TexturesMapper> _texturesMapper;
-
 	void init() {
 		auto vertexBufferAndVertexBufferLayout = initVertexBufferAndVertexBufferLayout();
 		_vertexBuffer = vertexBufferAndVertexBufferLayout.first;
@@ -55,6 +48,13 @@ public:
 
 protected:
 	Model _model;
+
+	std::shared_ptr<VertexBuffer> _vertexBuffer;
+	std::shared_ptr<VertexBufferLayout> _vertexBufferLayout;
+	std::shared_ptr<VertexArray> _vertexArray;
+	std::shared_ptr<IndexBuffer> _indexBuffer;
+	std::shared_ptr<Shader> _shader;
+	std::shared_ptr<TexturesMapper> _texturesMapper;
 
 	virtual std::pair<std::shared_ptr <VertexBuffer>, std::shared_ptr <VertexBufferLayout>> initVertexBufferAndVertexBufferLayout() {
 		std::pair<std::shared_ptr <VertexBuffer>, std::shared_ptr <VertexBufferLayout>> result = { nullptr, nullptr };
