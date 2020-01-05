@@ -6,8 +6,11 @@
 #include "Utilities.h"
 
 
+
 Texture::Texture(const std::string& filePath) {
     _buffer = SOIL_load_image(filePath.c_str(), &_width, &_height, &_channels, 4);
+    ASSERT(_buffer);
+
     GLCall(glGenTextures(1, &_id));
     GLCall(glBindTexture(GL_TEXTURE_2D, _id)); // Bind without slot selection
 
