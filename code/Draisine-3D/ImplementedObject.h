@@ -1,5 +1,7 @@
 #pragma once
 
+#include <iostream>
+
 #include "Utilities.h"
 #include "Object.h"
 #include "VertexArray.h"
@@ -36,9 +38,24 @@ public:
 		glm::mat4 viewMatrix = renderer.getView().getMatrix();
 		glm::mat4 projectionMatrix = renderer.getProjection().getMatrix();
 
-		// glm::mat4 MVP = modelMatrix * viewMatrix * projectionMatrix;
+		glm::mat4 MVP = modelMatrix * viewMatrix * projectionMatrix;
+
+		std::cout << "Model: " << std::endl;
+		std::cout << mat4ToString(_model.getMatrix()) << std::endl;
+
+		std::cout << "View: " << std::endl;
+		std::cout << mat4ToString(viewMatrix) << std::endl;
+
+		std::cout << "Projection: " << std::endl;
+		std::cout << mat4ToString(projectionMatrix) << std::endl;
+
+
+		std::cout << "MVP: " << std::endl;
+		std::cout << mat4ToString(MVP) << std::endl;
+
 		//glm::mat4 MVP = glm::mat4(1.0f);
-		//_shader->setUniformMat4("MVP", MVP);
+		//MVP = glm::mat4(glm::vec4(1.5, 0.0, 0.0, 0.0), glm::vec4(0.0, 1.0, 0.0, 0.0), glm::vec4(0.0, 0.0, 1.0, 0.0), glm::vec4(-0, 0.0, 0.0, 1.0));
+		_shader->setUniformMat4("MVP", MVP);
 		
 		GLCall(glDrawElements(GL_TRIANGLES, _indexBuffer->getCount(), GL_UNSIGNED_INT, nullptr));
 	};
