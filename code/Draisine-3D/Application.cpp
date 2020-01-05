@@ -43,10 +43,8 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 		cameraPos[0] += step;
 	if (key == GLFW_KEY_LEFT && action == GLFW_PRESS)
 		cameraPos[0] -= step;
-
 	if (key == GLFW_KEY_Q && action == GLFW_PRESS)
 		cameraPos[1] -= step;
-
 	if (key == GLFW_KEY_E && action == GLFW_PRESS)
 		cameraPos[1] += step;
 
