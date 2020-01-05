@@ -11,9 +11,13 @@ public:
 	~PositionFrontUpView();
 
 	glm::mat4& getMatrix();
+
 	glm::vec3& getPosition() { return _position; }
+	void setPosition(glm::vec3 position) { _position = position; }
 	glm::vec3& getFront() { return _front; }
+	void setFront(glm::vec3 front) { _front = front; }
 	glm::vec3& getUp() { return _up; }
+	void setUp(glm::vec3 up) { _up = up; }
 
 private:
 	glm::vec3 _position;
