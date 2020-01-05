@@ -3,8 +3,6 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
-#include "Projection.h"
-
 
 OrtogonalProjection::OrtogonalProjection(float left, float right, float bottom, float top) {
 	_matrix = glm::ortho(left, right, bottom, top);

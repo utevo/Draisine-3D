@@ -2,12 +2,24 @@
 
 #include <fstream>
 #include <sstream>
+#include <iostream>
 
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
 #include "Utilities.h"
 
+Shader::Shader() {
+    _id = glCreateProgram();
+}
+
+Shader& Shader::operator=(const Shader& shader) {
+    _id = shader._id;
+    _source = shader._source;
+    _uniformLocationCache = shader._uniformLocationCache;
+
+    return *this;
+}
 
 Shader::Shader(const std::string& vertexShaderFilePath, const std::string& fragmentShaderFilePath) {
     _source = _parseShaderSource(vertexShaderFilePath, fragmentShaderFilePath);
@@ -32,7 +44,7 @@ ShaderSource Shader::_parseShaderSource(const std::string& vertexShaderFilePath,
 }
 
 unsigned int Shader::_createShader(const std::string& vertexShaderSource, const std::string& fragmentShaderSource) {
-    unsigned int program = glCreateProgram();
+    GLCall(unsigned int program = glCreateProgram());
     unsigned int vertexShader = _compileShader(GL_VERTEX_SHADER, vertexShaderSource);
     unsigned int fragmentShader = _compileShader(GL_FRAGMENT_SHADER, fragmentShaderSource);
 
@@ -56,8 +68,7 @@ unsigned int Shader::_createShader(const std::string& vertexShaderSource, const 
     return program;
 }
 
-unsigned int Shader::_compileShader(unsigned int type, const std::string& shaderSource)
-{
+unsigned int Shader::_compileShader(unsigned int type, const std::string& shaderSource) {
     GLCall(unsigned int shader = glCreateShader(type));
     const GLchar* shaderSourceAsGLcharPoiter = shaderSource.c_str();
     GLCall(glShaderSource(shader, 1, &shaderSourceAsGLcharPoiter, nullptr));
@@ -103,6 +114,10 @@ void Shader::setUniformFloat(const std::string& name, float value) {
 
 void Shader::setUniformInt(const std::string& name, int value) {
     GLCall(glUniform1i(getUniformLocation(name), value));
+}
+
+void Shader::setUniformMat4(const std::string& name, const glm::mat4& mat4) {
+    GLCall(glUniformMatrix4fv(getUniformLocation(name), 1, GL_FALSE, &mat4[0][0]));
 }
 
 void Shader::bind() const {

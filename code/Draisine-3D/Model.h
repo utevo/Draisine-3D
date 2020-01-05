@@ -4,6 +4,7 @@
 
 class Model {
 public:
+	Model() : _matrix(1.0f) {}
 	Model(glm::mat4& matrix) : _matrix(matrix) {}
 	~Model() {}
 

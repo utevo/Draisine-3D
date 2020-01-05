@@ -4,7 +4,8 @@
 
 #include "View.h"
 
-class PositionFrontUpView  {
+
+class PositionFrontUpView : public View {
 public:
 	PositionFrontUpView(glm::vec3 position, glm::vec3 front, glm::vec3 up);
 	~PositionFrontUpView();

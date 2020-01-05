@@ -4,6 +4,7 @@
 #include <unordered_map>
 
 #include <glm/vec4.hpp>
+#include <glm/glm.hpp>
 
 
 struct ShaderSource {
@@ -14,8 +15,11 @@ struct ShaderSource {
 
 class Shader {
 public:
+    Shader();
     Shader(const std::string& vertexShaderFilepath, const std::string& fragmentShaderFilepath);
     ~Shader();
+
+    Shader& operator=(const Shader& shader);
 
     void bind() const;
     void unbind() const;
@@ -23,6 +27,7 @@ public:
     void setUniformVec4(const std::string& name, glm::vec4 vec4);
     void setUniformFloat(const std::string& name, float value);
     void setUniformInt(const std::string& name, int value);
+    void setUniformMat4(const std::string& name, const glm::mat4& mat4);
 
     int getUniformLocation(const std::string& name);
 

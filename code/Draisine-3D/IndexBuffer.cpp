@@ -3,6 +3,10 @@
 #include "Utilities.h"
 
 
+IndexBuffer::IndexBuffer() {
+    GLCall(glGenBuffers(1, &_id));
+}
+
 IndexBuffer::IndexBuffer(const unsigned int* indices, unsigned int count)
     : _count(count) {
     GLCall(glGenBuffers(1, &_id));

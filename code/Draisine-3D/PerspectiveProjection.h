@@ -3,8 +3,10 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
+#include "Projection.h"
 
-class PerspectiveProjection {
+
+class PerspectiveProjection : public Projection {
 public:
 	PerspectiveProjection(float fovy, float aspect, float near, float far);
 	~PerspectiveProjection();

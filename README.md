@@ -7,7 +7,7 @@
 ## Punkty kontrolne
 - [x] Stworzenie wstępnych punków kontrolnych | *estimate:* 0.5h | *spend:* 1.0h
 - [x] Utworzenie prostego przykładowego projektu OpenGL | *estimate:* 1.0h | *spend:* 1.5h
-- [ ] Zaprojetowanie klas tworzących szablon struktóry projektu: | *estimate:* 20.0h |
+- [x] Zaprojetowanie klas tworzących szablon struktóry projektu: | *estimate:* 20.0h |
     - [x] Application | *estimate:* 0.5h | *spend:* 0.5h
     - [x] Utilities | *estimate:* 0.5h | *spend:* 0.5h
     - [x] Debug | *estimate:* 0.5h | *spend:* 0.5h
@@ -25,8 +25,7 @@
     	- [x] PositionFrontUpView | *estimate:* 1.0h | *spend:* 1.0h
     - [x] Model | *estimate:* 0.5h | *spend:* 0.3h
     - [x] TexturesMapper | *estimate:* 1.0h | *spend:* 1.75h
-    - [ ] Object
-    - [ ] Other...
+    - [x] Object, CompositeObject, ImplementedObject | *estimate:* 5.0h | *spend:* 8.0h
 - [ ] Stworzenie wstępnego szkicu projektu
 - [ ] Zamodelowanie obiektów:
     - [ ] Drezyna:
