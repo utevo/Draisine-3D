@@ -16,10 +16,10 @@ protected:
 		// Set up vertex data 
 		GLfloat vertices[] = {
 			// coordinates			// color			// texture
-			 -1.0f,  -0.21f, -1.0f,	1.0f, 1.0f, 1.0f,	1.0f,  0.0f,
-			 -1.0f,  -0.21f,  1.0f,	1.0f, 1.0f, 1.0f,	0.0f,  0.0f,
-			  1.0f,  -0.21f, -1.0f,	1.0f, 1.0f, 1.0f,	0.0f,  1.0f,
-			  1.0f,  -0.21f,  1.0f,	1.0f, 1.0f, 1.0f,	1.0f,  1.0f,
+			 -5.0f,  -0.21f, -5.0f,	1.0f, 1.0f, 1.0f,	1.0f,  0.0f,
+			 -5.0f,  -0.21f,  5.0f,	1.0f, 1.0f, 1.0f,	0.0f,  0.0f,
+			  5.0f,  -0.21f, -5.0f,	1.0f, 1.0f, 1.0f,	0.0f,  1.0f,
+			  5.0f,  -0.21f,  5.0f,	1.0f, 1.0f, 1.0f,	1.0f,  1.0f,
 		};
 
 		std::shared_ptr<VertexBuffer> vertexBuffer = std::make_shared<VertexBuffer>(vertices, sizeof(vertices));

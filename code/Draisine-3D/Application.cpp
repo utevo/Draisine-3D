@@ -51,7 +51,7 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 	if (key == GLFW_KEY_RIGHT && action == GLFW_PRESS)//STEP_RIGHT
 		cameraPos += step * glm::vec3( quarterRotation * glm::vec4(cameraFront,1.0));
 	if (key == GLFW_KEY_LEFT && action == GLFW_PRESS)//STEP_LEFT
-		cameraPos += step * glm::vec3(glm::inverse(quarterRotation) * glm::vec4(cameraFront, 1.0));
+		cameraPos -= step * glm::vec3( quarterRotation * glm::vec4(cameraFront, 1.0));
 	if (key == GLFW_KEY_Q && action == GLFW_PRESS)	//ROTATE_COUNTER_CLOCKWISE
 		cameraFront=glm::vec3(rotationMat * glm::vec4(cameraFront, 1.0));
 	
@@ -112,8 +112,9 @@ int main()
 		Square square = Square();
 		Ground gr = Ground();
 		ThreeD_Obj cube = ThreeD_Obj();
+		
 		rotationMat = glm::rotate(rotationMat, 0.1f, glm::vec3(0.0, 1.0, 0.0));
-		quarterRotation= glm::rotate(rotationMat, -3.14152f/2 , glm::vec3(0.0, 1.0, 0.0));
+		quarterRotation= glm::rotate(rotationMat, -glm::half_pi<float>(), glm::vec3(0.0, 1.0, 0.0));
 		//
 		// main event loop
 		while (!glfwWindowShouldClose(window)) {
