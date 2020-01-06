@@ -38,7 +38,7 @@ public:
 		glm::mat4 viewMatrix = renderer.getView().getMatrix();
 		glm::mat4 projectionMatrix = renderer.getProjection().getMatrix();
 
-		glm::mat4 MVP = modelMatrix * viewMatrix * projectionMatrix;
+		glm::mat4 MVP =  projectionMatrix * viewMatrix * modelMatrix;
 
 		std::cout << "Model: " << std::endl;
 		std::cout << mat4ToString(_model.getMatrix()) << std::endl;
