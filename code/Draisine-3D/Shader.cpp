@@ -6,6 +6,8 @@
 
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
+#include <glm/glm.hpp>
+#include <glm/gtc/type_ptr.hpp>
 
 #include "Utilities.h"
 
@@ -117,7 +119,7 @@ void Shader::setUniformInt(const std::string& name, int value) {
 }
 
 void Shader::setUniformMat4(const std::string& name, const glm::mat4& mat4) {
-    GLCall(glUniformMatrix4fv(getUniformLocation(name), 1, GL_FALSE, &mat4[0][0]));
+    GLCall(glUniformMatrix4fv(getUniformLocation(name), 1, GL_FALSE, glm::value_ptr(mat4)));
 }
 
 void Shader::bind() const {
