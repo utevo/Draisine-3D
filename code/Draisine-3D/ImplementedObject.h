@@ -58,13 +58,10 @@ protected:
 	std::shared_ptr<Shader> _shader;
 	std::shared_ptr<TexturesMapper> _texturesMapper;
 
-	virtual std::pair<std::shared_ptr <VertexBuffer>, std::shared_ptr <VertexBufferLayout>> initVertexBufferAndVertexBufferLayout() {
-		std::pair<std::shared_ptr <VertexBuffer>, std::shared_ptr <VertexBufferLayout>> result = { nullptr, nullptr };
-		return result;
-	}
-	virtual std::shared_ptr <IndexBuffer> initIndexBuffer() { return nullptr; }
-	virtual std::shared_ptr <Shader> initShader() { return nullptr; }
-	virtual std::shared_ptr <TexturesMapper> initTexturesMapper() { return nullptr; }
+	virtual std::pair<std::shared_ptr <VertexBuffer>, std::shared_ptr <VertexBufferLayout>> initVertexBufferAndVertexBufferLayout() = 0;
+	virtual std::shared_ptr <IndexBuffer> initIndexBuffer() = 0;
+	virtual std::shared_ptr <Shader> initShader() = 0;
+	virtual std::shared_ptr <TexturesMapper> initTexturesMapper() = 0;
 
 
 };
