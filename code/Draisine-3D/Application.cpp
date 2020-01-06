@@ -28,7 +28,7 @@ using namespace std;
 
 const GLuint WIDTH = 800, HEIGHT = 600;
 
-glm::vec3 cameraPos = glm::vec3(0.0f, 0.0f, -0.5);
+glm::vec3 cameraPos = glm::vec3(0.0f, 0.0f, -1.5f);
 float step = 0.1;
 
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode)
@@ -87,12 +87,14 @@ int main()
 			throw exception("GLEW Initialization failed");
 
 
-		glm::vec3 cameraFront = glm::vec3(0.0f, 0.0f, -1.0f);
+		glm::vec3 cameraFront = glm::vec3(0.0f, 0.0f, 1.0f);
 		glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
 		std::shared_ptr<PositionFrontUpView> view = std::make_shared<PositionFrontUpView>(cameraPos, cameraFront, cameraUp);
-		std::shared_ptr<OrtogonalProjection> projection = std::make_shared<OrtogonalProjection>(-2.0, 2.0, -2.0, 2.0);
+		std::shared_ptr<OrtogonalProjection> projection = std::make_shared<OrtogonalProjection>(-2.0, 2.0, -2.0, 2.0, -2.0, 2.0);
 		float fov = 45.f;
-		//std::shared_ptr<PerspectiveProjection> projection = std::make_shared<PerspectiveProjection>(glm::radians(fov), 800.0f / 600.0f, 1.0f, 100.0f);
+		//std::shared_ptr<PerspectiveProjection> projection = std::make_shared<PerspectiveProjection>(glm::radians(fov), (float) WIDTH / (float) HEIGHT , 1.0f, 100.0f);
+
+
 		Renderer renderer = Renderer(*view, *projection);
 
 		Square square = Square();
