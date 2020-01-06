@@ -22,7 +22,7 @@
     <VCProjectVersion>16.0</VCProjectVersion>
     <ProjectGuid>{BB8F2930-4D5D-42FF-B85D-3841EF6E8BFB}</ProjectGuid>
     <RootNamespace>Draisine3D</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -169,6 +169,8 @@
     <ClInclude Include="IndexBuffer.h" />
     <ClInclude Include="Model.h" />
     <ClInclude Include="Object.h" />
+    <ClInclude Include="objects\ThreeD_Obj.h" />
+    <ClInclude Include="objects\Ground.h" />
     <ClInclude Include="objects\Square.h" />
     <ClInclude Include="OrtogonalProjection.h" />
     <ClInclude Include="PerspectiveProjection.h" />
