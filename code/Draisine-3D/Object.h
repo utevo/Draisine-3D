@@ -2,13 +2,13 @@
 
 #include <glm/vec3.hpp>
 
-#include "Renderer.h"
+#include "Shader.h"
 
 class Object {
 public:
 	Object() {};
 	virtual ~Object() = 0;
-	virtual void render(Renderer& renderer) = 0;
+	virtual void render(Shader& shader) = 0;
 
 	virtual void move(const glm::vec3& vec) = 0;
 	virtual void scale(const glm::vec3& vec) = 0;

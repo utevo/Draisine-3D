@@ -7,9 +7,9 @@
 
 class CompositeObject : public Object {
 public:
-	virtual void render(Renderer& renderer) {
+	virtual void render(Shader& shader) {
 		for (Object& object : _objects)
-			object.render(renderer);
+			object.render(shader);
 	}
 
 	void addChild(Object& object) {
@@ -31,6 +31,7 @@ public:
 		for (Object& object : _objects)
 			object.rotate(vec);
 	}
+
 private:
 	std::vector <Object&> _objects;
 };
