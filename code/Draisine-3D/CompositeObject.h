@@ -1,13 +1,14 @@
 #pragma once
 
 #include <vector>
+#include <memory>
 
 #include "Object.h"
 
 
 class CompositeObject : public Object {
 public:
-	virtual void render(Shader& shader) {
+	virtual void render(std::shared_ptr<Shader> shader) override {
 		for (Object& object : _objects)
 			object.render(shader);
 	}

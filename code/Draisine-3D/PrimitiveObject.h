@@ -20,12 +20,11 @@
 // - call constructor PrimitiveObject(const std::string& textureFilePath, const glm::vec3& possition, const glm::vec3& rotation, const glm::vec3& size) in all contructors
 class PrimitiveObject : public Object {
 public:
-	PrimitiveObject(const std::string& textureFilePath, 
+	PrimitiveObject(std::shared_ptr<Texture> texture,
 		const glm::vec3& possition = { 0.0, 0.0, 0.0 },
 		const glm::vec3& rotation = { 0.0, 0.0, 0.0 },
 		const glm::vec3& size = { 1.0f, 1.0f, 1.0f })
-		: _possition(possition), _rotation(rotation), _size(size) {
-		_texture = Texture(textureFilePath);
+		: _texture(texture), _possition(possition), _rotation(rotation), _size(size) {
 	}
 
 	void move(const glm::vec3& vec) {
@@ -40,7 +39,7 @@ public:
 		_size += vec;
 	};
 
-	void render(Shader& shader) {
+	void render(std::shared_ptr<Shader> shader) {
 		glm::mat4 model = glm::mat4(1.0f);
 
 		model = glm::translate(model, _possition);
@@ -49,14 +48,15 @@ public:
 		model = glm::rotate(model, glm::radians(_rotation.z), glm::vec3(0.0f, 0.0f, 1.0f));
 		model = glm::scale(model, _size);
 
-		shader.bind();
-		shader.setUniformMat4("model", model);
+		shader->bind();
+		shader->setUniformMat4("MODEL", model);
+
+		_texture->bind(0);
+		shader->setUniformInt("TEXTURE", 0);
 
 		_vertexArray->bind();
 		_indexBuffer->bind();
 		GLCall(glDrawElements(GL_TRIANGLES, _indexBuffer->getCount(), GL_UNSIGNED_INT, nullptr));
-		_indexBuffer->unbind();
-		_vertexArray->unbind();
 	}
 
 	std::unique_ptr<VertexBufferLayout> initVertexBufferLayout() {
@@ -75,8 +75,19 @@ protected:
 	virtual std::unique_ptr<VertexBuffer> initVertexBuffer() = 0;
 	virtual std::unique_ptr<IndexBuffer> initIndexBuffer() = 0;
 
+	void init() {
+		_vertexBuffer = initVertexBuffer();
+		_vertexBufferLayout = initVertexBufferLayout();
+
+		_vertexArray = std::make_unique<VertexArray>();
+		_vertexArray->link(*_vertexBuffer, *_vertexBufferLayout);
+
+		_indexBuffer = initIndexBuffer();
+	}
+
 private:
-	Texture _texture; //if necessary it can be shared resource
+	std::shared_ptr<Texture> _texture; //if necessary it can be shared resource
+
 	std::unique_ptr<VertexBuffer> _vertexBuffer;
 	std::unique_ptr <IndexBuffer> _indexBuffer;
 	std::unique_ptr<VertexArray> _vertexArray;
@@ -87,13 +98,4 @@ private:
 	glm::vec3 _rotation;
 	glm::vec3 _size;
 
-	void init() {
-		_vertexBuffer = initVertexBuffer();
-		_vertexBufferLayout = initVertexBufferLayout();
-
-		_vertexArray = std::make_unique<VertexArray>();
-		_vertexArray->link(*_vertexBuffer, *_vertexBufferLayout);
-
-		_indexBuffer = initIndexBuffer();
-	}
 };
