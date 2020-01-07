@@ -16,15 +16,11 @@
 #include "Shader.h"
 #include "Texture.h"
 #include "TexturesMapper.h"
-
-#include "objects/Square.h"
-#include "objects/Ground.h"
-#include "objects/ThreeD_Obj.h"
+#include "Renderer.h"
 
 #include "OrtogonalProjection.h"
 #include "PerspectiveProjection.h"
 #include "PositionFrontUpView.h"
-
 
 
 using namespace std;
@@ -109,9 +105,7 @@ int main()
 
 		Renderer renderer = Renderer(*view, *projection);
 
-		Square square = Square();
-		Ground gr = Ground();
-		ThreeD_Obj cube = ThreeD_Obj();
+
 		
 		rotationMat = glm::rotate(rotationMat, 0.1f, glm::vec3(0.0, 1.0, 0.0));
 		quarterRotation= glm::rotate(rotationMat, -glm::half_pi<float>(), glm::vec3(0.0, 1.0, 0.0));
@@ -128,8 +122,6 @@ int main()
 			view->setFront(cameraFront);
 
 			//square.render(renderer);
-			gr.render(renderer);
-			cube.render(renderer);
 			// Swap the screen buffers
 			glfwSwapBuffers(window);
 		}
