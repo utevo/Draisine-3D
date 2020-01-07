@@ -171,6 +171,7 @@
     <ClInclude Include="OrtogonalProjection.h" />
     <ClInclude Include="PerspectiveProjection.h" />
     <ClInclude Include="PrimitiveObject.h" />
+    <ClInclude Include="primitives\Trapeze.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="Texture.h" />
