@@ -95,28 +95,20 @@ int main()
 		if (glewInit() != GLEW_OK)
 			throw exception("GLEW Initialization failed");
 
-
-	
 		std::shared_ptr<PositionFrontUpView> view = std::make_shared<PositionFrontUpView>(cameraPos, cameraFront, cameraUp);
 		//std::shared_ptr<OrtogonalProjection> projection = std::make_shared<OrtogonalProjection>(-2.0, 2.0, -2.0, 2.0, -2.0, 2.0);
 		float fov = 45.f;
 		std::shared_ptr<PerspectiveProjection> projection = std::make_shared<PerspectiveProjection>(glm::radians(fov), (float) WIDTH / (float) HEIGHT , 1.0f, 100.0f);
-
-
 		Renderer renderer = Renderer(*view, *projection);
-
-
 		
 		rotationMat = glm::rotate(rotationMat, 0.1f, glm::vec3(0.0, 1.0, 0.0));
 		quarterRotation= glm::rotate(rotationMat, -glm::half_pi<float>(), glm::vec3(0.0, 1.0, 0.0));
-		//
 		// main event loop
 		while (!glfwWindowShouldClose(window)) {
 			// Check if any events have been activiated (key pressed, mouse moved etc.) and call corresponding response functions
 			glfwPollEvents();
 
 			renderer.clear();
-
 
 			view->setPosition(cameraPos);
 			view->setFront(cameraFront);
