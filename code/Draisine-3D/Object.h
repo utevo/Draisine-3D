@@ -11,7 +11,7 @@ public:
 	virtual void render(Shader& shader) = 0;
 
 	virtual void move(const glm::vec3& vec) = 0;
-	virtual void scale(const glm::vec3& vec) = 0;
 	virtual void rotate(const glm::vec3& vec) = 0;
+	virtual void scale(const glm::vec3& vec) = 0;
 };
 
