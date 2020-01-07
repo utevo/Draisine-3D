@@ -7,6 +7,7 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <memory>
 
 #include "Utilities.h"
 #include "VertexArray.h"
@@ -16,16 +17,13 @@
 #include "Shader.h"
 #include "Texture.h"
 #include "TexturesMapper.h"
-
-#include "objects/Square.h"
-#include "objects/Ground.h"
-#include "objects/ThreeD_Obj.h"
+#include "Renderer.h"
 
 #include "OrtogonalProjection.h"
 #include "PerspectiveProjection.h"
 #include "PositionFrontUpView.h"
 
-
+#include "primitives/Trapeze.h"
 
 using namespace std;
 
@@ -94,43 +92,45 @@ int main()
 
 		glewExperimental = GL_TRUE;
 		
-		glEnable(GL_DEPTH_TEST);
+		GLCall(glEnable(GL_DEPTH_TEST));
+		GLCall(glDepthFunc(GL_LESS));
 
 		if (glewInit() != GLEW_OK)
 			throw exception("GLEW Initialization failed");
 
-
-	
 		std::shared_ptr<PositionFrontUpView> view = std::make_shared<PositionFrontUpView>(cameraPos, cameraFront, cameraUp);
-		//std::shared_ptr<OrtogonalProjection> projection = std::make_shared<OrtogonalProjection>(-2.0, 2.0, -2.0, 2.0, -2.0, 2.0);
+		// std::shared_ptr<OrtogonalProjection> projection = std::make_shared<OrtogonalProjection>(-2.0, 2.0, -2.0, 2.0, -2.0, 2.0);
 		float fov = 45.f;
 		std::shared_ptr<PerspectiveProjection> projection = std::make_shared<PerspectiveProjection>(glm::radians(fov), (float) WIDTH / (float) HEIGHT , 1.0f, 100.0f);
 
 
-		Renderer renderer = Renderer(*view, *projection);
+		auto texture = std::make_shared<Texture>("textures/iipw.png");
+		auto texture2 = std::make_shared<Texture>("textures/weiti.png");
+		Trapeze trapeze(texture);
+		Trapeze trapeze2(texture2, { 1.0, 0.0, -1.0});
 
-		Square square = Square();
-		Ground gr = Ground();
-		ThreeD_Obj cube = ThreeD_Obj();
-		
+		auto shader = std::make_shared<Shader>("shader.vert", "shader.frag");
+
+
 		rotationMat = glm::rotate(rotationMat, 0.1f, glm::vec3(0.0, 1.0, 0.0));
 		quarterRotation= glm::rotate(rotationMat, -glm::half_pi<float>(), glm::vec3(0.0, 1.0, 0.0));
-		//
 		// main event loop
 		while (!glfwWindowShouldClose(window)) {
 			// Check if any events have been activiated (key pressed, mouse moved etc.) and call corresponding response functions
 			glfwPollEvents();
 
-			renderer.clear();
-
-
+			GLCall(glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
 			view->setPosition(cameraPos);
 			view->setFront(cameraFront);
+			glm::mat4 viewMatrix = view->getMatrix();
+			shader->setUniformMat4("VIEW", viewMatrix);
+			glm::mat4 projectionMatrix = projection->getMatrix();
+			shader->setUniformMat4("PROJECTION", projectionMatrix);
 
-			//square.render(renderer);
-			gr.render(renderer);
-			cube.render(renderer);
-			// Swap the screen buffers
+
+			trapeze.render(shader);
+			trapeze2.render(shader);
+
 			glfwSwapBuffers(window);
 		}
 

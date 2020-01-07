@@ -165,15 +165,13 @@
   <ItemGroup>
     <ClInclude Include="CompositeObject.h" />
     <ClInclude Include="Debug.h" />
-    <ClInclude Include="ImplementedObject.h" />
     <ClInclude Include="IndexBuffer.h" />
     <ClInclude Include="Model.h" />
     <ClInclude Include="Object.h" />
-    <ClInclude Include="objects\ThreeD_Obj.h" />
-    <ClInclude Include="objects\Ground.h" />
-    <ClInclude Include="objects\Square.h" />
     <ClInclude Include="OrtogonalProjection.h" />
     <ClInclude Include="PerspectiveProjection.h" />
+    <ClInclude Include="PrimitiveObject.h" />
+    <ClInclude Include="primitives\Trapeze.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="Texture.h" />
