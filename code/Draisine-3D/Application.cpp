@@ -1,17 +1,12 @@
 #define GLEW_STATIC
-
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include <SOIL.h>
-
 #include <iostream>
 #include <fstream>
 #include <sstream>
 #include <memory>
-
-
 #include "Camera.h"
-
 #include "Utilities.h"
 #include "VertexArray.h"
 #include "VertexBuffer.h"
@@ -20,49 +15,28 @@
 #include "Shader.h"
 #include "Texture.h"
 #include "TexturesMapper.h"
-<<<<<<< HEAD
-
-#include "Camera.h"
-
-#include "objects/Square.h"
-#include "objects/Ground.h"
-#include "objects/ThreeD_Obj.h"
-=======
 #include "Renderer.h"
->>>>>>> 590cf6da1ca7a970be8264a4b7d0aef8b3356cf3
-
 #include "OrtogonalProjection.h"
 #include "PerspectiveProjection.h"
 #include "PositionFrontUpView.h"
-<<<<<<< HEAD
-//TODO:future code cleaning, move prev X Y to camera h
-=======
-
 #include "primitives/Trapeze.h"
->>>>>>> 590cf6da1ca7a970be8264a4b7d0aef8b3356cf3
-
 using namespace std;
-
 const GLuint WIDTH = 800, HEIGHT = 600;
-
 glm::vec3 cameraPos = glm::vec3(0.0f, 0.0f, 1.0f);
 glm::vec3 cameraFront = glm::vec3(0.0f, 0.0f, -1.0f);
 glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
 Camera cam = Camera(cameraPos, cameraFront, cameraUp);;
 float step = 0.005f;//TODO: step should account for fps
 double prev_X, prev_Y;
-
 void mouse_callback(GLFWwindow* window, double new_X, double new_Y)
 {
 	cam.Rotate_Mouse(prev_X - new_X, prev_Y - new_Y);
 	glfwSetCursorPos(window, prev_X, prev_Y);
 }
-
 //for keys pressed once
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode)
 {
 	// cout << key << endl;
-
 	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
 		glfwSetWindowShouldClose(window, GL_TRUE);
 }
@@ -85,11 +59,9 @@ void render(const VertexArray& vertexArray, const IndexBuffer& indexBuffer, cons
 	indexBuffer.bind();
 	GLCall(glDrawElements(GL_TRIANGLES, indexBuffer.getCount(), GL_UNSIGNED_INT, nullptr));
 }
-
 void clear() {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
-
 int main()
 {
 	if (glfwInit() != GL_TRUE)
@@ -106,90 +78,52 @@ int main()
 		GLFWwindow* window = glfwCreateWindow(WIDTH, HEIGHT, "GKOM - OpenGL 04", nullptr, nullptr);
 		if (window == nullptr)
 			throw exception("GLFW window not created");
-
 		glfwMakeContextCurrent(window);
-
 		glfwSetCursorPosCallback(window, mouse_callback);
 		glfwSetKeyCallback(window, key_callback);
-	
-		
-		glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-
 		glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 		glfwGetCursorPos(window, &prev_X, &prev_Y);
-
 		glewExperimental = GL_TRUE;
-		
+
 		GLCall(glEnable(GL_DEPTH_TEST));
 		GLCall(glDepthFunc(GL_LESS));
-
 		if (glewInit() != GLEW_OK)
 			throw exception("GLEW Initialization failed");
-
-<<<<<<< HEAD
-		//cam = Camera(&cameraPos, &cameraFront, &cameraUp);
-	
-=======
->>>>>>> 590cf6da1ca7a970be8264a4b7d0aef8b3356cf3
 		std::shared_ptr<PositionFrontUpView> view = std::make_shared<PositionFrontUpView>(cameraPos, cameraFront, cameraUp);
 		// std::shared_ptr<OrtogonalProjection> projection = std::make_shared<OrtogonalProjection>(-2.0, 2.0, -2.0, 2.0, -2.0, 2.0);
 		float fov = 45.f;
-		std::shared_ptr<PerspectiveProjection> projection = std::make_shared<PerspectiveProjection>(glm::radians(fov), (float) WIDTH / (float) HEIGHT , 1.0f, 100.0f);
-		
-	
+		std::shared_ptr<PerspectiveProjection> projection = std::make_shared<PerspectiveProjection>(glm::radians(fov), (float)WIDTH / (float)HEIGHT, 1.0f, 100.0f);
+
 
 		auto texture = std::make_shared<Texture>("textures/iipw.png");
 		auto texture2 = std::make_shared<Texture>("textures/weiti.png");
 		Trapeze trapeze(texture);
-		Trapeze trapeze2(texture2, { 1.0, 0.0, -1.0});
-
+		Trapeze trapeze2(texture2, { 1.0, 0.0, -1.0 });
 		auto shader = std::make_shared<Shader>("shader.vert", "shader.frag");
-
-
 		// main event loop
 		while (!glfwWindowShouldClose(window)) {
 			// Check if any events have been activiated (key pressed, mouse moved etc.) and call corresponding response functions
-
-
 			GLCall(glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
 			cameraPos = cam.getPos();
 			cameraFront = cam.getFront();
 			view->setPosition(cameraPos);
 			view->setFront(cameraFront);
-
 			glm::mat4 viewMatrix = view->getMatrix();
 			shader->setUniformMat4("VIEW", viewMatrix);
 			glm::mat4 projectionMatrix = projection->getMatrix();
 			shader->setUniformMat4("PROJECTION", projectionMatrix);
-
-
 			trapeze.render(shader);
 			trapeze2.render(shader);
 			mouse_callback(window, prev_X, prev_Y);
-
-<<<<<<< HEAD
-			//square.render(renderer);
-			gr.render(renderer);
-
-			cube.render(renderer);
-
-			mouse_callback(window, prev_X, prev_Y);
-
-			// Swap the screen buffers
-=======
->>>>>>> 590cf6da1ca7a970be8264a4b7d0aef8b3356cf3
 			glfwSwapBuffers(window);
 			process_sticky_keys(window);
 			glfwPollEvents();
-
 		}
-
 	}
 	catch (exception ex)
 	{
 		cout << ex.what() << endl;
 	}
 	glfwTerminate();
-
 	return 0;
 }
