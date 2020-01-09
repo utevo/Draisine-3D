@@ -165,11 +165,7 @@
   <ItemGroup>
     <ClInclude Include="CompositeObject.h" />
     <ClInclude Include="Debug.h" />
-<<<<<<< HEAD
     <ClInclude Include="Camera.h" />
-    <ClInclude Include="ImplementedObject.h" />
-=======
->>>>>>> 590cf6da1ca7a970be8264a4b7d0aef8b3356cf3
     <ClInclude Include="IndexBuffer.h" />
     <ClInclude Include="Model.h" />
     <ClInclude Include="Object.h" />
