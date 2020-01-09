@@ -165,16 +165,18 @@
   <ItemGroup>
     <ClInclude Include="CompositeObject.h" />
     <ClInclude Include="Debug.h" />
+<<<<<<< HEAD
     <ClInclude Include="Camera.h" />
     <ClInclude Include="ImplementedObject.h" />
+=======
+>>>>>>> 590cf6da1ca7a970be8264a4b7d0aef8b3356cf3
     <ClInclude Include="IndexBuffer.h" />
     <ClInclude Include="Model.h" />
     <ClInclude Include="Object.h" />
-    <ClInclude Include="objects\ThreeD_Obj.h" />
-    <ClInclude Include="objects\Ground.h" />
-    <ClInclude Include="objects\Square.h" />
     <ClInclude Include="OrtogonalProjection.h" />
     <ClInclude Include="PerspectiveProjection.h" />
+    <ClInclude Include="PrimitiveObject.h" />
+    <ClInclude Include="primitives\Trapeze.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="Texture.h" />

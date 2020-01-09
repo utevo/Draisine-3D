@@ -7,6 +7,7 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <memory>
 
 #include "Utilities.h"
 #include "VertexArray.h"
@@ -16,17 +17,26 @@
 #include "Shader.h"
 #include "Texture.h"
 #include "TexturesMapper.h"
+<<<<<<< HEAD
 
 #include "Camera.h"
 
 #include "objects/Square.h"
 #include "objects/Ground.h"
 #include "objects/ThreeD_Obj.h"
+=======
+#include "Renderer.h"
+>>>>>>> 590cf6da1ca7a970be8264a4b7d0aef8b3356cf3
 
 #include "OrtogonalProjection.h"
 #include "PerspectiveProjection.h"
 #include "PositionFrontUpView.h"
+<<<<<<< HEAD
 //TODO:future code cleaning, move prev X Y to camera h
+=======
+
+#include "primitives/Trapeze.h"
+>>>>>>> 590cf6da1ca7a970be8264a4b7d0aef8b3356cf3
 
 using namespace std;
 
@@ -115,21 +125,32 @@ int main()
 		
 		glewExperimental = GL_TRUE;
 		
-		glEnable(GL_DEPTH_TEST);
+		GLCall(glEnable(GL_DEPTH_TEST));
+		GLCall(glDepthFunc(GL_LESS));
 
 		if (glewInit() != GLEW_OK)
 			throw exception("GLEW Initialization failed");
 
+<<<<<<< HEAD
 		//cam = Camera(&cameraPos, &cameraFront, &cameraUp);
 	
+=======
+>>>>>>> 590cf6da1ca7a970be8264a4b7d0aef8b3356cf3
 		std::shared_ptr<PositionFrontUpView> view = std::make_shared<PositionFrontUpView>(cameraPos, cameraFront, cameraUp);
-		//std::shared_ptr<OrtogonalProjection> projection = std::make_shared<OrtogonalProjection>(-2.0, 2.0, -2.0, 2.0, -2.0, 2.0);
+		// std::shared_ptr<OrtogonalProjection> projection = std::make_shared<OrtogonalProjection>(-2.0, 2.0, -2.0, 2.0, -2.0, 2.0);
 		float fov = 45.f;
 		std::shared_ptr<PerspectiveProjection> projection = std::make_shared<PerspectiveProjection>(glm::radians(fov), (float) WIDTH / (float) HEIGHT , 1.0f, 100.0f);
 
 
-		Renderer renderer = Renderer(*view, *projection);
+		auto texture = std::make_shared<Texture>("textures/iipw.png");
+		auto texture2 = std::make_shared<Texture>("textures/weiti.png");
+		Trapeze trapeze(texture);
+		Trapeze trapeze2(texture2, { 1.0, 0.0, -1.0});
 
+		auto shader = std::make_shared<Shader>("shader.vert", "shader.frag");
+
+
+<<<<<<< HEAD
 		Square square = Square();
 		Ground gr = Ground();
 		ThreeD_Obj cube = ThreeD_Obj();
@@ -146,9 +167,28 @@ int main()
 			cameraPos = cam.getPos();
 			cameraFront = cam.getFront();
 
+=======
+		rotationMat = glm::rotate(rotationMat, 0.1f, glm::vec3(0.0, 1.0, 0.0));
+		quarterRotation= glm::rotate(rotationMat, -glm::half_pi<float>(), glm::vec3(0.0, 1.0, 0.0));
+		// main event loop
+		while (!glfwWindowShouldClose(window)) {
+			// Check if any events have been activiated (key pressed, mouse moved etc.) and call corresponding response functions
+			glfwPollEvents();
+
+			GLCall(glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
+>>>>>>> 590cf6da1ca7a970be8264a4b7d0aef8b3356cf3
 			view->setPosition(cameraPos);
 			view->setFront(cameraFront);
+			glm::mat4 viewMatrix = view->getMatrix();
+			shader->setUniformMat4("VIEW", viewMatrix);
+			glm::mat4 projectionMatrix = projection->getMatrix();
+			shader->setUniformMat4("PROJECTION", projectionMatrix);
 
+
+			trapeze.render(shader);
+			trapeze2.render(shader);
+
+<<<<<<< HEAD
 			//square.render(renderer);
 			gr.render(renderer);
 
@@ -157,6 +197,8 @@ int main()
 			mouse_callback(window, prev_X, prev_Y);
 
 			// Swap the screen buffers
+=======
+>>>>>>> 590cf6da1ca7a970be8264a4b7d0aef8b3356cf3
 			glfwSwapBuffers(window);
 			process_sticky_keys(window);
 			glfwPollEvents();
