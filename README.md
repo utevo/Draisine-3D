@@ -26,7 +26,7 @@
     - [x] Model | *estimate:* 0.5h | *spend:* 0.3h
     - [x] TexturesMapper | *estimate:* 1.0h | *spend:* 1.75h
     - [x] Object, CompositeObject, ImplementedObject | *estimate:* 5.0h | *spend:* 8.0h
-- [ ] Stworzenie wstępnego szkicu projektu
+- [x] Stworzenie wstępnego szkicu projektu | *estimate:* 0.5h | *spend:* 0.75h
 - [ ] Zamodelowanie obiektów:
     - [ ] Drezyna:
         - [ ] Koła
