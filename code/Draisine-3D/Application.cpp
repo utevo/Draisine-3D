@@ -20,6 +20,7 @@
 #include "PerspectiveProjection.h"
 #include "PositionFrontUpView.h"
 #include "primitives/Trapeze.h"
+#include "primitives/Ground.h"
 using namespace std;
 const GLuint WIDTH = 800, HEIGHT = 600;
 glm::vec3 cameraPos = glm::vec3(0.0f, 0.0f, 1.0f);
