@@ -97,8 +97,10 @@ int main()
 
 		auto texture = std::make_shared<Texture>("textures/iipw.png");
 		auto texture2 = std::make_shared<Texture>("textures/weiti.png");
+		auto groundtex = std::make_shared<Texture>("textures/cracked_ground.png", true);
 		Trapeze trapeze(texture);
 		Trapeze trapeze2(texture2, { 1.0, 0.0, -1.0 });
+		Ground ground(groundtex);
 		auto shader = std::make_shared<Shader>("shader.vert", "shader.frag");
 		// main event loop
 		while (!glfwWindowShouldClose(window)) {
@@ -114,6 +116,7 @@ int main()
 			shader->setUniformMat4("PROJECTION", projectionMatrix);
 			trapeze.render(shader);
 			trapeze2.render(shader);
+			ground.render(shader);
 			mouse_callback(window, prev_X, prev_Y);
 			glfwSwapBuffers(window);
 			process_sticky_keys(window);
