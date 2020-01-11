@@ -6,7 +6,7 @@
 class Texture {
 public:
     Texture();
-    Texture(const std::string& filePath);
+    Texture(const std::string& filePath, const bool toRepeat = 0);
     ~Texture();
 
     void bind(unsigned int slot = 0) const;
