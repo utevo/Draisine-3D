@@ -21,6 +21,8 @@
 #include "PositionFrontUpView.h"
 #include "primitives/Trapeze.h"
 #include "primitives/Ground.h"
+#include "primitives/Cube.h"
+
 using namespace std;
 const GLuint WIDTH = 800, HEIGHT = 600;
 glm::vec3 cameraPos = glm::vec3(0.0f, 0.0f, 1.0f);
@@ -99,9 +101,20 @@ int main()
 		auto texture = std::make_shared<Texture>("textures/iipw.png");
 		auto texture2 = std::make_shared<Texture>("textures/weiti.png");
 		auto groundtex = std::make_shared<Texture>("textures/cracked_ground.png", true);
+		auto planktex = std::make_shared<Texture>("textures/wood_old.png");
+
+		auto skybox_tex = std::make_shared<Texture>("textures/skybox.png");
+		auto cart_tex = std::make_shared<Texture>("textures/cart.png");
+
+
 		Trapeze trapeze(texture);
 		Trapeze trapeze2(texture2, { 1.0, 0.0, -1.0 });
 		Ground ground(groundtex);
+
+		Cube plank(planktex, {1.0,0.1,-1.0});
+		Cube skybox(skybox_tex, { 0.0, 0.0, 0.0 }, { 0.0, 0.0, 0.0 }, { 10.0, 10.0, 10.0 });
+		Cube cart(cart_tex, { 1.0, 0.0, 1.0 }, { 0.0, 0.0, 0.0 }, { 0.5, 0.02, 1.0 });		//can be any size as long as proportions are kept
+
 		auto shader = std::make_shared<Shader>("shader.vert", "shader.frag");
 		// main event loop
 		while (!glfwWindowShouldClose(window)) {
@@ -111,14 +124,22 @@ int main()
 			cameraFront = cam.getFront();
 			view->setPosition(cameraPos);
 			view->setFront(cameraFront);
+			
 			glm::mat4 viewMatrix = view->getMatrix();
 			shader->setUniformMat4("VIEW", viewMatrix);
 			glm::mat4 projectionMatrix = projection->getMatrix();
 			shader->setUniformMat4("PROJECTION", projectionMatrix);
-			trapeze.render(shader);
-			trapeze2.render(shader);
+			
+			//trapeze.render(shader);
+			//trapeze2.render(shader);
 			ground.render(shader);
+			plank.render(shader);
+
+			cart.render(shader);
+			skybox.render(shader);
 			mouse_callback(window, prev_X, prev_Y);
+
+
 			glfwSwapBuffers(window);
 			process_sticky_keys(window);
 			glfwPollEvents();
