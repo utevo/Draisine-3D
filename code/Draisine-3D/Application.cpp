@@ -22,6 +22,8 @@
 #include "primitives/Trapeze.h"
 #include "primitives/Ground.h"
 #include "primitives/Cube.h"
+#include "composites/railway.h"
+
 
 using namespace std;
 const GLuint WIDTH = 800, HEIGHT = 600;
@@ -110,6 +112,7 @@ int main()
 		Trapeze trapeze(texture);
 		Trapeze trapeze2(texture2, { 1.0, 0.0, -1.0 });
 		Ground ground(groundtex);
+		Railway railway(3);
 
 		Cube plank(planktex, {1.0,0.1,-1.0});
 		Cube skybox(skybox_tex, { 0.0, 0.0, 0.0 }, { 0.0, 0.0, 0.0 }, { 10.0, 10.0, 10.0 });
@@ -135,6 +138,7 @@ int main()
 			ground.render(shader);
 			plank.render(shader);
 
+            railway.render(shader);
 			cart.render(shader);
 			skybox.render(shader);
 			mouse_callback(window, prev_X, prev_Y);
