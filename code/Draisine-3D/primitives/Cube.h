@@ -62,4 +62,5 @@ public:
 		auto indexBuffer = std::make_unique<IndexBuffer>(indices, sizeof(indices));
 		return indexBuffer;
 	}
+
 };
