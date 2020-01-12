@@ -118,12 +118,21 @@
     <ClInclude Include="Camera.h">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
+    <ClInclude Include="primitives\Ground.h">
+      <Filter>Pliki nagłówkowe</Filter>
+    </ClInclude>
+    <ClInclude Include="primitives\Cube.h">
+      <Filter>Pliki nagłówkowe</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="textures\weiti.png">
       <Filter>Pliki zasobów</Filter>
     </Image>
     <Image Include="textures\iipw.png">
+      <Filter>Pliki zasobów</Filter>
+    </Image>
+    <Image Include="textures\wood_old.png">
       <Filter>Pliki zasobów</Filter>
     </Image>
   </ItemGroup>

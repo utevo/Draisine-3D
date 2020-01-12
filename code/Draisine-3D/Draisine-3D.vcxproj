@@ -172,6 +172,8 @@
     <ClInclude Include="OrtogonalProjection.h" />
     <ClInclude Include="PerspectiveProjection.h" />
     <ClInclude Include="PrimitiveObject.h" />
+    <ClInclude Include="primitives\Cube.h" />
+    <ClInclude Include="primitives\Ground.h" />
     <ClInclude Include="primitives\Trapeze.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="Shader.h" />
@@ -188,6 +190,7 @@
   <ItemGroup>
     <Image Include="textures\iipw.png" />
     <Image Include="textures\weiti.png" />
+    <Image Include="textures\wood_old.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
