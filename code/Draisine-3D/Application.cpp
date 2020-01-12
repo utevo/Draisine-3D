@@ -22,6 +22,8 @@
 #include "primitives/Trapeze.h"
 #include "primitives/Ground.h"
 #include "primitives/Cube.h"
+#include "composites/railway.h"
+
 
 using namespace std;
 const GLuint WIDTH = 800, HEIGHT = 600;
