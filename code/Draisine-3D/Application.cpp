@@ -101,11 +101,13 @@ int main()
 		auto texture2 = std::make_shared<Texture>("textures/weiti.png");
 		auto groundtex = std::make_shared<Texture>("textures/cracked_ground.png", true);
 		auto planktex = std::make_shared<Texture>("textures/wood_old.png");
+		auto skybox_tex = std::make_shared<Texture>("textures/skybox.png");
 
 		Trapeze trapeze(texture);
 		Trapeze trapeze2(texture2, { 1.0, 0.0, -1.0 });
 		Ground ground(groundtex);
 		Cube plank(planktex, {1.0,0.2,-1.0});
+		Cube skybox(skybox_tex, { 0.0, 0.0, 0.0 }, { 0.0, 0.0, 0.0 }, { 10.0, 10.0, 10.0 });
 		auto shader = std::make_shared<Shader>("shader.vert", "shader.frag");
 		// main event loop
 		while (!glfwWindowShouldClose(window)) {
@@ -125,6 +127,7 @@ int main()
 			//trapeze2.render(shader);
 			ground.render(shader);
 			plank.render(shader);
+			skybox.render(shader);
 			mouse_callback(window, prev_X, prev_Y);
 
 
