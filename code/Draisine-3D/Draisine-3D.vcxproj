@@ -189,6 +189,7 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="textures\iipw.png" />
+    <Image Include="textures\skybox.png" />
     <Image Include="textures\weiti.png" />
     <Image Include="textures\wood_old.png" />
   </ItemGroup>
