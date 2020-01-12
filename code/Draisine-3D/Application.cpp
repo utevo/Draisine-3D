@@ -103,7 +103,7 @@ int main()
 		auto groundtex = std::make_shared<Texture>("textures/cracked_ground.png", true);
 		auto planktex = std::make_shared<Texture>("textures/wood_old.png");
 
-		auto skybox_tex = std::make_shared<Texture>("textures/wood_old.png");
+		auto skybox_tex = std::make_shared<Texture>("textures/skybox.png");
 
 
 		Trapeze trapeze(texture);
