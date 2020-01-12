@@ -135,8 +135,5 @@
     <Image Include="textures\wood_old.png">
       <Filter>Pliki zasobów</Filter>
     </Image>
-    <Image Include="textures\skybox.png">
-      <Filter>Pliki zasobów</Filter>
-    </Image>
   </ItemGroup>
 </Project>
