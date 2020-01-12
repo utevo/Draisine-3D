@@ -29,7 +29,7 @@ public:
 			-1.0f,	-1.0f,	-1.0f,  -1.0f,	-1.0f,	-1.0f,	0.25f,	0.0f,	//10 4
 			-1.0f,	 1.0f,	-1.0f,	-1.0f,	 1.0f,	-1.0f,	0.5f,	0.0f,	//11 7
 			-1.0f,	-1.0f,	 1.0f,	-1.0f,	-1.0f,	 1.0f,	0.0f,	2.0f/3, //12 0
-			-1.0f,	-1.0f,	-1.0f,  -1.0f,	-1.0f,	-1.0f,	0.0f,	2.0f/3, //13 4
+			-1.0f,	-1.0f,	-1.0f,  -1.0f,	-1.0f,	-1.0f,	0.0f,	1.0f/3, //13 4
 		};
 
 		auto vertexBuffer = std::make_unique<VertexBuffer>(vertices, sizeof(vertices));
