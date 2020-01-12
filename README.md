@@ -37,7 +37,8 @@
     - [ ] Tory
     - [ ] Tło
     - [ ] Ozdoby
-- [x] Zaprogramowanie ruchu kamery  | *estimate:* 3.0h | *spend:* 4h
+    - [ ] Obiekty środowiska
+- [x] Zaprogramowanie ruchu kamery  | *estimate:* 3.0h | *spend:* 4.0h
 - [ ] Zaprogramowanie ruchu obiektów:
     - [ ] Drezyna: 
         - [ ] Kóła
@@ -45,6 +46,9 @@
         - [ ] Podwozie
         - [ ] Dzwignia
 - [ ] Dodanie interakcji (obsługa klawiatury/myszki)
+    - [x] Poruszanie kamerą | *estimate:* 1.0h | *spend:* 1.0h
+    - [ ] Poruszanie drezyną
+    - [ ] Inne obiekty
 - [ ] Teksturowanie
 - [ ] Stworzenie oświetlenia
 - [ ] Prezentacja gotowego projetku na spotkaniu nr 7
