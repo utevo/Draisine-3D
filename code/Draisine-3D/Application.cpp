@@ -104,6 +104,7 @@ int main()
 		auto planktex = std::make_shared<Texture>("textures/wood_old.png");
 
 		auto skybox_tex = std::make_shared<Texture>("textures/skybox.png");
+		auto cart_tex = std::make_shared<Texture>("textures/cart.png");
 
 
 		Trapeze trapeze(texture);
@@ -112,6 +113,7 @@ int main()
 
 		Cube plank(planktex, {1.0,0.1,-1.0});
 		Cube skybox(skybox_tex, { 0.0, 0.0, 0.0 }, { 0.0, 0.0, 0.0 }, { 10.0, 10.0, 10.0 });
+		Cube cart(cart_tex, { 1.0, 0.0, 1.0 }, { 0.0, 0.0, 0.0 }, { 0.5, 0.02, 1.0 });		//can be any size as long as proportions are kept
 
 		auto shader = std::make_shared<Shader>("shader.vert", "shader.frag");
 		// main event loop
@@ -133,6 +135,7 @@ int main()
 			ground.render(shader);
 			plank.render(shader);
 
+			cart.render(shader);
 			skybox.render(shader);
 			mouse_callback(window, prev_X, prev_Y);
 
