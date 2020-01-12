@@ -121,8 +121,8 @@ int main()
 			glm::mat4 projectionMatrix = projection->getMatrix();
 			shader->setUniformMat4("PROJECTION", projectionMatrix);
 			
-			trapeze.render(shader);
-			trapeze2.render(shader);
+			//trapeze.render(shader);
+			//trapeze2.render(shader);
 			ground.render(shader);
 			plank.render(shader);
 			mouse_callback(window, prev_X, prev_Y);
