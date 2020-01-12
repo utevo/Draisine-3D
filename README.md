@@ -37,7 +37,7 @@
     - [ ] Tory
     - [ ] Tło
     - [ ] Ozdoby
-- [ ] Zaprogramowanie ruchu kamery
+- [x] Zaprogramowanie ruchu kamery  | *estimate:* 3.0h | *spend:* 4h
 - [ ] Zaprogramowanie ruchu obiektów:
     - [ ] Drezyna: 
         - [ ] Kóła
