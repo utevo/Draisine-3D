@@ -65,6 +65,11 @@ public:
 		lateral_vector[1] = 0.0f;
 		cameraPos += step * lateral_vector;
 	}
+	
+    void Step_Vertical(const double& step)
+	{
+		cameraPos += step * cameraUp; //glm::vec3(0.0f, 1.0f, 0.0f);
+	}
 
 	glm::vec3 getFront() { return cameraFront; }
 	glm::vec3 getUp() { return cameraUp; }
