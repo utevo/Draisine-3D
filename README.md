@@ -28,6 +28,10 @@
     - [x] Object, CompositeObject, ImplementedObject | *estimate:* 5.0h | *spend:* 8.0h
 - [x] Stworzenie wstępnego szkicu projektu | *estimate:* 0.5h | *spend:* 0.75h
 - [ ] Zamodelowanie obiektów:
+    - [ ] Prymitywy:
+        - [x] Trapez.h
+        - [x] Cube.h | *estimate:* 1.0h | *spend:* 2.0h
+        - [x] Cylinder.h  | *estimate:* 1.0h | *spend:* 3.0h
     - [ ] Drezyna:
         - [ ] Koła
         - [ ] Podstawa dzwigni

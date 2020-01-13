@@ -124,6 +124,9 @@
     <ClInclude Include="primitives\Cube.h">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
+    <ClInclude Include="primitives\Cylinder.h">
+      <Filter>Pliki nagłówkowe</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="textures\weiti.png">
