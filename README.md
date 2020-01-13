@@ -31,7 +31,7 @@
     - [ ] Prymitywy:
         - [x] Trapez.h
         - [x] Cube.h | *estimate:* 1.0h | *spend:* 2.0h
-        - [x] Cylinder.h  | *estimate:* 1.5h | *spend:* 3.5h
+        - [x] Cylinder.h  | *estimate:* 1.5h | *spend:* 4.0h
     - [ ] Drezyna:
         - [ ] Koła
         - [ ] Podstawa dzwigni
