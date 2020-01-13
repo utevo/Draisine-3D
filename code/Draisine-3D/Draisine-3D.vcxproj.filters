@@ -138,5 +138,8 @@
     <Image Include="textures\wood_old.png">
       <Filter>Pliki zasobów</Filter>
     </Image>
+    <Image Include="textures\texture_cylinder.png">
+      <Filter>Pliki zasobów</Filter>
+    </Image>
   </ItemGroup>
 </Project>
