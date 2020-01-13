@@ -24,7 +24,7 @@
 #include "primitives/Cube.h"
 #include "composites/railway.h"
 
-
+#include "primitives/Cylinder.h"
 using namespace std;
 const GLuint WIDTH = 800, HEIGHT = 600;
 glm::vec3 cameraPos = glm::vec3(0.0f, 0.0f, 1.0f);
@@ -114,14 +114,14 @@ int main()
 		auto texture = std::make_shared<Texture>("textures/iipw.png");
 		auto texture2 = std::make_shared<Texture>("textures/weiti.png");
 		auto groundtex = std::make_shared<Texture>("textures/cracked_ground.png", true);
-
 		auto skybox_tex = std::make_shared<Texture>("textures/skybox.png");
 		auto cart_tex = std::make_shared<Texture>("textures/cart.png");
-
+		auto cyl_tex = std::make_shared<Texture>("textures/texture_cylinder.png");
 
 		Trapeze trapeze(texture);
 		Trapeze trapeze2(texture2, { 1.0, 0.0, -1.0 });
 		Ground ground(groundtex);
+		Cylinder c(cyl_tex);
 		Railway railway(3);
 
 		Cube skybox(skybox_tex, { 0.0, 0.0, 0.0 }, { 0.0, 0.0, 0.0 }, { 40.0, 40.0, 40.0 });
@@ -157,12 +157,11 @@ int main()
 			glm::mat4 projectionMatrix = projection->getMatrix();
 			shader->setUniformMat4("PROJECTION", projectionMatrix);
 			
-			//trapeze.render(shader);
-			//trapeze2.render(shader);
 			ground.render(shader);
             railway.render(shader);
 			cart.render(shader);
 			skybox.render(shader);
+			c.render(shader);
 			mouse_callback(window, prev_X, prev_Y);
 
 
