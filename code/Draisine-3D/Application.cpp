@@ -32,7 +32,9 @@ glm::vec3 cameraFront = glm::vec3(0.0f, 0.0f, -1.0f);
 glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
 glm::vec3 prevPos(0.0f, 0.0f, 0.0f);
 Camera cam = Camera(cameraPos, cameraFront, cameraUp);;
-float step = 0.005f;//TODO: step should account for fps
+double fps = 0.0;
+const float FPS_CONST = 0.01f / 60.0f;
+float step = 0.0f;
 double prev_X, prev_Y;
 void mouse_callback(GLFWwindow* window, double new_X, double new_Y)
 {
@@ -49,8 +51,10 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 //for "sticky keys"
 void process_sticky_keys(GLFWwindow* window, Cube& skybox)
 {
-	//TODO: step should account for fps
 	prevPos = cam.getPos();
+	if (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS)//FASTER
+		step = FPS_CONST * fps * 10 ;
+	else step = FPS_CONST * fps;
 	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)//STEP_FORWARD
 		cam.Step_Longtitudal(step);
 	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)//STEP_BACK
@@ -59,6 +63,10 @@ void process_sticky_keys(GLFWwindow* window, Cube& skybox)
 		cam.Step_Lateral(-step);
 	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS) //STEP_RIGHT
 		cam.Step_Lateral(step);
+	if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS) //STEP_UP
+		cam.Step_Vertical(step);
+	if (glfwGetKey(window, GLFW_KEY_LEFT_CONTROL) == GLFW_PRESS) //STEP_DOWN
+		cam.Step_Vertical(-step);
 	skybox.move(cam.getPos() - prevPos);
 }
 void render(const VertexArray& vertexArray, const IndexBuffer& indexBuffer, const Shader& shader) {
@@ -116,12 +124,27 @@ int main()
 		Ground ground(groundtex);
 		Railway railway(3);
 
-		Cube skybox(skybox_tex, { 0.0, 0.0, 0.0 }, { 0.0, 0.0, 0.0 }, { 10.0, 10.0, 10.0 });
+		Cube skybox(skybox_tex, { 0.0, 0.0, 0.0 }, { 0.0, 0.0, 0.0 }, { 40.0, 40.0, 40.0 });
 		Cube cart(cart_tex, { 1.0, 0.0, 1.0 }, { 0.0, 0.0, 0.0 }, { 0.5, 0.02, 1.0 });		//can be any size as long as proportions are kept
 
 		auto shader = std::make_shared<Shader>("shader.vert", "shader.frag");
+		
+		double lastTime = glfwGetTime(), deltaT = 0.0, spf = 0.0;
+		float currentFrame;
+		int nbFrames = 0;
+		
 		// main event loop
 		while (!glfwWindowShouldClose(window)) {
+			currentFrame = glfwGetTime(); 
+			deltaT = currentFrame - lastTime; 
+			nbFrames++;
+			if (deltaT >= 0.25) {
+				fps = 4 * nbFrames;
+				nbFrames = 0;
+				lastTime += 0.25f;
+			}
+			cout << "Current Frame: " << currentFrame << "\nFPS: " << fps << endl;
+			
 			// Check if any events have been activiated (key pressed, mouse moved etc.) and call corresponding response functions
 			GLCall(glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
 			cameraPos = cam.getPos();
