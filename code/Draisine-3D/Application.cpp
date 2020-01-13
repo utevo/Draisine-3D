@@ -30,6 +30,7 @@ const GLuint WIDTH = 800, HEIGHT = 600;
 glm::vec3 cameraPos = glm::vec3(0.0f, 0.0f, 1.0f);
 glm::vec3 cameraFront = glm::vec3(0.0f, 0.0f, -1.0f);
 glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
+glm::vec3 prevPos(0.0f, 0.0f, 0.0f);
 Camera cam = Camera(cameraPos, cameraFront, cameraUp);;
 float step = 0.005f;//TODO: step should account for fps
 double prev_X, prev_Y;
@@ -46,9 +47,10 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 		glfwSetWindowShouldClose(window, GL_TRUE);
 }
 //for "sticky keys"
-void process_sticky_keys(GLFWwindow* window)
+void process_sticky_keys(GLFWwindow* window, Cube& skybox)
 {
 	//TODO: step should account for fps
+	prevPos = cam.getPos();
 	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)//STEP_FORWARD
 		cam.Step_Longtitudal(step);
 	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)//STEP_BACK
@@ -57,6 +59,7 @@ void process_sticky_keys(GLFWwindow* window)
 		cam.Step_Lateral(-step);
 	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS) //STEP_RIGHT
 		cam.Step_Lateral(step);
+	skybox.move(cam.getPos() - prevPos);
 }
 void render(const VertexArray& vertexArray, const IndexBuffer& indexBuffer, const Shader& shader) {
 	shader.bind();
@@ -103,7 +106,6 @@ int main()
 		auto texture = std::make_shared<Texture>("textures/iipw.png");
 		auto texture2 = std::make_shared<Texture>("textures/weiti.png");
 		auto groundtex = std::make_shared<Texture>("textures/cracked_ground.png", true);
-		auto planktex = std::make_shared<Texture>("textures/wood_old.png");
 
 		auto skybox_tex = std::make_shared<Texture>("textures/skybox.png");
 		auto cart_tex = std::make_shared<Texture>("textures/cart.png");
@@ -114,7 +116,6 @@ int main()
 		Ground ground(groundtex);
 		Railway railway(3);
 
-		Cube plank(planktex, {1.0,0.1,-1.0});
 		Cube skybox(skybox_tex, { 0.0, 0.0, 0.0 }, { 0.0, 0.0, 0.0 }, { 10.0, 10.0, 10.0 });
 		Cube cart(cart_tex, { 1.0, 0.0, 1.0 }, { 0.0, 0.0, 0.0 }, { 0.5, 0.02, 1.0 });		//can be any size as long as proportions are kept
 
@@ -136,8 +137,6 @@ int main()
 			//trapeze.render(shader);
 			//trapeze2.render(shader);
 			ground.render(shader);
-			plank.render(shader);
-
             railway.render(shader);
 			cart.render(shader);
 			skybox.render(shader);
@@ -145,7 +144,7 @@ int main()
 
 
 			glfwSwapBuffers(window);
-			process_sticky_keys(window);
+			process_sticky_keys(window, skybox);
 			glfwPollEvents();
 		}
 	}
