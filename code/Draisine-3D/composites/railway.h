@@ -15,8 +15,11 @@ public:
 		for (int i = 0; i < number; ++i)
 		{
 			addChild(std::move(std::make_unique<Cube>(cart_tex, glm::vec3(0.0, -0.48, 0.0) + i * offset + possition, rotation, size * glm::vec3(0.6, 0.02, 0.2))));
-			addChild(std::move(std::make_unique<Cube>(rail_tex, glm::vec3(-0.5, -0.44, 0.0) + i * offset + possition, rotation, size * glm::vec3(0.02, 0.02, 0.5))));
-			addChild(std::move(std::make_unique<Cube>(rail_tex, glm::vec3(0.5, -0.44, 0.0) + i * offset + possition, rotation, size * glm::vec3(0.02, 0.02, 0.5))));
+			addChild(std::move(std::make_unique<Cube>(rail_tex, glm::vec3(-0.525, -0.44, 0.0) + i * offset + possition, rotation, size * glm::vec3(0.03, 0.02, 0.5))));
+			addChild(std::move(std::make_unique<Cube>(rail_tex, glm::vec3(0.525, -0.44, 0.0) + i * offset + possition, rotation, size * glm::vec3(0.03, 0.02, 0.5))));
+			addChild(std::move(std::make_unique<Cube>(cart_tex, glm::vec3(0.0, -0.48, 0.0) - i * offset + possition, rotation, size * glm::vec3(0.6, 0.02, 0.2))));
+			addChild(std::move(std::make_unique<Cube>(rail_tex, glm::vec3(-0.525, -0.44, 0.0) - i * offset + possition, rotation, size * glm::vec3(0.03, 0.02, 0.5))));
+			addChild(std::move(std::make_unique<Cube>(rail_tex, glm::vec3(0.525, -0.44, 0.0) - i * offset + possition, rotation, size * glm::vec3(0.03, 0.02, 0.5))));
 		}
 	}
 
