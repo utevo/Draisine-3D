@@ -71,6 +71,11 @@ public:
 		return vertexBufferLayout;
 	};
 
+	glm::vec3 getPos()
+	{
+		return _possition;
+	}
+	
 protected:
 	virtual std::unique_ptr<VertexBuffer> initVertexBuffer() = 0;
 	virtual std::unique_ptr<IndexBuffer> initIndexBuffer() = 0;

@@ -20,11 +20,10 @@
 #include "PerspectiveProjection.h"
 #include "PositionFrontUpView.h"
 #include "primitives/Trapeze.h"
-#include "primitives/Ground.h"
-#include "primitives/Cube.h"
+#include "composites/Floor.h"
 #include "composites/railway.h"
-#include "composites/Wheels.h"
-#include "primitives/Cylinder.h"
+#include "composites/Cart.h"
+
 using namespace std;
 const GLuint WIDTH = 800, HEIGHT = 600;
 glm::vec3 cameraPos = glm::vec3(0.0f, 0.0f, 1.0f);
@@ -49,7 +48,7 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 		glfwSetWindowShouldClose(window, GL_TRUE);
 }
 //for "sticky keys"
-void process_sticky_keys(GLFWwindow* window, Cube& skybox)
+void process_sticky_keys(GLFWwindow* window, Cube& skybox, Cart& cart)
 {
 	prevPos = cam.getPos();
 	if (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS)//FASTER
@@ -67,6 +66,10 @@ void process_sticky_keys(GLFWwindow* window, Cube& skybox)
 		cam.Step_Vertical(step);
 	if (glfwGetKey(window, GLFW_KEY_LEFT_CONTROL) == GLFW_PRESS) //STEP_DOWN
 		cam.Step_Vertical(-step);
+	if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS) //SPEED_UP
+		cart.addSpeed(0.1);
+	if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS) //SPEED_DOWN
+		cart.addSpeed(-0.1);
 	skybox.move(cam.getPos() - prevPos);
 }
 void render(const VertexArray& vertexArray, const IndexBuffer& indexBuffer, const Shader& shader) {
@@ -111,63 +114,49 @@ int main()
 		std::shared_ptr<PerspectiveProjection> projection = std::make_shared<PerspectiveProjection>(glm::radians(fov), (float)WIDTH / (float)HEIGHT, 0.25f, 100.0f);
 
 
-		auto texture = std::make_shared<Texture>("textures/iipw.png");
-		auto texture2 = std::make_shared<Texture>("textures/weiti.png");
-		auto groundtex = std::make_shared<Texture>("textures/cracked_ground.png", true);
 		auto skybox_tex = std::make_shared<Texture>("textures/skybox.png");
-		auto cart_tex = std::make_shared<Texture>("textures/cart.png");
-		auto test_tex = std::make_shared<Texture>("textures/test_cyl.png");
-
-		Trapeze trapeze(texture);
-		Trapeze trapeze2(texture2, { 1.0, 0.0, -1.0 });
-		Ground ground(groundtex);
-		Wheels w= Wheels();
-		Railway railway(3);
-		Cylinder c = Cylinder(test_tex);
 		Cube skybox(skybox_tex, { 0.0, 0.0, 0.0 }, { 0.0, 0.0, 0.0 }, { 40.0, 40.0, 40.0 });
-		Cube cart(cart_tex, { 1.0, 0.0, 1.0 }, { 0.0, 0.0, 0.0 }, { 0.5, 0.02, 1.0 });		//can be any size as long as proportions are kept
-
+		Cart cart;
+		Floor floor(4);
 		auto shader = std::make_shared<Shader>("shader.vert", "shader.frag");
-		
+
+
 		double lastTime = glfwGetTime(), deltaT = 0.0, spf = 0.0;
 		float currentFrame;
 		int nbFrames = 0;
-		
 		// main event loop
 		while (!glfwWindowShouldClose(window)) {
-			currentFrame = glfwGetTime(); 
-			deltaT = currentFrame - lastTime; 
+			currentFrame = glfwGetTime();
+			deltaT = currentFrame - lastTime;
 			nbFrames++;
 			if (deltaT >= 0.25) {
 				fps = 4 * nbFrames;
 				nbFrames = 0;
 				lastTime += 0.25f;
 			}
-			cout << "Current Frame: " << currentFrame << "\nFPS: " << fps << endl;
-			
+			//cout << "Current Frame: " << currentFrame << "\nFPS: " << fps << endl;
+
 			// Check if any events have been activiated (key pressed, mouse moved etc.) and call corresponding response functions
 			GLCall(glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
 			cameraPos = cam.getPos();
 			cameraFront = cam.getFront();
 			view->setPosition(cameraPos);
 			view->setFront(cameraFront);
-			
 			glm::mat4 viewMatrix = view->getMatrix();
 			shader->setUniformMat4("VIEW", viewMatrix);
 			glm::mat4 projectionMatrix = projection->getMatrix();
 			shader->setUniformMat4("PROJECTION", projectionMatrix);
-			
-			//ground.render(shader);
-            railway.render(shader);
-			cart.render(shader);
+
 			skybox.render(shader);
-			w.render(shader);
-			//c.render(shader);
+			cart.render(shader);
+			floor.render(shader);
+			cart.moveAuto();
+			if ((cart.getPos() - floor.getPos()).z >  2.5) floor.reposition( 1);
+			if ((cart.getPos() - floor.getPos()).z < -2.5) floor.reposition(-1);
+
 			mouse_callback(window, prev_X, prev_Y);
-
-
 			glfwSwapBuffers(window);
-			process_sticky_keys(window, skybox);
+			process_sticky_keys(window, skybox, cart);
 			glfwPollEvents();
 		}
 	}
