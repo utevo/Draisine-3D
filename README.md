@@ -45,7 +45,7 @@
 - [x] Zaprogramowanie ruchu kamery  | *estimate:* 3.0h | *spend:* 4.0h
 - [ ] Zaprogramowanie ruchu obiektów:
     - [ ] Drezyna: 
-        - [ ] Kóła
+        - [x] Kóła
         - [ ] Podstawa dzwigni
         - [ ] Podwozie
         - [ ] Dzwignia
