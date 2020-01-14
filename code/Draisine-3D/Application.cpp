@@ -23,7 +23,7 @@
 #include "primitives/Ground.h"
 #include "primitives/Cube.h"
 #include "composites/railway.h"
-
+#include "composites/Wheels.h"
 #include "primitives/Cylinder.h"
 using namespace std;
 const GLuint WIDTH = 800, HEIGHT = 600;
@@ -107,8 +107,8 @@ int main()
 			throw exception("GLEW Initialization failed");
 		std::shared_ptr<PositionFrontUpView> view = std::make_shared<PositionFrontUpView>(cameraPos, cameraFront, cameraUp);
 		// std::shared_ptr<OrtogonalProjection> projection = std::make_shared<OrtogonalProjection>(-2.0, 2.0, -2.0, 2.0, -2.0, 2.0);
-		float fov = 45.f;
-		std::shared_ptr<PerspectiveProjection> projection = std::make_shared<PerspectiveProjection>(glm::radians(fov), (float)WIDTH / (float)HEIGHT, 1.0f, 100.0f);
+		float fov = 45.0f;
+		std::shared_ptr<PerspectiveProjection> projection = std::make_shared<PerspectiveProjection>(glm::radians(fov), (float)WIDTH / (float)HEIGHT, 0.25f, 100.0f);
 
 
 		auto texture = std::make_shared<Texture>("textures/iipw.png");
@@ -116,14 +116,14 @@ int main()
 		auto groundtex = std::make_shared<Texture>("textures/cracked_ground.png", true);
 		auto skybox_tex = std::make_shared<Texture>("textures/skybox.png");
 		auto cart_tex = std::make_shared<Texture>("textures/cart.png");
-		auto cyl_tex = std::make_shared<Texture>("textures/texture_cylinder.png");
+		auto test_tex = std::make_shared<Texture>("textures/test_cyl.png");
 
 		Trapeze trapeze(texture);
 		Trapeze trapeze2(texture2, { 1.0, 0.0, -1.0 });
 		Ground ground(groundtex);
-		Cylinder c(cyl_tex);
+		Wheels w= Wheels();
 		Railway railway(3);
-
+		Cylinder c = Cylinder(test_tex);
 		Cube skybox(skybox_tex, { 0.0, 0.0, 0.0 }, { 0.0, 0.0, 0.0 }, { 40.0, 40.0, 40.0 });
 		Cube cart(cart_tex, { 1.0, 0.0, 1.0 }, { 0.0, 0.0, 0.0 }, { 0.5, 0.02, 1.0 });		//can be any size as long as proportions are kept
 
@@ -157,11 +157,12 @@ int main()
 			glm::mat4 projectionMatrix = projection->getMatrix();
 			shader->setUniformMat4("PROJECTION", projectionMatrix);
 			
-			ground.render(shader);
+			//ground.render(shader);
             railway.render(shader);
 			cart.render(shader);
 			skybox.render(shader);
-			c.render(shader);
+			w.render(shader);
+			//c.render(shader);
 			mouse_callback(window, prev_X, prev_Y);
 
 
