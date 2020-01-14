@@ -164,7 +164,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CompositeObject.h" />
-    <ClInclude Include="composites\wheel.h" />
     <ClInclude Include="Debug.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="IndexBuffer.h" />
