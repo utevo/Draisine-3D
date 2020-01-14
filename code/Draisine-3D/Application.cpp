@@ -33,7 +33,7 @@ glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
 glm::vec3 prevPos(0.0f, 0.0f, 0.0f);
 Camera cam = Camera(cameraPos, cameraFront, cameraUp);;
 double fps = 0.0;
-const float FPS_CONST = 0.01f / 60.0f;
+const float FPS_CONST = 0.01f * 60.0f;
 float step = 0.0f;
 double prev_X, prev_Y;
 void mouse_callback(GLFWwindow* window, double new_X, double new_Y)
