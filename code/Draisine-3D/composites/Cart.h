@@ -26,10 +26,10 @@ public:
 		if (speed >  15) speed =  15;
 		if (speed < -15) speed = -15;
 	}
-
+	bool getSpeed_sign() { return (speed >= 0.0f); }
 	void moveAuto()
 	{
-		move(speed * glm::vec3(0.0, 0.0, 0.004));
+		move(speed * glm::vec3(0.0, 0.0, -0.004));
 		rotateWheels(speed * glm::vec3(0.0, 0.0, 1.0));
 	}
 

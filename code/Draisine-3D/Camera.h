@@ -21,6 +21,7 @@ public:
 	Camera(glm::vec3  cP, glm::vec3  cF, glm::vec3  cU) : first_mouse_call(true),
 		cameraPos(cP),
 		cameraFront(cF),
+		startCameraFront(cF),
 		cameraUp(cU),
 		_yaw(0.0), _pitch(0.0)
 	{
@@ -51,7 +52,7 @@ public:
 
 		if (_pitch > UPPER_BOUND)_pitch = UPPER_BOUND;
 		if (_pitch < LOWER_BOUND)_pitch = LOWER_BOUND;
-
+		
 		Rotate_Vectors();
 	}
 
@@ -75,7 +76,9 @@ public:
 	glm::vec3 getUp() { return cameraUp; }
 	glm::vec3 getPos() { return cameraPos; }
 
-
+	void setPos(glm::vec3 a) { cameraPos = a; }
+	void setUp(glm::vec3 a) { cameraUp = a; }
+	void setFront(glm::vec3 a) { cameraFront = a; _yaw = 0.0; _pitch = 0.0; }
 
 private:
 
@@ -83,7 +86,7 @@ private:
 		glm::mat4 rotationMat(1);
 		rotationMat = glm::rotate(rotationMat, float(_yaw), glm::vec3(0.0, 1.0, 0.0));
 		rotationMat = glm::rotate(rotationMat, float(_pitch), glm::vec3(1.0, 0.0, 0.0));
-		cameraFront = glm::vec3(0.0f, 0.0f, -1.0f);
+		cameraFront = glm::vec3 (0.0f, 0.0f, -1.0f);
 		cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
 		cameraFront = glm::vec3(rotationMat * glm::vec4(cameraFront, 1.0));
 		cameraUp = glm::vec3(rotationMat * glm::vec4(cameraUp, 1.0));
@@ -93,6 +96,7 @@ private:
 	bool first_mouse_call;
 	glm::vec3 cameraPos;
 	glm::vec3 cameraFront;
+	const glm::vec3 startCameraFront;
 	glm::vec3 cameraUp;
 	double _yaw;
 	double _pitch;

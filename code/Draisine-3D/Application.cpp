@@ -26,15 +26,25 @@
 
 using namespace std;
 const GLuint WIDTH = 800, HEIGHT = 600;
-glm::vec3 cameraPos = glm::vec3(0.0f, 0.0f, 1.0f);
-glm::vec3 cameraFront = glm::vec3(0.0f, 0.0f, -1.0f);
+
+const glm::vec3 cameraOffset = glm::vec3(0.0f, 1.0f, 3.0f);
+const glm::vec3 defaultFront = glm::vec3(0.0f, 0.0f, -1.0f);
+glm::vec3 cameraPos = cameraOffset;
+glm::vec3 cameraFront = defaultFront;
 glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
 glm::vec3 prevPos(0.0f, 0.0f, 0.0f);
-Camera cam = Camera(cameraPos, cameraFront, cameraUp);;
+Camera cam = Camera(cameraPos, cameraFront, cameraUp);	
+
+glm::vec3 cartPos;
 double fps = 0.0;
 const float FPS_CONST = 0.01f * 60.0f;
 float step = 0.0f;
 double prev_X, prev_Y;
+
+glm::vec3 skybox_offset;
+
+bool skybox_should_move=false;
+bool camera_attached = true;
 void mouse_callback(GLFWwindow* window, double new_X, double new_Y)
 {
 	cam.Rotate_Mouse(prev_X - new_X, prev_Y - new_Y);
@@ -44,8 +54,22 @@ void mouse_callback(GLFWwindow* window, double new_X, double new_Y)
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode)
 {
 	// cout << key << endl;
+
 	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
 		glfwSetWindowShouldClose(window, GL_TRUE);
+	if (key == GLFW_KEY_C && action == GLFW_PRESS)
+	{
+		if (camera_attached == false) {
+			prevPos = cam.getPos();
+			cam.setPos(cartPos+ cameraOffset);
+			cam.setFront(defaultFront);
+			cam.setUp(glm::vec3(0.0f, 1.0f, 0.0f));
+			camera_attached = true;
+			skybox_offset =  cartPos - prevPos;
+			skybox_should_move = true;
+		}
+		else camera_attached = false;
+	}
 }
 //for "sticky keys"
 void process_sticky_keys(GLFWwindow* window, Cube& skybox, Cart& cart)
@@ -70,6 +94,9 @@ void process_sticky_keys(GLFWwindow* window, Cube& skybox, Cart& cart)
 		cart.addSpeed(0.1);
 	if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS) //SPEED_DOWN
 		cart.addSpeed(-0.1);
+	//should be in key_callback but we need cart handle
+	if (glfwGetKey(window, GLFW_KEY_C) == GLFW_PRESS)
+
 	skybox.move(cam.getPos() - prevPos);
 }
 void render(const VertexArray& vertexArray, const IndexBuffer& indexBuffer, const Shader& shader) {
@@ -138,10 +165,13 @@ int main()
 
 			// Check if any events have been activiated (key pressed, mouse moved etc.) and call corresponding response functions
 			GLCall(glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
+			if (camera_attached)cam.setPos(cart.getPos()+cameraOffset);
 			cameraPos = cam.getPos();
 			cameraFront = cam.getFront();
+			//cameraUp = cam.getUp();
 			view->setPosition(cameraPos);
 			view->setFront(cameraFront);
+			view->setUp(cameraUp);
 			glm::mat4 viewMatrix = view->getMatrix();
 			shader->setUniformMat4("VIEW", viewMatrix);
 			glm::mat4 projectionMatrix = projection->getMatrix();
@@ -150,14 +180,22 @@ int main()
 			skybox.render(shader);
 			cart.render(shader);
 			floor.render(shader);
+			if (camera_attached)prevPos = cart.getPos();
 			cart.moveAuto();
-			if ((cart.getPos() - floor.getPos()).z >  2.5) floor.reposition( 1);
-			if ((cart.getPos() - floor.getPos()).z < -2.5) floor.reposition(-1);
+			if(camera_attached)skybox.move(cart.getPos()-prevPos);
+
+			if ((cam.getPos() - floor.getPos()).z >  2.5) floor.reposition( 1);
+			if ((cam.getPos() - floor.getPos()).z < -2.5) floor.reposition(-1);
 
 			mouse_callback(window, prev_X, prev_Y);
 			glfwSwapBuffers(window);
 			process_sticky_keys(window, skybox, cart);
+			cartPos = cart.getPos();
 			glfwPollEvents();
+			if (skybox_should_move) {
+				skybox_should_move = false;
+				skybox.move(skybox_offset);
+			}
 		}
 	}
 	catch (exception ex)
