@@ -37,7 +37,7 @@ Camera cam = Camera(cameraPos, cameraFront, cameraUp);
 
 glm::vec3 cartPos;
 double fps = 0.0;
-const float FPS_CONST = 0.01f * 60.0f;
+const float FPS_CONST = 0.1f * 60.0f;
 float step = 0.0f;
 double prev_X, prev_Y;
 
@@ -95,7 +95,6 @@ void process_sticky_keys(GLFWwindow* window, Cube& skybox, Cart& cart)
 	if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS) //SPEED_DOWN
 		cart.addSpeed(-0.1);
 	//should be in key_callback but we need cart handle
-	if (glfwGetKey(window, GLFW_KEY_C) == GLFW_PRESS)
 
 	skybox.move(cam.getPos() - prevPos);
 }
