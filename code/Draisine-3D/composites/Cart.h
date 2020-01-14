@@ -30,7 +30,7 @@ public:
 	void moveAuto()
 	{
 		move(speed * glm::vec3(0.0, 0.0, -0.004));
-		rotateWheels(speed * glm::vec3(0.0, 0.0, 1.0));
+		rotateWheels(speed * glm::vec3(0.0, 0.0, -1.0));
 	}
 
 	void rotateWheels(const glm::vec3& rotation) {
