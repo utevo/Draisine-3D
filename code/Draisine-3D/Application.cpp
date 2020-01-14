@@ -33,7 +33,7 @@ glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
 glm::vec3 prevPos(0.0f, 0.0f, 0.0f);
 Camera cam = Camera(cameraPos, cameraFront, cameraUp);;
 double fps = 0.0;
-const float FPS_CONST = 0.01f / 60.0f;
+const float FPS_CONST = 0.01f * 60.0f;
 float step = 0.0f;
 double prev_X, prev_Y;
 void mouse_callback(GLFWwindow* window, double new_X, double new_Y)
@@ -53,8 +53,8 @@ void process_sticky_keys(GLFWwindow* window, Cube& skybox)
 {
 	prevPos = cam.getPos();
 	if (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS)//FASTER
-		step = FPS_CONST * fps * 10 ;
-	else step = FPS_CONST * fps;
+		step = (FPS_CONST / fps)* 10 ;
+	else step = FPS_CONST / fps;
 	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)//STEP_FORWARD
 		cam.Step_Longtitudal(step);
 	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)//STEP_BACK
