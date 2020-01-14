@@ -110,8 +110,8 @@ int main()
 			throw exception("GLEW Initialization failed");
 		std::shared_ptr<PositionFrontUpView> view = std::make_shared<PositionFrontUpView>(cameraPos, cameraFront, cameraUp);
 		// std::shared_ptr<OrtogonalProjection> projection = std::make_shared<OrtogonalProjection>(-2.0, 2.0, -2.0, 2.0, -2.0, 2.0);
-		float fov = 45.f;
-		std::shared_ptr<PerspectiveProjection> projection = std::make_shared<PerspectiveProjection>(glm::radians(fov), (float)WIDTH / (float)HEIGHT, 1.0f, 100.0f);
+		float fov = 45.0f;
+		std::shared_ptr<PerspectiveProjection> projection = std::make_shared<PerspectiveProjection>(glm::radians(fov), (float)WIDTH / (float)HEIGHT, 0.25f, 100.0f);
 
 
 		auto skybox_tex = std::make_shared<Texture>("textures/skybox.png");
