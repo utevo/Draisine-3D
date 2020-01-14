@@ -53,8 +53,8 @@ void process_sticky_keys(GLFWwindow* window, Cube& skybox)
 {
 	prevPos = cam.getPos();
 	if (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS)//FASTER
-		step = FPS_CONST * fps * 10 ;
-	else step = FPS_CONST * fps;
+		step = (FPS_CONST / fps)* 10 ;
+	else step = FPS_CONST / fps;
 	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)//STEP_FORWARD
 		cam.Step_Longtitudal(step);
 	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)//STEP_BACK
