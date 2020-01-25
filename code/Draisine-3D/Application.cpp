@@ -78,23 +78,25 @@ void process_sticky_keys(GLFWwindow* window, Cube& skybox, Cart& cart)
 	if (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS)//FASTER
 		step = (FPS_CONST / fps)* 10 ;
 	else step = FPS_CONST / fps;
-	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)//STEP_FORWARD
-		cam.Step_Longtitudal(step);
-	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)//STEP_BACK
-		cam.Step_Longtitudal(-step);
-	if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)//STEP_LEFT
-		cam.Step_Lateral(-step);
-	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS) //STEP_RIGHT
-		cam.Step_Lateral(step);
-	if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS) //STEP_UP
-		cam.Step_Vertical(step);
-	if (glfwGetKey(window, GLFW_KEY_LEFT_CONTROL) == GLFW_PRESS) //STEP_DOWN
-		cam.Step_Vertical(-step);
-	if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS) //SPEED_UP
-		cart.addSpeed(0.1);
-	if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS) //SPEED_DOWN
-		cart.addSpeed(-0.1);
-	//should be in key_callback but we need cart handle
+	if (!camera_attached)
+	{
+		if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)//STEP_FORWARD
+			cam.Step_Longtitudal(step);
+		if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)//STEP_BACK
+			cam.Step_Longtitudal(-step);
+		if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)//STEP_LEFT
+			cam.Step_Lateral(-step);
+		if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS) //STEP_RIGHT
+			cam.Step_Lateral(step);
+		if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS) //STEP_UP
+			cam.Step_Vertical(step);
+		if (glfwGetKey(window, GLFW_KEY_LEFT_CONTROL) == GLFW_PRESS) //STEP_DOWN
+			cam.Step_Vertical(-step);
+	}
+		if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS) //SPEED_UP
+			cart.addSpeed(0.1);
+		if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS) //SPEED_DOWN
+			cart.addSpeed(-0.1);
 
 	skybox.move(cam.getPos() - prevPos);
 }
