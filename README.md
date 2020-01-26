@@ -54,7 +54,7 @@
     - [ ] Poruszanie drezyną
     - [ ] Inne obiekty
 - [ ] Teksturowanie
-- [ ] Stworzenie oświetlenia
+- [ ] Stworzenie oświetlenia | *estimate:* 4.0h | *spend:* 4.0h
 - [ ] Prezentacja gotowego projetku na spotkaniu nr 7
 
 ## Przykład
