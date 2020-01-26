@@ -176,6 +176,14 @@ int main()
 			glm::mat4 projectionMatrix = projection->getMatrix();
 			shader->setUniformMat4("PROJECTION", projectionMatrix);
 
+			// uniforms for fragment shader
+			glm::vec3 lightColor = { 1.0, 1.0, 1.0};
+			shader->setUniformVec3("LIGHT_COLOR", lightColor);
+			glm::vec3 lightPos = { -2.0f, 4.0f, 3.0f };
+			shader->setUniformVec3("LIGHT_POS", lightPos);
+			glm::vec3 cameraPos = cam.getPos();
+			shader->setUniformVec3("CAMERA_POS", cameraPos);
+
 			skybox.render(shader);
 			cart.render(shader);
 			floor.render(shader);

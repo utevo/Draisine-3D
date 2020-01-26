@@ -6,6 +6,10 @@ in vec3 FragPos;
 in vec3 Normal;
 in vec2 TexCoord;
 
+uniform vec3 LIGHT_COLOR;  
+uniform vec3 LIGHT_POS; 
+uniform vec3 CAMERA_POS; 
+
 uniform sampler2D TEXTURE;
 
 void main() {
