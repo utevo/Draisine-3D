@@ -25,6 +25,7 @@ public:
     void unbind() const;
 
     void setUniformVec4(const std::string& name, glm::vec4 vec4);
+    void setUniformVec3(const std::string& name, glm::vec3 vec3);
     void setUniformFloat(const std::string& name, float value);
     void setUniformInt(const std::string& name, int value);
     void setUniformMat4(const std::string& name, const glm::mat4& mat4);
