@@ -183,6 +183,8 @@ int main()
 			shader->setUniformVec3("LIGHT_POS", lightPos);
 			glm::vec3 cameraPos = cam.getPos();
 			shader->setUniformVec3("CAMERA_POS", cameraPos);
+			float ambientLightStrenght = 0.25f;
+			shader->setUniformFloat("AMBIENT_LIGHT_STRENGHT", ambientLightStrenght);
 
 			skybox.render(shader);
 			cart.render(shader);
