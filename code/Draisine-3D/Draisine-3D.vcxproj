@@ -159,8 +159,8 @@
     <ClCompile Include="VertexBuffer.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="shader.frag" />
-    <None Include="shader.vert" />
+    <None Include="shaders\fullLighting.frag" />
+    <None Include="shaders\shader.vert" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CompositeObject.h" />
@@ -179,6 +179,7 @@
     <ClInclude Include="primitives\Trapeze.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="Shader.h" />
+    <ClInclude Include="shaders\simpleLighting.frag" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="TexturesMapper.h" />
     <ClInclude Include="Projection.h" />
