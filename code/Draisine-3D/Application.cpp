@@ -135,7 +135,7 @@ int main()
 		if (glewInit() != GLEW_OK)
 			throw exception("GLEW Initialization failed");
 		std::shared_ptr<PositionFrontUpView> view = std::make_shared<PositionFrontUpView>(cameraPos, cameraFront, cameraUp);
-		// std::shared_ptr<OrtogonalProjection> projection = std::make_shared<OrtogonalProjection>(-2.0, 2.0, -2.0, 2.0, -2.0, 2.0);
+		//std::shared_ptr<OrtogonalProjection> projection = std::make_shared<OrtogonalProjection>(-2.0, 2.0, -2.0, 2.0, -2.0, 2.0);
 		float fov = 45.0f;
 		std::shared_ptr<PerspectiveProjection> projection = std::make_shared<PerspectiveProjection>(glm::radians(fov), (float)WIDTH / (float)HEIGHT, 0.25f, 100.0f);
 
@@ -143,9 +143,10 @@ int main()
 		auto skybox_tex = std::make_shared<Texture>("textures/skybox.png");
 		Cube skybox(skybox_tex, { 0.0, 0.0, 0.0 }, { 0.0, 0.0, 0.0 }, { 40.0, 40.0, 40.0 });
 		Cart cart;
-		Floor floor(4);
-		auto shader = std::make_shared<Shader>("shader.vert", "shader.frag");
 
+		Cube cube(skybox_tex, { 3.0f, 0.0f, 2.0f });
+		Floor floor(4);
+		auto shader = std::make_shared<Shader>("shaders/shader.vert", "shaders/fullLighting.frag");
 
 		double lastTime = glfwGetTime(), deltaT = 0.0, spf = 0.0;
 		float currentFrame;
@@ -171,28 +172,48 @@ int main()
 			view->setPosition(cameraPos);
 			view->setFront(cameraFront);
 			view->setUp(cameraUp);
+
+			// set uniforms
 			glm::mat4 viewMatrix = view->getMatrix();
 			shader->setUniformMat4("VIEW", viewMatrix);
+
 			glm::mat4 projectionMatrix = projection->getMatrix();
 			shader->setUniformMat4("PROJECTION", projectionMatrix);
 
 			// uniforms for fragment shader
 			glm::vec3 lightColor = { 1.0, 1.0, 1.0};
 			shader->setUniformVec3("LIGHT_COLOR", lightColor);
-			glm::vec3 lightPos = { -2.0f, 4.0f, 3.0f };
+
+			glm::vec3 lightPos = { -100.0f, 100.0f, 100.0f };
 			shader->setUniformVec3("LIGHT_POS", lightPos);
+
 			glm::vec3 cameraPos = cam.getPos();
+			std::cout << "Camera:" << cameraPos.x << " " << cameraPos.y << " " << cameraPos.z << " " << std::endl;
 			shader->setUniformVec3("CAMERA_POS", cameraPos);
+
 			float ambientLightStrenght = 0.25f;
 			shader->setUniformFloat("AMBIENT_LIGHT_STRENGHT", ambientLightStrenght);
-			float diffuseLightStrenght = 0.8f;
+
+			float diffuseLightStrenght = 0.6f;
 			shader->setUniformFloat("DIFFUSE_LIGHT_STRENGHT", diffuseLightStrenght);
+
 			float specularLightStrenght = 1.0f;
 			shader->setUniformFloat("SPECULAR_LIGHT_STRENGHT", specularLightStrenght);
 
-			skybox.render(shader);
+			
+			cube.render(shader);
 			cart.render(shader);
+
+
+			ambientLightStrenght = 0.8f;
+			shader->setUniformFloat("AMBIENT_LIGHT_STRENGHT", ambientLightStrenght);
+			diffuseLightStrenght = 0.0f;
+			shader->setUniformFloat("DIFFUSE_LIGHT_STRENGHT", diffuseLightStrenght);
+			specularLightStrenght = 0.0f;
+			shader->setUniformFloat("SPECULAR_LIGHT_STRENGHT", specularLightStrenght);
+			skybox.render(shader);
 			floor.render(shader);
+
 			if (camera_attached)prevPos = cart.getPos();
 			cart.moveAuto();
 			if(camera_attached)skybox.move(cart.getPos()-prevPos);

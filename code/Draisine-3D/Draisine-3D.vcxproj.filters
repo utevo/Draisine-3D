@@ -47,10 +47,10 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="shader.vert">
+    <None Include="shaders\shader.vert">
       <Filter>Pliki źródłowe</Filter>
     </None>
-    <None Include="shader.frag">
+    <None Include="shaders\fullLighting.frag">
       <Filter>Pliki źródłowe</Filter>
     </None>
   </ItemGroup>
@@ -128,6 +128,9 @@
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
     <ClInclude Include="composites\wheel.h">
+      <Filter>Pliki nagłówkowe</Filter>
+    </ClInclude>
+    <ClInclude Include="shaders\simpleLighting.frag">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
   </ItemGroup>

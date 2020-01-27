@@ -57,6 +57,8 @@ public:
 		_vertexArray->bind();
 		_indexBuffer->bind();
 		GLCall(glDrawElements(GL_TRIANGLES, _indexBuffer->getCount(), GL_UNSIGNED_INT, nullptr));
+		_indexBuffer->unbind();
+		_vertexArray->unbind();
 	}
 
 	std::unique_ptr<VertexBufferLayout> initVertexBufferLayout() {
