@@ -183,27 +183,18 @@ int main()
 			// uniforms for fragment shader
 			glm::vec3 lightColor = { 1.0, 1.0, 1.0};
 			shader->setUniformVec3("LIGHT_COLOR", lightColor);
-
 			glm::vec3 lightPos = { -100.0f, 100.0f, 100.0f };
 			shader->setUniformVec3("LIGHT_POS", lightPos);
-
 			glm::vec3 cameraPos = cam.getPos();
-			std::cout << "Camera:" << cameraPos.x << " " << cameraPos.y << " " << cameraPos.z << " " << std::endl;
 			shader->setUniformVec3("CAMERA_POS", cameraPos);
-
 			float ambientLightStrenght = 0.25f;
 			shader->setUniformFloat("AMBIENT_LIGHT_STRENGHT", ambientLightStrenght);
-
 			float diffuseLightStrenght = 0.6f;
 			shader->setUniformFloat("DIFFUSE_LIGHT_STRENGHT", diffuseLightStrenght);
-
 			float specularLightStrenght = 1.0f;
 			shader->setUniformFloat("SPECULAR_LIGHT_STRENGHT", specularLightStrenght);
-
-			
 			cube.render(shader);
 			cart.render(shader);
-
 
 			ambientLightStrenght = 0.8f;
 			shader->setUniformFloat("AMBIENT_LIGHT_STRENGHT", ambientLightStrenght);
