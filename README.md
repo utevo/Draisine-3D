@@ -33,13 +33,13 @@
         - [x] Cube.h | *estimate:* 1.0h | *spend:* 2.0h
         - [x] Cylinder.h  | *estimate:* 2.0h | *spend:* 4.5h
     - [ ] Drezyna:
-        - [ ] Koła
+        - [x] Koła
         - [ ] Podstawa dzwigni
-        - [ ] Podwozie
-        - [ ] Dzwignia
-    - [ ] Podłoże
-    - [ ] Tory
-    - [ ] Tło
+        - [x] Podwozie
+        - [x] Dzwignia
+    - [x] Podłoże
+    - [x] Tory
+    - [x] Tło
     - [ ] Ozdoby
     - [ ] Obiekty środowiska
 - [x] Zaprogramowanie ruchu kamery  | *estimate:* 3.0h | *spend:* 4.0h
@@ -47,11 +47,11 @@
     - [ ] Drezyna: 
         - [x] Kóła
         - [ ] Podstawa dzwigni
-        - [ ] Podwozie
-        - [ ] Dzwignia
+        - [x] Podwozie
+        - [x] Dzwignia
 - [ ] Dodanie interakcji (obsługa klawiatury/myszki)
     - [x] Poruszanie kamerą | *estimate:* 1.0h | *spend:* 1.0h
-    - [ ] Poruszanie drezyną
+    - [x] Poruszanie drezyną
     - [ ] Inne obiekty
 - [ ] Teksturowanie
 - [x] Stworzenie oświetlenia | *estimate:* 4.0h | *spend:* 6.0h
