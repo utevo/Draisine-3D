@@ -3,6 +3,7 @@
 #include "../CompositeObject.h"
 #include "../primitives/Cube.h"
 #include "Wheels.h"
+#include "../primitives/Podstawka.h"
 #include<iostream>
 
 #define M_PI 3.14159265358979323846
@@ -14,6 +15,7 @@ Cart(const glm::vec3& possition = { 0.0, 0.0, 0.0 },
 		const glm::vec3& size = { 1.0f, 1.0f, 1.0f }): speed(0) {
 		auto cart_tex = std::make_shared<Texture>("textures/cart.png");
 		auto wood_tex = std::make_shared<Texture>("textures/lever_tex.png");
+		auto blue = std::make_shared<Texture>("textures/podstawka.png");
 		auto metal_tex = std::make_shared<Texture>("textures/lever_metal.png");
 		auto wh = std::make_unique<Wheels>(possition + glm::vec3(0.0, -0.22, 0.0), rotation, size);
 		auto bs = std::make_unique<Cube>(cart_tex, possition + glm::vec3(0.0, -0.22, 0.0), rotation, size * glm::vec3(0.5, 0.02, 1.0));
@@ -30,7 +32,7 @@ Cart(const glm::vec3& possition = { 0.0, 0.0, 0.0 },
 		addChild(std::move(lc));
 		addChild(std::move(l1));
 		addChild(std::move(l2));
-		addChild(std::move(std::make_unique<Cube>(wood_tex, possition + glm::vec3(0.0, 0.2, 0.0), rotation, size * glm::vec3(0.1, 0.4, 0.1))));
+		addChild(std::move(std::make_unique<Podstawka>(blue, possition + glm::vec3(0.0, 0.2, 0.0), rotation, size * glm::vec3(0.1, 0.38, 0.1))));
 	}
 
 	void addSpeed(float step)
@@ -49,12 +51,12 @@ Cart(const glm::vec3& possition = { 0.0, 0.0, 0.0 },
 		move(speed * glm::vec3(0.0, 0.0, -0.004));
 		rotateWheels(speed * glm::vec3(0.0, 0.0, -1.0));
 	}
-	
-    void stop()
+
+	void stop()
 	{
 		speed = 0;
 	}
-	
+
 	glm::vec3 getPos()
 	{
 		return base->getPos();
