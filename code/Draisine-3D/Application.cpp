@@ -37,7 +37,7 @@ Camera cam = Camera(cameraPos, cameraFront, cameraUp);
 
 glm::vec3 cartPos;
 double fps = 0.0;
-const float FPS_CONST = 0.1f * 60.0f;
+const float FPS_CONST = 0.05f * 60.0f;
 float step = 0.0f;
 double prev_X, prev_Y;
 
@@ -76,7 +76,7 @@ void process_sticky_keys(GLFWwindow* window, Cube& skybox, Cart& cart)
 {
 	prevPos = cam.getPos();
 	if (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS)//FASTER
-		step = (FPS_CONST / fps)* 10 ;
+		step = (FPS_CONST / fps)* 5 ;
 	else step = FPS_CONST / fps;
 	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)//STEP_FORWARD
 		cam.Step_Longtitudal(step);
@@ -94,9 +94,12 @@ void process_sticky_keys(GLFWwindow* window, Cube& skybox, Cart& cart)
 		cart.addSpeed(0.1);
 	if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS) //SPEED_DOWN
 		cart.addSpeed(-0.1);
+	if (glfwGetKey(window, GLFW_KEY_X) == GLFW_PRESS)//STOP
+		cart.stop();
 	//should be in key_callback but we need cart handle
 
-	skybox.move(cam.getPos() - prevPos);
+	if(!camera_attached) 
+		skybox.move(cam.getPos() - prevPos);
 }
 void render(const VertexArray& vertexArray, const IndexBuffer& indexBuffer, const Shader& shader) {
 	shader.bind();
@@ -144,7 +147,7 @@ int main()
 		Cube skybox(skybox_tex, { 0.0, 0.0, 0.0 }, { 0.0, 0.0, 0.0 }, { 40.0, 40.0, 40.0 });
 		Cart cart;
 
-		Cube cube(skybox_tex, { 3.0f, 0.0f, 2.0f });
+		Cube cube(skybox_tex, { 3.0f, 0.0f, 0.0f });
 		Floor floor(4);
 		auto shader = std::make_shared<Shader>("shaders/shader.vert", "shaders/fullLighting.frag");
 
@@ -187,7 +190,7 @@ int main()
 			shader->setUniformVec3("LIGHT_POS", lightPos);
 			glm::vec3 cameraPos = cam.getPos();
 			shader->setUniformVec3("CAMERA_POS", cameraPos);
-			float ambientLightStrenght = 0.25f;
+			float ambientLightStrenght = 0.4f;
 			shader->setUniformFloat("AMBIENT_LIGHT_STRENGHT", ambientLightStrenght);
 			float diffuseLightStrenght = 0.6f;
 			shader->setUniformFloat("DIFFUSE_LIGHT_STRENGHT", diffuseLightStrenght);
@@ -196,7 +199,7 @@ int main()
 			cube.render(shader);
 			cart.render(shader);
 
-			ambientLightStrenght = 0.8f;
+			ambientLightStrenght = 1.0f;
 			shader->setUniformFloat("AMBIENT_LIGHT_STRENGHT", ambientLightStrenght);
 			diffuseLightStrenght = 0.0f;
 			shader->setUniformFloat("DIFFUSE_LIGHT_STRENGHT", diffuseLightStrenght);
