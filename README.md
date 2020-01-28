@@ -32,9 +32,9 @@
         - [x] Trapez.h
         - [x] Cube.h | *estimate:* 1.0h | *spend:* 2.0h
         - [x] Cylinder.h  | *estimate:* 2.0h | *spend:* 4.5h
-    - [ ] Drezyna:
+    - [x] Drezyna:
         - [x] Koła
-        - [ ] Podstawa dzwigni
+        - [x] Podstawa dzwigni
         - [x] Podwozie
         - [x] Dzwignia
     - [x] Podłoże
@@ -44,9 +44,9 @@
     - [ ] Obiekty środowiska
 - [x] Zaprogramowanie ruchu kamery  | *estimate:* 3.0h | *spend:* 4.0h
 - [ ] Zaprogramowanie ruchu obiektów:
-    - [ ] Drezyna: 
+    - [x] Drezyna: 
         - [x] Kóła
-        - [ ] Podstawa dzwigni
+        - [x] Podstawa dzwigni
         - [x] Podwozie
         - [x] Dzwignia
 - [ ] Dodanie interakcji (obsługa klawiatury/myszki)
