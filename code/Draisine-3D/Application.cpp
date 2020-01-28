@@ -94,6 +94,8 @@ void process_sticky_keys(GLFWwindow* window, Cube& skybox, Cart& cart)
 		cart.addSpeed(0.1);
 	if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS) //SPEED_DOWN
 		cart.addSpeed(-0.1);
+	if (glfwGetKey(window, GLFW_KEY_X) == GLFW_PRESS)//STOP
+		cart.stop();
 	//should be in key_callback but we need cart handle
 
 	skybox.move(cam.getPos() - prevPos);
