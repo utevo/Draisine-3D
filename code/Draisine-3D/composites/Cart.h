@@ -49,7 +49,12 @@ Cart(const glm::vec3& possition = { 0.0, 0.0, 0.0 },
 		move(speed * glm::vec3(0.0, 0.0, -0.004));
 		rotateWheels(speed * glm::vec3(0.0, 0.0, -1.0));
 	}
-
+	
+    void stop()
+	{
+		speed = 0;
+	}
+	
 	glm::vec3 getPos()
 	{
 		return base->getPos();
