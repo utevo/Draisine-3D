@@ -39,6 +39,11 @@ public:
 		_size += vec;
 	};
 
+	void reposition(const glm::vec3& vec)
+	{
+		_possition = vec;
+	};
+	
 	void render(std::shared_ptr<Shader> shader) {
 		glm::mat4 model = glm::mat4(1.0f);
 
@@ -73,11 +78,16 @@ public:
 		return vertexBufferLayout;
 	};
 
-	glm::vec3 getPos()
+	const glm::vec3 getPos()
 	{
 		return _possition;
 	}
 	
+	const glm::vec3 getAngle()
+	{
+		return _rotation;
+	}
+
 protected:
 	virtual std::unique_ptr<VertexBuffer> initVertexBuffer() = 0;
 	virtual std::unique_ptr<IndexBuffer> initIndexBuffer() = 0;
