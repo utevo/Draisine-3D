@@ -173,7 +173,6 @@ int main()
 		Cube skybox(skybox_tex, { 0.0, 0.0, 0.0 }, { 0.0, 0.0, 0.0 }, { 40.0, 40.0, 40.0 });
 		Cart cart;
 
-		Cube cube(skybox_tex, { 3.0f, 0.0f, 0.0f });
 		Floor floor(4);
 		auto shader = std::make_shared<Shader>("shaders/shader.vert", "shaders/fullLighting.frag");
 		auto depthShader = std::make_shared<Shader>("shaders/depthMap.vert", "shaders/depthMap.frag");
@@ -185,7 +184,6 @@ int main()
 		float currentFrame;
 		int nbFrames = 0;
 		glm::vec3 lightPos = { -3.0f, 4.2f, 5.0f };
-		Cube lit(skybox_tex, lightPos, { 0.0, 0.0, 0.0 }, { 0.1, 0.1, 0.1 });
 
 		// main event loop
 		while (!glfwWindowShouldClose(window)) {
@@ -225,7 +223,6 @@ int main()
 			glBindFramebuffer(GL_FRAMEBUFFER, depthMapFBO);
 			glClear(GL_DEPTH_BUFFER_BIT);
 			glActiveTexture(GL_TEXTURE0);
-			cube.render(depthShader, false);
 			cart.render(depthShader, false);
 			floor.renderRailway(depthShader, false);
 			glBindFramebuffer(GL_FRAMEBUFFER, 0);
@@ -260,7 +257,6 @@ int main()
 			shader->setUniformFloat("DIFFUSE_LIGHT_STRENGHT", diffuseLightStrenght);
 			float specularLightStrenght = 0.5f;
 			shader->setUniformFloat("SPECULAR_LIGHT_STRENGHT", specularLightStrenght);
-			cube.render(shader);
 			cart.render(shader);
 			ambientLightStrenght = 0.6f;
 			shader->setUniformFloat("AMBIENT_LIGHT_STRENGHT", ambientLightStrenght);
@@ -277,8 +273,6 @@ int main()
 			specularLightStrenght = 0.0f;
 			shader->setUniformFloat("SPECULAR_LIGHT_STRENGHT", specularLightStrenght);
 			skybox.render(shader);
-			//floor.render(shader);
-			lit.render(shader);
 
 			if (camera_attached)prevPos = cart.getPos();
 			cart.moveAuto();
