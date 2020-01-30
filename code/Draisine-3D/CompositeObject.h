@@ -8,9 +8,9 @@
 
 class CompositeObject : public Object {
 public:
-	virtual void render(std::shared_ptr<Shader> shader) override {
+	virtual void render(std::shared_ptr<Shader> shader, bool tex = true) override {
 		for (auto& object : _objects)
-			object->render(shader);
+			object->render(shader, tex);
 	}
 
 
