@@ -12,9 +12,11 @@ public:
 		const glm::vec3& size = { 1.0f, 1.0f, 1.0f }) {
 		auto ground_tex = std::make_shared<Texture>("textures/cracked_ground.png", true);
 		auto bs = std::make_unique<Ground>(ground_tex, possition, rotation, size);
+		auto rw = std::make_unique<Railway>(6 + 10 * number);
 		center = bs.get();
+		railway = rw.get();
+		addChild(std::move(rw));
 		addChild(std::move(bs));
-		addChild(std::move(std::make_unique<Railway>(3 + 5 * number)));
 		for (int i = 1; i <= number; ++i)
 		{
 			addChild(std::move(std::make_unique<Ground>(ground_tex, possition + i*offset, rotation, size)));
@@ -35,9 +37,15 @@ public:
 		return center->getPos();
 	}
 
+	void renderRailway(std::shared_ptr<Shader> shader, bool tex = true)
+	{
+		railway->render(shader, tex);
+	}
+
 private:
 	Ground* center;
-	const glm::vec3 offset = {0.0, 0.0, 5.0};
+	Railway* railway;
+	const glm::vec3 offset = {0.0, 0.0, 10.0};
 
 };
 

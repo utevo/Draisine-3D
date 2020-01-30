@@ -44,7 +44,7 @@ public:
 		_possition = vec;
 	};
 	
-	void render(std::shared_ptr<Shader> shader) {
+	void render(std::shared_ptr<Shader> shader, bool tex=true) {
 		glm::mat4 model = glm::mat4(1.0f);
 
 		model = glm::translate(model, _possition);
@@ -56,9 +56,11 @@ public:
 		shader->bind();
 		shader->setUniformMat4("MODEL", model);
 
-		_texture->bind(0);
-		shader->setUniformInt("TEXTURE", 0);
-
+		if (tex)
+		{
+			_texture->bind(0);
+			shader->setUniformInt("TEXTURE", 0);
+		}
 		_vertexArray->bind();
 		_indexBuffer->bind();
 		GLCall(glDrawElements(GL_TRIANGLES, _indexBuffer->getCount(), GL_UNSIGNED_INT, nullptr));
