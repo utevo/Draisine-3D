@@ -2,6 +2,7 @@
 
 #include "../CompositeObject.h"
 #include "../primitives/Ground.h"
+#include "Cactus.h"
 #include "railway.h"
 #include<iostream>
 
@@ -22,6 +23,7 @@ public:
 			addChild(std::move(std::make_unique<Ground>(ground_tex, possition + i*offset, rotation, size)));
 			addChild(std::move(std::make_unique<Ground>(ground_tex, possition - i*offset, rotation, size)));
 		}
+		addCacti(number, possition);
 	}
 
 	void reposition(int dir)
@@ -40,6 +42,31 @@ public:
 	void renderRailway(std::shared_ptr<Shader> shader, bool tex = true)
 	{
 		railway->render(shader, tex);
+	}
+
+	void addCacti(int n, const glm::vec3& possition = { 0.0, 0.0, 0.0 })
+	{
+		auto ctemp = std::make_unique<Cactus>(5, possition + glm::vec3(4.0, -0.5, -1.0));
+		addChild(std::move(ctemp));
+		ctemp = std::make_unique<Cactus>(2, possition + glm::vec3(-5.0, -0.5, -2));
+		addChild(std::move(ctemp));
+		ctemp = std::make_unique<Cactus>(7, possition + glm::vec3(-2.0, -0.5, 2));
+		addChild(std::move(ctemp));
+		for (int i = 1; i <= 2; ++i)
+		{
+			ctemp = std::make_unique<Cactus>(5, possition + glm::vec3(4.0, -0.5, -1.0) + i*offset);
+			addChild(std::move(ctemp));
+			ctemp = std::make_unique<Cactus>(2, possition + glm::vec3(-5.0, -0.5, -2) + i * offset);
+			addChild(std::move(ctemp));
+			ctemp = std::make_unique<Cactus>(5, possition + glm::vec3(4.0, -0.5, -1.0) - i * offset);
+			addChild(std::move(ctemp));
+			ctemp = std::make_unique<Cactus>(2, possition + glm::vec3(-5.0, -0.5, -2) - i * offset);
+			addChild(std::move(ctemp));
+			ctemp = std::make_unique<Cactus>(7, possition + glm::vec3(-2.0, -0.5, 2) - i * offset);
+			addChild(std::move(ctemp));
+			ctemp = std::make_unique<Cactus>(7, possition + glm::vec3(-2.0, -0.5, 2) + i * offset);
+			addChild(std::move(ctemp));
+		}
 	}
 
 private:
