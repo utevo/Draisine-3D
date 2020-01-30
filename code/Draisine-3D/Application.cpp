@@ -177,12 +177,9 @@ int main()
 		Floor floor(4);
 		auto shader = std::make_shared<Shader>("shaders/shader.vert", "shaders/fullLighting.frag");
 		auto depthShader = std::make_shared<Shader>("shaders/depthMap.vert", "shaders/depthMap.frag");
-		auto debugShader = std::make_shared<Shader>("shaders/debug_quad.vert", "shaders/debug_quad_depth.frag");
 
 		shader->bind();
 		shader->setUniformInt("shadowMap", 1); 
-		debugShader->bind();
-		debugShader->setUniformInt("depthMap", 0);
 
 		double lastTime = glfwGetTime(), deltaT = 0.0, spf = 0.0;
 		float currentFrame;
@@ -283,15 +280,6 @@ int main()
 			//floor.render(shader);
 			lit.render(shader);
 
-			// render Depth map to quad for visual debugging
-			// ---------------------------------------------
-			debugShader->bind();
-			//debugShader->setUniformFloat("near_plane", near_plane);
-			//debugShader->setUniformFloat("far_plane", far_plane);
-			glActiveTexture(GL_TEXTURE0);
-			glBindTexture(GL_TEXTURE_2D, depthMap);
-			//renderQuad();
-			
 			if (camera_attached)prevPos = cart.getPos();
 			cart.moveAuto();
 			if(camera_attached)skybox.move(cart.getPos()-prevPos);
