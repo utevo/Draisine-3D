@@ -45,10 +45,10 @@ public:
 		int upper_bound = 0;
 		for (int i = 0; i < branch_nr; i++) {
 
-			lower_bound = (i*type * SEED) % (stem_height - BRANCH_OFFSET) + BRANCH_OFFSET;
+			lower_bound = (i*type * SEED) % (stem_height - BRANCH_OFFSET) + BRANCH_OFFSET/2;
 			upper_bound = 0;
 			int tmp_seed = SEED;
-			while (upper_bound <= lower_bound) { upper_bound = (i * upper_bound + type + tmp_seed) % (stem_height); tmp_seed += SEED_BUMP; }
+			while (upper_bound <= lower_bound) { upper_bound = (i * upper_bound + type + tmp_seed) % (stem_height)+BRANCH_OFFSET / 2; tmp_seed += SEED_BUMP; std::cout << "U:" << upper_bound << "L:" << lower_bound << '\n'; }
 			glm::vec3 branch_size(size);
 			branch_size[2] *= (upper_bound - lower_bound);
 

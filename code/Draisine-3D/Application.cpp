@@ -148,7 +148,7 @@ int main()
         auto skybox_tex = std::make_shared<Texture>("textures/skybox.png");
         Cube skybox(skybox_tex, { 0.0, 0.0, 0.0 }, { 0.0, 0.0, 0.0 }, { 40.0, 40.0, 40.0 });
         Cart cart;
-        Cactus cactus(1);
+        Cactus cactus(2);
         //Cube cube(skybox_tex, { 3.0f, 0.0f, 0.0f });
         Floor floor(4);
         auto shader = std::make_shared<Shader>("shaders/shader.vert", "shaders/fullLighting.frag");
