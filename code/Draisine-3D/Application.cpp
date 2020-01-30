@@ -23,6 +23,7 @@
 #include "composites/Floor.h"
 #include "composites/railway.h"
 #include "composites/Cart.h"
+#include "composites/Cactus.h"
 
 using namespace std;
 const GLuint WIDTH = 800, HEIGHT = 600;
@@ -147,7 +148,7 @@ int main()
         auto skybox_tex = std::make_shared<Texture>("textures/skybox.png");
         Cube skybox(skybox_tex, { 0.0, 0.0, 0.0 }, { 0.0, 0.0, 0.0 }, { 40.0, 40.0, 40.0 });
         Cart cart;
-
+        Cactus cactus(1);
         //Cube cube(skybox_tex, { 3.0f, 0.0f, 0.0f });
         Floor floor(4);
         auto shader = std::make_shared<Shader>("shaders/shader.vert", "shaders/fullLighting.frag");
@@ -208,7 +209,7 @@ int main()
             shader->setUniformFloat("SPECULAR_LIGHT_STRENGHT", specularLightStrenght);
             skybox.render(shader);
             floor.render(shader);
-
+            cactus.render(shader);
             if (camera_attached)prevPos = cart.getPos();
             cart.moveAuto();
             if (camera_attached)skybox.move(cart.getPos() - prevPos);
