@@ -43,7 +43,7 @@
     - [ ] Ozdoby
     - [ ] Obiekty środowiska
 - [x] Zaprogramowanie ruchu kamery  | *estimate:* 3.0h | *spend:* 4.0h
-- [ ] Zaprogramowanie ruchu obiektów:
+- [x] Zaprogramowanie ruchu obiektów:
     - [x] Drezyna: 
         - [x] Kóła
         - [x] Podstawa dzwigni
@@ -55,6 +55,7 @@
     - [ ] Inne obiekty
 - [ ] Teksturowanie
 - [x] Stworzenie oświetlenia | *estimate:* 4.0h | *spend:* 6.0h
+- [x] Stworzenie cieniowania | *estimate:* 6.0h | *spend:* 8.0h
 - [ ] Prezentacja gotowego projetku na spotkaniu nr 7
 
 ## Przykład
