@@ -198,7 +198,7 @@ int main()
             shader->setUniformFloat("DIFFUSE_LIGHT_STRENGHT", diffuseLightStrenght);
             float specularLightStrenght = 1.0f;
             shader->setUniformFloat("SPECULAR_LIGHT_STRENGHT", specularLightStrenght);
-           // cube.render(shader);
+            // cube.render(shader);
             cart.render(shader);
 
             ambientLightStrenght = 1.0f;
@@ -214,8 +214,9 @@ int main()
             cart.moveAuto();
             if (camera_attached)skybox.move(cart.getPos() - prevPos);
 
-            if ((cam.getPos() - floor.getPos()).z > 2.5) floor.reposition(1);
-            if ((cam.getPos() - floor.getPos()).z < -2.5) floor.reposition(-1);
+            if ((cam.getPos() - floor.getPos()).z > 2.5) { floor.reposition(1); }
+            if ((cam.getPos() - floor.getPos()).z < -2.5) {floor.reposition(-1);
+        }
 
             mouse_callback(window, prev_X, prev_Y);
             glfwSwapBuffers(window);

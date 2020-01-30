@@ -3,20 +3,21 @@
 #include "../CompositeObject.h"
 #include "../primitives/Cylinder.h"
 #include "../primitives/Sphere.h"
-
+#include <iostream>
 
 #define MAX_BRANCHES 4
 #define MAX_STEM_HEIGHT 10
 #define STEM_OFFSET 6
 #define BRANCH_OFFSET 3
 #define SEED 123456
+#define SEED_BUMP 17
 class Cactus : public CompositeObject {
 public:
 	Cactus( int type, const glm::vec3& possition = { 2.0, -0.51, 0.0 }) {
 
 		const glm::vec3& rotation = { -90.0f, 0.0f, -90.0f };
 		const glm::vec3& size = { 0.1f, 0.1f, 0.1f };
-
+		type += SEED_BUMP;
 		glm::vec3 stem_size(size);
 		glm::vec3 connection_size(size);
 		connection_size[0] /= 2;
@@ -44,9 +45,10 @@ public:
 		int upper_bound = 0;
 		for (int i = 0; i < branch_nr; i++) {
 
-			lower_bound = (type * SEED) % (stem_height - BRANCH_OFFSET) + BRANCH_OFFSET;
+			lower_bound = (i*type * SEED) % (stem_height - BRANCH_OFFSET) + BRANCH_OFFSET;
 			upper_bound = 0;
-			while (upper_bound <= lower_bound)upper_bound = (type * SEED) % (stem_height - BRANCH_OFFSET) + BRANCH_OFFSET;
+			int tmp_seed = SEED;
+			while (upper_bound <= lower_bound) { upper_bound = (i * upper_bound + type + tmp_seed) % (stem_height); tmp_seed += SEED_BUMP; }
 			glm::vec3 branch_size(size);
 			branch_size[2] *= (upper_bound - lower_bound);
 
@@ -74,7 +76,13 @@ public:
 		}
 	}
 
-
+	void reposition(int dir)
+	{
+		if (dir > 0)
+			move(offset);
+		else
+			move(-offset);
+	}
 
 
 	/*glm::vec3 getPos()
@@ -83,6 +91,7 @@ public:
 	}
 	*/
 private:
+	const glm::vec3 offset = { 0.0, 0.0, 10.0 };
 
 };
 
