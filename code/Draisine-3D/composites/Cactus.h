@@ -13,7 +13,7 @@
 #define SEED_BUMP 17
 class Cactus : public CompositeObject {
 public:
-	Cactus( int type, const glm::vec3& possition = { 2.0, -0.51, 0.0 }) {
+	Cactus(int type, const glm::vec3& possition = { 2.0, -0.51, 0.0 }) {
 
 		const glm::vec3& rotation = { -90.0f, 0.0f, -90.0f };
 		const glm::vec3& size = { 0.1f, 0.1f, 0.1f };
@@ -26,7 +26,7 @@ public:
 		glm::vec3 height_unit = { 0.0f,0.1f,0.0f };
 		glm::vec3 branch_offset_horizontal = { 0.25f,0.0f,0.0f };
 		auto cacti_tex = std::make_shared<Texture>("textures/cacti_tex.png");
-		int branch_nr = 4;
+		int branch_nr = 2;
 		int stem_height = (type * SEED) % (MAX_STEM_HEIGHT + 1 - STEM_OFFSET) + STEM_OFFSET; //
 
 		stem_size[2] *= stem_height;
@@ -45,7 +45,7 @@ public:
 		int upper_bound = 0;
 		for (int i = 0; i < branch_nr; i++) {
 
-			lower_bound = (i*type * SEED) % (stem_height - BRANCH_OFFSET) + BRANCH_OFFSET/2;
+			lower_bound = (i*type * SEED) % (stem_height - BRANCH_OFFSET) + BRANCH_OFFSET / 2;
 			upper_bound = 0;
 			int tmp_seed = SEED;
 			while (upper_bound <= lower_bound) { upper_bound = (i * upper_bound + type + tmp_seed) % (stem_height)+BRANCH_OFFSET / 2; tmp_seed += SEED_BUMP; std::cout << "U:" << upper_bound << "L:" << lower_bound << '\n'; }
@@ -66,7 +66,7 @@ public:
 			};
 
 
-			auto connection = std::make_unique<Cylinder>(cacti_tex, possition + half_offset + (height_unit * lower_bound), con_rot, connection_size);
+			auto connection = std::make_unique<Cylinder>(cacti_tex, possition + half_offset + (height_unit * lower_bound) + glm::vec3(0.0, 0.0, 0.0), con_rot + glm::vec3(0.0, -90.0, 0.0), connection_size);
 			addChild(std::move(connection));
 			addChild(std::move(branch));
 			addChild(std::move(branch_top));
