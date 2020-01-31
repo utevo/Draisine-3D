@@ -27,11 +27,12 @@
     - [x] TexturesMapper | *estimate:* 1.0h | *spend:* 1.75h
     - [x] Object, CompositeObject, ImplementedObject | *estimate:* 5.0h | *spend:* 8.0h
 - [x] Stworzenie wstępnego szkicu projektu | *estimate:* 0.5h | *spend:* 0.75h
-- [ ] Zamodelowanie obiektów:
-    - [ ] Prymitywy:
-        - [x] Trapez.h
+- [x] Zamodelowanie obiektów:
+    - [x] Prymitywy:
+        - [x] Trapez.h | *estimate:* 1.0h | *spend:* 1.5h
         - [x] Cube.h | *estimate:* 1.0h | *spend:* 2.0h
         - [x] Cylinder.h  | *estimate:* 2.0h | *spend:* 4.5h
+        - [x] Sphere.h  | *estimate:* 2.0h | *spend:* 2.0h
     - [x] Drezyna:
         - [x] Koła
         - [x] Podstawa dzwigni
@@ -40,8 +41,7 @@
     - [x] Podłoże
     - [x] Tory
     - [x] Tło
-    - [ ] Ozdoby
-    - [ ] Obiekty środowiska
+    - [x] Obiekty środowiska
 - [x] Zaprogramowanie ruchu kamery  | *estimate:* 3.0h | *spend:* 4.0h
 - [x] Zaprogramowanie ruchu obiektów:
     - [x] Drezyna: 
@@ -49,11 +49,11 @@
         - [x] Podstawa dzwigni
         - [x] Podwozie
         - [x] Dzwignia
-- [ ] Dodanie interakcji (obsługa klawiatury/myszki)
+- [x] Dodanie interakcji (obsługa klawiatury/myszki)
     - [x] Poruszanie kamerą | *estimate:* 1.0h | *spend:* 1.0h
-    - [x] Poruszanie drezyną
-    - [ ] Inne obiekty
-- [ ] Teksturowanie
+    - [x] Tryb przypięcia kamery | *estimate:* 2.0h | *spend:* 1.5h
+    - [x] Poruszanie drezyną | *estimate:* 2.0h | *spend:* 1.0h
+- [x] Teksturowanie
 - [x] Stworzenie oświetlenia | *estimate:* 4.0h | *spend:* 6.0h
 - [x] Stworzenie cieniowania | *estimate:* 6.0h | *spend:* 8.0h
 - [ ] Prezentacja gotowego projetku na spotkaniu nr 7
