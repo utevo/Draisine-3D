@@ -38,9 +38,9 @@ Cart(const glm::vec3& possition = { 0.0, 0.0, 0.0 },
 	void addSpeed(float step)
 	{
 		speed += step;
-		std::cout << speed << std::endl;
-		if (speed >  15) speed =  15;
-		if (speed < -15) speed = -15;
+		//std::cout << speed << std::endl;
+		if (speed >  50) speed =  50;
+		if (speed < -50) speed = -50;
 	}
 	
 	bool getSpeed_sign() { return (speed >= 0.0f); }
