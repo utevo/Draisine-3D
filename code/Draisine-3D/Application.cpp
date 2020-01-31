@@ -195,7 +195,7 @@ int main()
 				nbFrames = 0;
 				lastTime += 0.25f;
 			}
-			cout << "Current Frame: " << currentFrame << "\nFPS: " << fps << endl;
+			//cout << "Current Frame: " << currentFrame << "\nFPS: " << fps << endl;
 
 			// Check if any events have been activiated (key pressed, mouse moved etc.) and call corresponding response functions
 			GLCall(glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
