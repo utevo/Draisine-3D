@@ -4,6 +4,11 @@
     2 - Denys Klochkov
     3 - Michał Kowieski
     
+## Podział zadań
+    1 - Maciej Kapuściński: podłoże, drezyna, tory, ruchy podłoża i drezyny, mapa cieni, teksturowanie
+    2 - Denys Klochkov: prymitywy, kaktusiki, koła, poruszanie kamerą
+    3 - Michał Kowieski: szkic architektury, cieniowanie
+    
 ## Sterowanie
 - Poruszanie kamerą: WASD, spacja, control
 - Poruszanie drezyną: strzałki
@@ -52,15 +57,16 @@
 - [x] Zaprogramowanie ruchu kamery  | *estimate:* 3.0h | *spend:* 4.0h
 - [x] Zaprogramowanie ruchu obiektów:
     - [x] Drezyna: 
-        - [x] Kóła
-        - [x] Podstawa dzwigni
-        - [x] Podwozie
-        - [x] Dzwignia
+        - [x] Kóła | *estimate:* 1.0h | *spend:* 1.0h
+        - [x] Podstawa dzwigni | *estimate:* 0 min | *spend:* 0 min
+        - [x] Podwozie | *estimate:* 1.0h | *spend:* 1.0h
+        - [x] Dzwignia | *estimate:* 2.0h | *spend:* 4.0h
+    - [x] Podłoże | *estimate:* 1.0h | *spend:* 1.0h
 - [x] Dodanie interakcji (obsługa klawiatury/myszki)
     - [x] Poruszanie kamerą | *estimate:* 1.0h | *spend:* 1.0h
     - [x] Tryb przypięcia kamery | *estimate:* 2.0h | *spend:* 1.5h
     - [x] Poruszanie drezyną | *estimate:* 2.0h | *spend:* 1.0h
-- [x] Teksturowanie
+- [x] Teksturowanie | *estimate:* 6.0h | *spend:* 6.0h
 - [x] Stworzenie oświetlenia | *estimate:* 4.0h | *spend:* 6.0h
 - [x] Stworzenie cieniowania | *estimate:* 6.0h | *spend:* 8.0h
 - [ ] Prezentacja gotowego projetku na spotkaniu nr 7
