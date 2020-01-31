@@ -123,10 +123,10 @@ public:
 			indices[i + 5] = counter + 1 + 2 + (SIDES + 1);
 			i += 6;
 		}
-		std::cout << "i" << i << "estimate" << 3 * 2 * SIDES * 2 << '\n';
+		//std::cout << "i" << i << "estimate" << 3 * 2 * SIDES * 2 << '\n';
 		
 auto indexBuffer = std::make_unique<IndexBuffer>(indices, sizeof(indices));
-std::cout << "succ\n";
+//std::cout << "succ\n";
 		return indexBuffer;
 	}
 };
