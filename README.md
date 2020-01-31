@@ -4,6 +4,12 @@
     2 - Denys Klochkov
     3 - Michał Kowieski
     
+## Sterowanie
+- Poruszanie kamerą: WASD, spacja, control
+- Poruszanie drezyną: strzałki
+- Przypięcie kamery do drezyny: c
+- Zatrzymanie drezyny: x
+    
 ## Punkty kontrolne
 - [x] Stworzenie wstępnych punków kontrolnych | *estimate:* 0.5h | *spend:* 1.0h
 - [x] Utworzenie prostego przykładowego projektu OpenGL | *estimate:* 1.0h | *spend:* 1.5h
@@ -42,6 +48,7 @@
     - [x] Tory
     - [x] Tło
     - [x] Obiekty środowiska
+    - [x] Ozdoby
 - [x] Zaprogramowanie ruchu kamery  | *estimate:* 3.0h | *spend:* 4.0h
 - [x] Zaprogramowanie ruchu obiektów:
     - [x] Drezyna: 
@@ -60,3 +67,5 @@
 
 ## Przykład
    ![alt text](pictures/drezyna.JPG "Drezyna")
+## Ostateczny render
+   ![alt text](pictures/drezyna_render.png "Drezyna")
