@@ -102,10 +102,10 @@ public:
                 }
             }
         }
-        std::cout << "ii" << ii << "estimate" << 3 * 2 * (SLICES) * (SLICE_SEGMENTS-1) << '\n';
+        //std::cout << "ii" << ii << "estimate" << 3 * 2 * (SLICES) * (SLICE_SEGMENTS-1) << '\n';
         
         auto indexBuffer = std::make_unique<IndexBuffer>(indices, sizeof(indices));
-        std::cout << "succ\n";
+        //std::cout << "succ\n";
         return indexBuffer;
     }
 };
